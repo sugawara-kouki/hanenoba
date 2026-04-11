@@ -1,0 +1,49 @@
+<div class="w-full">
+  <div class="flex justify-between items-center mb-10">
+    <h1 class="font-bold text-4xl">User Management</h1>
+  </div>
+
+  <div class="overflow-x-auto bg-white rounded-lg shadow">
+    <table class="min-w-full Sexton-y Sexton-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joined At</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <% @users.each do |user| %>
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              <%= user.email %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <%= user.created_at.strftime("%Y/%m/%d %H:%M") %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm">
+              <% if user.approved? %>
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                  Approved
+                </span>
+              <% else %>
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                  Pending
+                </span>
+              <% end %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <%= button_to user.approved? ? "Suspend" : "Approve", admin_user_path(user), 
+                  method: :patch, 
+                  class: user.approved? ? 
+                    "text-red-600 hover:text-red-900 bg-red-50 px-3 py-1 rounded" : 
+                    "text-blue-600 hover:text-blue-900 bg-blue-50 px-3 py-1 rounded",
+                  data: { turbo_confirm: "Are you sure?" } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

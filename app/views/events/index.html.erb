@@ -1,0 +1,12 @@
+<div class="max-w-2xl mx-auto py-10">
+  <h1 class="text-3xl font-bold mb-6">ハネノバ：イベント一覧</h1>
+  <p class="mb-4">ようこそ、<%= current_user.name || "ユーザー" %> さん！</p>
+  
+  <div class="bg-white shadow rounded-lg p-6">
+    <p class="text-gray-600">現在、募集中のイベントはありません。</p>
+  </div>
+
+  <div class="mt-8">
+    <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-red-500 underline" %>
+  </div>
+</div>

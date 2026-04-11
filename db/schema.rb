@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_11_035911) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_11_064210) do
   create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
@@ -40,6 +40,25 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_11_035911) do
     t.string "title"
     t.datetime "updated_at", null: false
     t.index ["event_type_id"], name: "index_events_on_event_type_id"
+  end
+
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.boolean "approved", default: false, null: false
+    t.datetime "created_at", null: false
+    t.string "email", default: ""
+    t.string "encrypted_password", default: "", null: false
+    t.string "image"
+    t.string "name"
+    t.string "provider"
+    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
+    t.string "uid"
+    t.datetime "updated_at", null: false
+    t.index ["approved"], name: "index_users_on_approved"
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "events", "event_types"

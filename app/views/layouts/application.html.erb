@@ -33,6 +33,7 @@
           <% if admin_signed_in? %>
             <%= link_to "Events", admin_events_path, class: "text-gray-600 hover:text-blue-600 font-medium" %>
             <%= link_to "Types", admin_event_types_path, class: "text-gray-600 hover:text-blue-600 font-medium" %>
+            <%= link_to "Users", admin_users_path, class: "text-gray-600 hover:text-blue-600 font-medium" %>
             <%= button_to "Logout", destroy_admin_session_path, method: :delete, class: "bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-md text-sm font-medium text-gray-700" %>
           <% else %>
             <%= link_to "Login", new_admin_session_path, class: "bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-md text-white font-medium" %>
