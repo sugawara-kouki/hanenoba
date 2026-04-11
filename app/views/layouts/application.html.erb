@@ -24,7 +24,31 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <header class="bg-white border-b border-gray-200 fixed top-0 w-full z-10">
+      <nav class="container mx-auto px-5 py-3 flex justify-between items-center">
+        <div class="font-bold text-xl text-blue-600">
+          <%= link_to "ハネノバ Admin", admin_root_path %>
+        </div>
+        <div class="space-x-4 flex items-center">
+          <% if admin_signed_in? %>
+            <%= link_to "Events", admin_events_path, class: "text-gray-600 hover:text-blue-600 font-medium" %>
+            <%= link_to "Types", admin_event_types_path, class: "text-gray-600 hover:text-blue-600 font-medium" %>
+            <%= button_to "Logout", destroy_admin_session_path, method: :delete, class: "bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-md text-sm font-medium text-gray-700" %>
+          <% else %>
+            <%= link_to "Login", new_admin_session_path, class: "bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-md text-white font-medium" %>
+          <% end %>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container mx-auto mt-24 px-5">
+      <% if notice.present? %>
+        <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+      <% end %>
+      <% if alert.present? %>
+        <p class="py-2 px-3 bg-red-50 mb-5 text-red-500 font-medium rounded-md inline-block" id="alert"><%= alert %></p>
+      <% end %>
+
       <%= yield %>
     </main>
   </body>
