@@ -1,0 +1,22 @@
+class Event < ApplicationRecord
+  belongs_to :event_type
+
+  enum :status, { draft: 0, published: 1, hidden: 2 }, default: :draft
+
+  validates :title, presence: true
+  validates :held_at, presence: true
+  validates :capacity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+  validates :status, presence: true
+  validates :event_type_id, presence: true
+
+  def status_ja
+    case status
+    when "draft"
+      "下書き"
+    when "published"
+      "公開"
+    when "hidden"
+      "非公開"
+    end
+  end
+end

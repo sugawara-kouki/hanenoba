@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  event_type: one
+  capacity: 1
+  held_at: 2026-04-11 12:59:11
+  location: MyString
+  status: 1
+
+two:
+  title: MyString
+  event_type: two
+  capacity: 1
+  held_at: 2026-04-11 12:59:11
+  location: MyString
+  status: 1
