@@ -1,49 +1,90 @@
-<div class="w-full">
-  <div class="flex justify-between items-center mb-10">
-    <h1 class="font-bold text-4xl">User Management</h1>
+<div class="px-4 sm:px-6 lg:px-8 py-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-3xl font-bold leading-6 text-gray-900">User Management</h1>
+      <p class="mt-2 text-sm text-gray-700">コミュニティに参加しているユーザーの一覧と、承認状態の管理ができます。</p>
+    </div>
   </div>
 
-  <div class="overflow-x-auto bg-white rounded-lg shadow">
-    <table class="min-w-full Sexton-y Sexton-gray-200">
-      <thead class="bg-gray-50">
-        <tr>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joined At</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-200">
-        <% @users.each do |user| %>
-          <tr>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              <%= user.email %>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              <%= user.created_at.strftime("%Y/%m/%d %H:%M") %>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm">
-              <% if user.approved? %>
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                  Approved
-                </span>
-              <% else %>
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                  Pending
-                </span>
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-300">
+            <thead class="bg-gray-50 uppercase tracking-wider text-xs font-semibold text-gray-500">
+              <tr>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6">User</th>
+                <th scope="col" class="px-3 py-3.5 text-left">Email</th>
+                <th scope="col" class="px-3 py-3.5 text-left">Joined At</th>
+                <th scope="col" class="px-3 py-3.5 text-left">Status</th>
+                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                  <span class="sr-only">Actions</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <% @users.each do |user| %>
+                <tr class="hover:bg-gray-50 transition-colors">
+                  <%# ユーザー（名前 & アイコン） %>
+                  <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-6">
+                    <div class="flex items-center">
+                      <div class="h-11 w-11 flex-shrink-0">
+                        <%= image_tag user.image || "https://ui-avatars.com/api/?name=#{user.name}&background=random", 
+                            class: "h-11 w-11 rounded-full object-cover ring-1 ring-gray-100", 
+                            alt: user.name %>
+                      </div>
+                      <div class="ml-4">
+                        <div class="font-bold text-gray-900"><%= user.name || "名称未設定" %></div>
+                        <div class="mt-1 text-gray-500 text-xs">ID: <%= user.uid %></div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <%# メールアドレス %>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                    <%= user.email.presence || "(なし)" %>
+                  </td>
+
+                  <%# 登録日 %>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                    <%= user.created_at.strftime("%Y/%m/%d %H:%M") %>
+                  </td>
+
+                  <%# ステータス %>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm">
+                    <% if user.approved? %>
+                      <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                        Approved
+                      </span>
+                    <% else %>
+                      <span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
+                        Pending
+                      </span>
+                    <% end %>
+                  </td>
+
+                  <%# アクション %>
+                  <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                    <div class="flex justify-end gap-2">
+                      <%= button_to user.approved? ? "Suspend" : "Approve", admin_user_path(user), 
+                          method: :patch, 
+                          class: user.approved? ? 
+                            "inline-flex items-center rounded-lg bg-white px-3 py-2 text-sm font-semibold text-red-600 shadow-sm ring-1 ring-inset ring-red-200 hover:bg-red-50 transition-all" : 
+                            "inline-flex items-center rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-all",
+                          data: { turbo_confirm: "#{user.name || user.email} を#{user.approved? ? '停止' : '承認'}しますか？" } %>
+                      
+                      <%= button_to "Delete", admin_user_path(user), 
+                          method: :delete, 
+                          class: "inline-flex items-center rounded-lg bg-white px-3 py-2 text-sm font-semibold text-gray-400 shadow-sm ring-1 ring-inset ring-gray-300 hover:text-red-600 hover:ring-red-200 hover:bg-red-50 transition-all",
+                          data: { turbo_confirm: "#{user.name || user.email} を完全に削除しますか？\n（次回のログイン時には、再度承認待ち状態から始まります）" } %>
+                    </div>
+                  </td>
+                </tr>
               <% end %>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-              <%= button_to user.approved? ? "Suspend" : "Approve", admin_user_path(user), 
-                  method: :patch, 
-                  class: user.approved? ? 
-                    "text-red-600 hover:text-red-900 bg-red-50 px-3 py-1 rounded" : 
-                    "text-blue-600 hover:text-blue-900 bg-blue-50 px-3 py-1 rounded",
-                  data: { turbo_confirm: "Are you sure?" } %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
