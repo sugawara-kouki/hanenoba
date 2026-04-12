@@ -1,27 +1,114 @@
-<% content_for :title, "Events" %>
+<div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+  <%= render "admin/shared/breadcrumbs", breadcrumbs: [{ name: "イベント一覧" }] %>
 
-<div class="w-full">
-
-
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Events</h1>
-    <%= link_to "New event", new_admin_event_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+  <div class="mb-10 sm:flex sm:items-center sm:justify-between">
+    <div class="sm:flex-auto">
+      <div class="flex items-center space-x-2 text-indigo-600 mb-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        </svg>
+        <span class="text-xs font-bold uppercase tracking-widest">Database</span>
+      </div>
+      <h1 class="text-3xl font-black text-gray-900 leading-tight">イベント一覧</h1>
+      <p class="mt-2 text-sm text-gray-500 font-medium">開催予定のイベント管理と、申込状況の確認ができます。</p>
+    </div>
+    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+      <%= link_to new_admin_event_path, class: "inline-flex items-center rounded-xl bg-indigo-600 px-6 py-4 text-sm font-bold text-white shadow-xl shadow-indigo-100 hover:bg-indigo-500 transition-all active:scale-95" do %>
+        <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        新規イベント作成
+      <% end %>
+    </div>
   </div>
 
-  <div id="events" class="min-w-full divide-y divide-gray-200 space-y-5">
-    <% if @events.any? %>
-      <% @events.each do |event| %>
-        <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
-          <%= render event %>
-          <div class="w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2">
-            <%= link_to "Show", [:admin, event], class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 inline-block font-medium" %>
-            <%= link_to "Edit", edit_admin_event_path(event), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 inline-block font-medium" %>
-            <%= button_to "Destroy", [:admin, event], method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
-          </div>
-        </div>
-      <% end %>
-    <% else %>
-      <p class="text-center my-10">No events found.</p>
-    <% end %>
+  <div class="mt-8 flow-root">
+    <div class="overflow-hidden shadow-sm ring-1 ring-gray-900/5 rounded-3xl border border-gray-100 bg-white">
+      <table class="min-w-full divide-y divide-gray-100">
+        <thead class="bg-gray-50/50">
+          <tr>
+            <th scope="col" class="py-4 pl-8 pr-3 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">イベント名</th>
+            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">開催日時</th>
+            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">申込状況 / 定員</th>
+            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">公開状態</th>
+            <th scope="col" class="relative py-4 pl-3 pr-8 text-right">
+              <span class="sr-only">操作</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+          <% if @events.any? %>
+            <% @events.each do |event| %>
+              <tr class="hover:bg-gray-50/30 transition-colors">
+                <td class="whitespace-nowrap py-6 pl-8 pr-3 text-sm">
+                  <div class="flex flex-col">
+                    <div class="flex items-center space-x-2 mb-1">
+                      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-50 text-indigo-700 ring-1 ring-indigo-600/10 uppercase tracking-tighter">
+                        <%= event.event_type.name %>
+                      </span>
+                      <span class="font-bold text-gray-900"><%= event.title %></span>
+                    </div>
+                    <div class="text-xs text-gray-400 font-medium"><%= event.location %></div>
+                  </div>
+                </td>
+                <td class="whitespace-nowrap px-3 py-6 text-sm">
+                  <div class="text-gray-900 font-bold"><%= event.held_at.strftime("%Y/%m/%d") %></div>
+                  <div class="text-xs text-indigo-600 font-medium mt-0.5"><%= event.held_at.strftime("%H:%M") %>〜</div>
+                </td>
+                <td class="whitespace-nowrap px-3 py-6 text-sm">
+                  <div class="flex items-center space-x-3">
+                    <div class="flex flex-col flex-1 min-w-[120px]">
+                      <div class="flex justify-between text-[10px] font-bold text-gray-400 mb-1.5 uppercase tracking-tighter">
+                        <span><%= event.bookings.count %> / <%= event.capacity %> 名</span>
+                        <span><%= (event.bookings.count.to_f / event.capacity * 100).round %>%</span>
+                      </div>
+                      <div class="w-full bg-gray-100 rounded-full h-1.5">
+                        <div class="bg-indigo-600 h-1.5 rounded-full" style="width: <%= [event.bookings.count.to_f / event.capacity * 100, 100].min %>%"></div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="whitespace-nowrap px-3 py-6 text-sm text-gray-500">
+                  <span class="inline-flex items-center rounded-md px-2 py-1 text-[10px] font-bold ring-1 ring-inset <%= event.published? ? 'bg-green-50 text-green-700 ring-green-600/20' : 'bg-yellow-50 text-yellow-700 ring-yellow-600/20' %>">
+                    <%= event.status_ja %>
+                  </span>
+                </td>
+                <td class="relative whitespace-nowrap py-6 pl-3 pr-8 text-right font-medium">
+                  <div class="flex items-center justify-end space-x-2">
+                    <%= link_to [:admin, event], class: "inline-flex items-center px-4 py-2.5 rounded-xl bg-indigo-50 text-indigo-700 text-xs font-bold hover:bg-indigo-100 transition-all", title: "参加者一覧" do %>
+                      詳細
+                    <% end %>
+
+                    <%= link_to edit_admin_event_path(event), class: "inline-flex items-center px-2.5 py-2.5 rounded-xl bg-white border border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition-all shadow-sm", title: "編集" do %>
+                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                      </svg>
+                    <% end %>
+
+                    <%= button_to [:admin, event], method: :delete, class: "inline-flex items-center px-2.5 py-2.5 rounded-xl text-red-300 hover:text-red-600 hover:bg-red-50 transition-all", data: { turbo_confirm: "イベントを削除してもよろしいですか？この操作は取り消せません。" }, title: "削除" do %>
+                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="5" class="px-8 py-20 text-center text-sm text-gray-400 bg-gray-50/30">
+                <div class="flex flex-col items-center justify-center">
+                  <svg class="h-12 w-12 text-gray-200 mb-4" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                  </svg>
+                  <p class="font-bold">イベントが見つかりませんでした。</p>
+                  <p class="text-xs mt-1">新しいイベントを作成して始めましょう。</p>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

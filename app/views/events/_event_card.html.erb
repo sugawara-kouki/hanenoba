@@ -1,7 +1,21 @@
 <%# app/views/events/_event_card.html.erb %>
 <div class="group relative bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full">
+  <%# 一括申し込み用チェックボックス %>
+  <% 
+    is_booked = event.bookings.exists?(user: current_user)
+    is_full = event.bookings.count >= event.capacity
+    is_disabled = is_booked || is_full
+  %>
+  <div class="absolute top-4 right-4 z-10">
+    <input type="checkbox" name="event_ids[]" value="<%= event.id %>" 
+           class="h-6 w-6 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer disabled:bg-gray-200 disabled:cursor-not-allowed transition-all"
+           data-bulk-booking-target="checkbox"
+           data-action="change->bulk-booking#toggle"
+           <%= "disabled" if is_disabled %>>
+  </div>
+
   <%# カードヘッダーイメージ（適当な色味を背景にする） %>
-  <div class="aspect-w-16 aspect-h-9 w-full overflow-hidden bg-gradient-to-br from-indigo-500 to-purple-600 h-32 flex items-center justify-center">
+  <div class="aspect-w-16 aspect-h-9 w-full overflow-hidden bg-gradient-to-br from-indigo-500 to-purple-600 h-32 flex items-center justify-center <%= 'grayscale opacity-50' if is_disabled %>">
     <span class="text-white text-4xl font-black opacity-20 uppercase"><%= event.event_type.name %></span>
   </div>
 

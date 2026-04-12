@@ -1,4 +1,4 @@
-<div class="bg-gray-50 min-h-screen pb-12">
+<div class="bg-gray-50 min-h-screen pb-24" data-controller="bulk-booking">
   <%# ヒーローセクション %>
   <div class="bg-white border-b overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
@@ -8,12 +8,11 @@
             ハネノバ：イベント一覧
           </h1>
           <p class="mt-3 text-lg text-gray-500 max-w-2xl">
-            現在募集中のイベントです。気になるイベントがあれば詳細をチェックしてみましょう。
+            現在募集中のイベントです。一括申し込みも可能です。
           </p>
         </div>
         <div class="flex items-center space-x-3">
           <div class="flex -space-x-2 overflow-hidden">
-             <%# ログイン中のユーザーアイコン（LINEから取得した画像があれば） %>
              <%= image_tag current_user.image || "https://ui-avatars.com/api/?name=#{current_user.name}&background=random", class: "inline-block h-10 w-10 rounded-full ring-2 ring-white", alt: current_user.name %>
           </div>
           <div class="text-sm font-medium text-gray-700">
@@ -24,25 +23,44 @@
     </div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
-    <% if @events.any? %>
-      <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-        <% @events.each do |event| %>
-          <%= render "event_card", event: event %>
-        <% end %>
-      </div>
-    <% else %>
-      <div class="text-center bg-white rounded-2xl shadow-sm border border-gray-100 py-20">
-        <div class="flex justify-center mb-4 text-gray-300">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
+  <%= form_with url: bulk_create_event_bookings_path(event_id: @events.first&.id || 0), method: :post, local: true do |f| %>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+      <% if @events.any? %>
+        <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+          <% @events.each do |event| %>
+            <%= render "event_card", event: event %>
+          <% end %>
         </div>
-        <h3 class="text-lg font-medium text-gray-900">募集中のイベントはありません</h3>
-        <p class="mt-1 text-sm text-gray-500">新しいイベントが追加されるのをお待ちください。</p>
+      <% else %>
+        <div class="text-center bg-white rounded-2xl shadow-sm border border-gray-100 py-20">
+          <div class="flex justify-center mb-4 text-gray-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium text-gray-900">募集中のイベントはありません</h3>
+          <p class="mt-1 text-sm text-gray-500">新しいイベントが追加されるのをお待ちください。</p>
+        </div>
+      <% end %>
+    </div>
+
+    <%# フローティング・アクション・バー %>
+    <div data-bulk-booking-target="floatingBar" 
+         class="fixed bottom-8 inset-x-4 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 z-50 transform translate-y-full opacity-0 transition-all duration-300 ease-out">
+      <div class="bg-gray-900 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center space-x-6 border border-gray-700">
+        <div class="flex flex-col">
+          <span class="text-xs text-gray-400 font-bold uppercase tracking-wider">選択中</span>
+          <span class="text-xl font-black">
+            <span data-bulk-booking-target="countLabel">0</span> 件
+          </span>
+        </div>
+        <div class="h-8 w-px bg-gray-700"></div>
+        <%= f.submit "一括で申し込む", 
+            class: "bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-8 rounded-xl transition-all active:scale-95 cursor-pointer shadow-lg shadow-indigo-500/20",
+            data: { confirm: "選択したイベントに一括で申し込みますか？" } %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
   <%# 簡易ログアウトボタン（フッター代わり） %>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 pt-8 border-t border-gray-200">

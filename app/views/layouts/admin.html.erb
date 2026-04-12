@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Hanenoba Admin" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-gray-50 h-screen flex overflow-hidden">
+    <%# サイドバー %>
+    <aside class="hidden md:flex md:flex-shrink-0">
+      <div class="flex flex-col w-64 bg-gray-900">
+        <div class="flex flex-col h-0 flex-1">
+          <div class="flex items-center h-16 flex-shrink-0 px-6 bg-gray-800">
+            <span class="text-white text-xl font-black tracking-tight">ハネノバ <span class="text-indigo-400">Admin</span></span>
+          </div>
+          <nav class="mt-5 flex-1 px-4 space-y-2 overflow-y-auto">
+            <%= link_to admin_events_path, class: "group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all #{controller_name == 'events' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}" do %>
+              <svg class="mr-3 h-5 w-5 <%= controller_name == 'events' ? 'text-white' : 'text-gray-500 group-hover:text-gray-300' %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              イベント管理
+            <% end %>
+
+            <%= link_to admin_users_path, class: "group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all #{controller_name == 'users' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}" do %>
+              <svg class="mr-3 h-5 w-5 <%= controller_name == 'users' ? 'text-white' : 'text-gray-500 group-hover:text-gray-300' %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+              ユーザー管理
+            <% end %>
+
+            <%= link_to admin_event_types_path, class: "group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all #{controller_name == 'event_types' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}" do %>
+              <svg class="mr-3 h-5 w-5 <%= controller_name == 'event_types' ? 'text-white' : 'text-gray-500 group-hover:text-gray-300' %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+              </svg>
+              種別設定
+            <% end %>
+          </nav>
+          <div class="flex-shrink-0 flex bg-gray-800/50 p-4">
+            <div class="flex-shrink-0 w-full group block">
+              <div class="flex items-center">
+                <div>
+                  <div class="inline-block h-9 w-9 bg-indigo-500 rounded-xl flex items-center justify-center text-white font-black shadow-lg shadow-indigo-500/20">A</div>
+                </div>
+                <div class="ml-3 flex-1 px-1">
+                  <p class="text-xs font-black text-white uppercase tracking-widest opacity-80 mb-0.5">Administrator</p>
+                  <%= button_to "ログアウト", destroy_admin_session_path, method: :delete, class: "text-xs font-bold text-gray-400 hover:text-red-400 transition-colors" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <%# メインコンテンツエリア %>
+    <div class="flex flex-col w-0 flex-1 overflow-hidden">
+      <main class="flex-1 relative overflow-y-auto focus:outline-none py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <% if notice.present? %>
+            <div class="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl flex items-center">
+              <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <%= notice %>
+            </div>
+          <% end %>
+
+          <% if alert.present? %>
+            <div class="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl flex items-center">
+              <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+              </svg>
+              <%= alert %>
+            </div>
+          <% end %>
+
+          <%= yield %>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

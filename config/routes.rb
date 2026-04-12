@@ -5,13 +5,16 @@ Rails.application.routes.draw do
   }
 
   resources :events, only: [ :index, :show ] do
-    resources :bookings, only: [ :create ]
+    resources :bookings, only: [ :create ] do
+      post :bulk_create, on: :collection
+    end
   end
 
   namespace :admin do
     resources :events
     resources :event_types
     resources :users, only: [ :index, :update, :destroy ]
+    resources :bookings, only: [ :destroy ]
     root to: "events#index"
   end
 

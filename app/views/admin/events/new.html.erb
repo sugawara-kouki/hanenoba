@@ -1,9 +1,28 @@
-<% content_for :title, "New event" %>
+<% content_for :title, "New Event | Hanenoba Admin" %>
 
-<div class="md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">New event</h1>
+<div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+  <%= render "admin/shared/breadcrumbs", breadcrumbs: [
+    { name: "イベント一覧", link: admin_events_path },
+    { name: "新規イベント作成" }
+  ] %>
+
+  <div class="mb-10 sm:flex sm:items-center sm:justify-between">
+    <div class="sm:flex-auto">
+      <div class="flex items-center space-x-2 text-indigo-600 mb-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        <span class="text-xs font-bold uppercase tracking-widest">Creator</span>
+      </div>
+      <h1 class="text-3xl font-black text-gray-900 leading-tight">新しいイベントを作成</h1>
+      <p class="mt-2 text-sm text-gray-500">コミュニティを盛り上げる魅力的なイベントを企画しましょう。</p>
+    </div>
+    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none space-x-3">
+      <%= link_to admin_events_path, class: "inline-flex items-center rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition-all" do %>
+        キャンセル
+      <% end %>
+    </div>
+  </div>
 
   <%= render "form", event: @event %>
-
-  <%= link_to "Back to events", admin_events_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 inline-block font-medium" %>
 </div>

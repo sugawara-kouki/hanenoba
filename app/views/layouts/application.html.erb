@@ -11,46 +11,85 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <header class="bg-white border-b border-gray-200 fixed top-0 w-full z-10">
-      <nav class="container mx-auto px-5 py-3 flex justify-between items-center">
-        <div class="font-bold text-xl text-blue-600">
-          <%= link_to "ハネノバ Admin", admin_root_path %>
+  <body class="bg-gray-50 flex flex-col min-h-screen">
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center transition-all duration-300">
+        <div class="flex items-center">
+          <%= link_to root_path, class: "group flex items-center space-x-2" do %>
+            <div class="bg-indigo-600 p-2 rounded-xl shadow-lg shadow-indigo-100 group-hover:bg-indigo-700 transition-colors">
+              <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </div>
+            <span class="text-2xl font-black text-gray-900 tracking-tight">ハネノバ</span>
+          <% end %>
         </div>
-        <div class="space-x-4 flex items-center">
+
+        <div class="flex items-center space-x-6">
+          <% if user_signed_in? %>
+            <div class="hidden sm:flex items-center space-x-3 pr-4 border-r border-gray-100">
+              <div class="flex -space-x-1 overflow-hidden">
+                <%= image_tag current_user.image || "https://ui-avatars.com/api/?name=#{current_user.name}&background=random", class: "inline-block h-8 w-8 rounded-full ring-2 ring-white shadow-sm", alt: current_user.name %>
+              </div>
+              <span class="text-sm font-bold text-gray-700"><%= current_user.name %></span>
+            </div>
+            <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-sm font-bold text-gray-500 hover:text-red-500 transition-colors" %>
+          <% elsif !admin_signed_in? %>
+            <%= link_to "ログイン", new_user_session_path, class: "bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl shadow-lg shadow-indigo-100 transition-all active:scale-95" %>
+          <% end %>
+
           <% if admin_signed_in? %>
-            <%= link_to "Events", admin_events_path, class: "text-gray-600 hover:text-blue-600 font-medium" %>
-            <%= link_to "Types", admin_event_types_path, class: "text-gray-600 hover:text-blue-600 font-medium" %>
-            <%= link_to "Users", admin_users_path, class: "text-gray-600 hover:text-blue-600 font-medium" %>
-            <%= button_to "Logout", destroy_admin_session_path, method: :delete, class: "bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-md text-sm font-medium text-gray-700" %>
-          <% else %>
-            <%= link_to "Login", new_admin_session_path, class: "bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-md text-white font-medium" %>
+            <%= link_to admin_root_path, class: "hidden sm:inline-flex items-center px-4 py-2 rounded-xl bg-gray-900 text-white text-xs font-bold hover:bg-gray-800 transition-all" do %>
+              管理画面へ
+              <svg class="ml-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            <% end %>
           <% end %>
         </div>
       </nav>
     </header>
 
-    <main class="container mx-auto mt-24 px-5">
-      <% if notice.present? %>
-        <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
-      <% end %>
-      <% if alert.present? %>
-        <p class="py-2 px-3 bg-red-50 mb-5 text-red-500 font-medium rounded-md inline-block" id="alert"><%= alert %></p>
-      <% end %>
+    <main class="flex-grow">
+      <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <% if notice.present? %>
+          <div class="mb-8 bg-indigo-50 border border-indigo-100 text-indigo-700 px-6 py-4 rounded-2xl flex items-center shadow-sm">
+            <svg class="h-5 w-5 mr-3 text-indigo-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zm-1 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+            </svg>
+            <span class="font-bold"><%= notice %></span>
+          </div>
+        <% end %>
 
-      <%= yield %>
+        <% if alert.present? %>
+          <div class="mb-8 bg-red-50 border border-red-100 text-red-700 px-6 py-4 rounded-2xl flex items-center shadow-sm">
+            <svg class="h-5 w-5 mr-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+            <span class="font-bold uppercase tracking-tight"><%= alert %></span>
+          </div>
+        <% end %>
+
+        <%= yield %>
+      </div>
     </main>
+
+    <footer class="bg-white border-t border-gray-100 py-12 mt-auto">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-gray-400">
+        <div class="flex items-center space-x-2 mb-4 md:mb-0">
+          <span class="font-black text-gray-900 tracking-tight">ハネノバ</span>
+          <span class="text-sm">&copy; 2026 Community Portal</span>
+        </div>
+        <div class="text-xs">
+          Built with precision and style.
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

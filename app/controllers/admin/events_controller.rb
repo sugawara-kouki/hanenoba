@@ -8,6 +8,7 @@ class Admin::EventsController < Admin::BaseController
 
   # GET /events/1 or /events/1.json
   def show
+    @bookings = @event.bookings.includes(:user).order(created_at: :desc)
   end
 
   # GET /events/new
