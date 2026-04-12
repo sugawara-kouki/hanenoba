@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :event_types, except: [ :show ]
     resources :users, only: [ :index, :update, :destroy ]
     resources :bookings, only: [ :destroy ]
+    resources :admins, except: [ :show ]
   end
 
   # 管理者ログイン用

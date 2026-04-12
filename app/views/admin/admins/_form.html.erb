@@ -1,0 +1,46 @@
+<%= form_with(model: [:admin, admin], class: "space-y-8") do |f| %>
+  <% if admin.errors.any? %>
+    <div class="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-2xl animate-shake">
+      <h2 class="text-sm font-black mb-2 flex items-center">
+        <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        入力内容を確認してください
+      </h2>
+      <ul class="text-xs list-disc list-inside space-y-1 opacity-80">
+        <% admin.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="bg-white rounded-[2rem] shadow-sm ring-1 ring-gray-900/5 p-8 sm:p-10 space-y-10">
+    <div class="grid grid-cols-1 gap-y-8">
+      <div>
+        <%= f.label :email, "メールアドレス", class: "block text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-3" %>
+        <%= f.email_field :email, class: "block w-full border-none bg-gray-50 rounded-2xl px-5 py-4 text-sm font-bold text-gray-900 placeholder-gray-300 focus:ring-2 focus:ring-indigo-500 transition-all shadow-inner", placeholder: "admin@example.com" %>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div>
+          <%= f.label :password, "パスワード", class: "block text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-3" %>
+          <%= f.password_field :password, class: "block w-full border-none bg-gray-50 rounded-2xl px-5 py-4 text-sm font-bold text-gray-900 placeholder-gray-300 focus:ring-2 focus:ring-indigo-500 transition-all shadow-inner", placeholder: "6文字以上" %>
+          <% if f.object.persisted? %>
+            <p class="mt-2 text-[10px] text-gray-400 font-bold">※変更しない場合は空欄のままにしてください</p>
+          <% end %>
+        </div>
+
+        <div>
+          <%= f.label :password_confirmation, "パスワード（確認）", class: "block text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-3" %>
+          <%= f.password_field :password_confirmation, class: "block w-full border-none bg-gray-50 rounded-2xl px-5 py-4 text-sm font-bold text-gray-900 placeholder-gray-300 focus:ring-2 focus:ring-indigo-500 transition-all shadow-inner" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-6 flex flex-col sm:flex-row items-center gap-4">
+      <%= f.submit class: "w-full sm:w-auto inline-flex justify-center items-center rounded-2xl bg-indigo-600 px-10 py-4 text-sm font-black text-white shadow-xl shadow-indigo-100 hover:bg-indigo-500 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 active:scale-95 cursor-pointer" %>
+      <%= link_to "キャンセル", admin_admins_path, class: "w-full sm:w-auto inline-flex justify-center items-center rounded-2xl bg-white border border-gray-200 px-10 py-4 text-sm font-bold text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition-all" %>
+    </div>
+  </div>
+<% end %>
