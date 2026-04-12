@@ -1,9 +1,11 @@
 class Admin::EventsController < Admin::BaseController
+  include AdminSortable
   before_action :set_event, only: %i[ show edit update destroy ]
 
   # GET /events or /events.json
   def index
-    @events = Event.all
+    s = sort_params("held_at", "desc", %w[title held_at created_at capacity status])
+    @events = Event.includes(:event_type).order("#{s[:column]} #{s[:direction]}")
   end
 
   # GET /events/1 or /events/1.json

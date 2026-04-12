@@ -1,6 +1,8 @@
 class Admin::UsersController < Admin::BaseController
+  include AdminSortable
   def index
-    @users = User.all.order(created_at: :desc)
+    s = sort_params("created_at", "desc", %w[name email approved created_at])
+    @users = User.all.order("#{s[:column]} #{s[:direction]}")
   end
 
   def update

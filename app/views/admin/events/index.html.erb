@@ -21,10 +21,10 @@
       <table class="min-w-full divide-y divide-gray-100">
         <thead class="bg-gray-50/50">
           <tr>
-            <th scope="col" class="py-4 pl-8 pr-3 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">イベント名</th>
-            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">開催日時</th>
-            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">申込状況 / 定員</th>
-            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">公開状態</th>
+            <th scope="col" class="py-4 pl-8 pr-3 text-left text-xs font-bold text-gray-400 uppercase tracking-widest"><%= sort_link "title", "イベント名" %></th>
+            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest"><%= sort_link "held_at", "開催日時" %></th>
+            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest"><%= sort_link "capacity", "申込状況 / 定員" %></th>
+            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest"><%= sort_link "status", "公開状態" %></th>
             <th scope="col" class="relative py-4 pl-3 pr-8 text-right">
               <span class="sr-only">操作</span>
             </th>

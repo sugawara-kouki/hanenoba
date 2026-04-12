@@ -21,7 +21,8 @@
       <table class="min-w-full divide-y divide-gray-100">
         <thead class="bg-gray-50/50">
           <tr>
-            <th scope="col" class="py-4 pl-8 pr-3 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">種別名</th>
+            <th scope="col" class="py-4 pl-8 pr-3 text-left text-xs font-bold text-gray-400 uppercase tracking-widest"><%= sort_link "name", "種別名" %></th>
+            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest font-mono"><%= sort_link "created_at", "登録日" %></th>
             <th scope="col" class="relative py-4 pl-3 pr-8 text-right">
               <span class="sr-only">操作</span>
             </th>
@@ -38,6 +39,9 @@
                     </svg>
                     <span><%= event_type.name %></span>
                   </div>
+                </td>
+                <td class="whitespace-nowrap px-3 py-6 text-sm text-gray-900 font-bold font-mono">
+                  <%= event_type.created_at.strftime("%Y/%m/%d") %>
                 </td>
                 <td class="relative whitespace-nowrap py-6 pl-3 pr-8 text-right font-medium">
                   <div class="flex items-center justify-end space-x-2">

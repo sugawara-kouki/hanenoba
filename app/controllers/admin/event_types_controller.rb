@@ -1,9 +1,11 @@
 class Admin::EventTypesController < Admin::BaseController
+  include AdminSortable
   before_action :set_event_type, only: %i[ edit update destroy ]
 
   # GET /event_types or /event_types.json
   def index
-    @event_types = EventType.all
+    s = sort_params("created_at", "desc", %w[name created_at])
+    @event_types = EventType.all.order("#{s[:column]} #{s[:direction]}")
   end
 
 

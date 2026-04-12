@@ -1,8 +1,10 @@
 class Admin::AdminsController < Admin::BaseController
+  include AdminSortable
   before_action :set_admin, only: %i[ edit update destroy ]
 
   def index
-    @admins = Admin.all.order(created_at: :desc)
+    s = sort_params("created_at", "desc", %w[email created_at])
+    @admins = Admin.all.order("#{s[:column]} #{s[:direction]}")
   end
 
   def new
