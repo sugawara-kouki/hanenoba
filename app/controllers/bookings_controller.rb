@@ -41,23 +41,25 @@ class BookingsController < ApplicationController
     Event.published.where(id: event_ids).each do |event|
       begin
         event.with_lock do
+          safe_title = ERB::Util.html_escape(event.title)
           if event.bookings.count >= event.capacity
-            failure_messages << "【#{event.title}】満員のため申し込めませんでした。"
+            failure_messages << "【#{safe_title}】満員のため申し込めませんでした。"
           elsif event.bookings.exists?(user: current_user)
             # 一括申し込み時は既に申し込んでいるものは静かにスキップするか、メッセージを出す
             # 今回はメッセージを出す
-            failure_messages << "【#{event.title}】既に申し込み済みです。"
+            failure_messages << "【#{safe_title}】既に申し込み済みです。"
           else
             booking = event.bookings.build(user: current_user)
             if booking.save
-              success_titles << event.title
+              success_titles << safe_title
             else
-              failure_messages << "【#{event.title}】保存に失敗しました。"
+              failure_messages << "【#{safe_title}】保存に失敗しました。"
             end
           end
         end
       rescue => e
-        failure_messages << "【#{event.title}】エラーが発生しました (#{e.message})"
+        safe_title = ERB::Util.html_escape(event.title)
+        failure_messages << "【#{safe_title}】エラーが発生しました (#{e.message})"
       end
     end
 
