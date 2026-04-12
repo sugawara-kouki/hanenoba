@@ -1,0 +1,83 @@
+ja:
+  views:
+    layout:
+      discover: "イベントを探す"
+      my_schedule: "マイカレンダー"
+      logout: "ログアウト"
+      login: "ログイン"
+      admin_panel: "管理画面へ"
+  events:
+    index:
+      title: "イベントを探す"
+      subtitle: "コミュニティの活気を感じる魅力的なイベントに参加しましょう。一括申し込みも可能です。"
+      welcome_back: "おかえりなさい"
+      no_events: "現在は募集中のイベントがありません"
+      no_events_subtitle: "新しい企画がまもなく登場します。楽しみにお待ちください！"
+      selection_status: "選択状況"
+      items_selected: "件を選択中"
+      bulk_apply: "一括で参加を申し込む"
+      confirm_bulk_apply: "選択したイベントに一括で申し込みますか？"
+    show:
+      back_to_discover: "一覧に戻る"
+      event_details: "イベント詳細"
+      date_time: "開催日時"
+      location: "開催場所"
+      status: "申込状況"
+      capacity: "定員"
+      applied: "参加登録済み"
+      fully_booked: "満員御礼"
+      apply: "参加を申し込む"
+      confirm_apply: "このイベントに参加を申し込みますか？"
+    card:
+      applied: "申込済"
+      full: "満員"
+      details: "詳細を見る"
+      capacity_text: "定員 %{count}名"
+  mypage:
+    title: "マイカレンダー"
+    subtitle: "参加予定のイベントをチェックしましょう。"
+    upcoming: "%{month}月の予定"
+    no_events: "この月の予定はありません"
+  date:
+    abbr_day_names: ["日", "月", "火", "水", "木", "金", "土"]
+    day_names: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
+  datetime:
+    distance_in_words:
+      half_a_minute: "30秒前後"
+      less_than_x_seconds:
+        one:   "1秒以内"
+        other: "%{count}秒以内"
+      x_seconds:
+        one:   "1秒"
+        other: "%{count}秒"
+      less_than_x_minutes:
+        one:   "1分以内"
+        other: "%{count}分以内"
+      x_minutes:
+        one:   "1分"
+        other: "%{count}分"
+      about_x_hours:
+        one:   "約1時間"
+        other: "約%{count}時間"
+      x_days:
+        one:   "1日"
+        other: "%{count}日"
+      about_x_months:
+        one:   "約1ヶ月"
+        other: "約%{count}ヶ月"
+      x_months:
+        one:   "1ヶ月"
+        other: "%{count}ヶ月"
+      about_x_years:
+        one:   "約1年"
+        other: "約%{count}年"
+      over_x_years:
+        one:   "1年以上"
+        other: "%{count}年以上"
+      almost_x_years:
+        one:   "1年弱"
+        other: "%{count}年弱"
+  helpers:
+    submit:
+      create: "作成"
+      update: "更新"

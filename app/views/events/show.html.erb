@@ -7,7 +7,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
         </svg>
       </div>
-      Back to Discover
+      <%= t('events.show.back_to_discover') %>
     <% end %>
   </div>
 
@@ -37,7 +37,7 @@
           <div class="lg:col-span-2 space-y-12">
             <%# イベント概要セクション %>
             <section>
-              <h2 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-6">Event Details</h2>
+              <h2 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-6"><%= t('events.show.event_details') %></h2>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div class="flex items-start">
                   <div class="bg-indigo-50 p-4 rounded-2xl text-indigo-600 shadow-sm ring-1 ring-indigo-600/10">
@@ -46,7 +46,7 @@
                     </svg>
                   </div>
                   <div class="ml-5">
-                    <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Date & Time</p>
+                    <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1"><%= t('events.show.date_time') %></p>
                     <p class="text-xl font-black text-gray-900 leading-tight">
                       <%= @event.held_at.strftime("%Y.%m.%d") %>
                     </p>
@@ -63,7 +63,7 @@
                     </svg>
                   </div>
                   <div class="ml-5">
-                    <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Location</p>
+                    <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1"><%= t('events.show.location') %></p>
                     <p class="text-xl font-black text-gray-900 leading-tight">
                       <%= @event.location %>
                     </p>
@@ -81,7 +81,7 @@
           <%# サイドバー：申し込み状況 %>
           <div class="space-y-8">
             <div class="bg-gray-50/50 rounded-[2rem] p-8 ring-1 ring-gray-900/5">
-              <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4 leading-none">Status</p>
+              <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4 leading-none"><%= t('events.show.status') %></p>
               <div class="flex items-end justify-between mb-4">
                 <span class="text-5xl font-black text-gray-900 leading-none"><%= @event.bookings.count %></span>
                 <span class="text-gray-400 font-black text-xl leading-none">/ <%= @event.capacity %></span>
@@ -105,19 +105,19 @@
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 class="text-xl font-black text-indigo-900">参加登録済み</h3>
+                  <h3 class="text-xl font-black text-indigo-900"><%= t('events.show.applied') %></h3>
                   <p class="text-indigo-400 text-xs font-bold mt-2 uppercase tracking-widest">Enjoy the event!</p>
                 </div>
               <% elsif @event.bookings.count >= @event.capacity %>
                 <div class="bg-gray-50 border border-gray-100 rounded-[2rem] p-8 text-center grayscale opacity-70">
-                  <h3 class="text-xl font-black text-gray-400 uppercase tracking-widest">Fully Booked</h3>
+                  <h3 class="text-xl font-black text-gray-400 uppercase tracking-widest"><%= t('events.show.fully_booked') %></h3>
                 </div>
               <% else %>
                 <%= button_to event_bookings_path(@event), 
                     method: :post, 
                     class: "w-full bg-indigo-600 hover:bg-indigo-700 text-white font-black py-6 px-8 rounded-[2rem] shadow-2xl shadow-indigo-500/30 transform hover:-translate-y-1 transition-all text-lg flex items-center justify-center group active:scale-95",
-                    data: { turbo_confirm: "このイベントに申し込みますか？" } do %>
-                  参加を申し込む
+                    data: { turbo_confirm: t('events.show.confirm_apply') } do %>
+                  <%= t('events.show.apply') %>
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-3 transform group-hover:translate-x-1 transition-transform" fill="none" viewbox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
