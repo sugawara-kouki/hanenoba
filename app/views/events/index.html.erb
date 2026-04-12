@@ -1,72 +1,76 @@
-<div class="bg-gray-50 min-h-screen pb-24" data-controller="bulk-booking">
-  <%# ヒーローセクション %>
-  <div class="bg-white border-b overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-        <div>
-          <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-            ハネノバ：イベント一覧
-          </h1>
-          <p class="mt-3 text-lg text-gray-500 max-w-2xl">
-            現在募集中のイベントです。一括申し込みも可能です。
-          </p>
+<div class="space-y-12" data-controller="bulk-booking">
+  <%# セクション見出し %>
+  <div class="relative">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+      <div class="relative z-10">
+        <h1 class="text-4xl font-black text-gray-900 tracking-tight sm:text-5xl lg:text-6xl">
+          Discover <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Events</span>
+        </h1>
+        <p class="mt-4 text-lg text-gray-500 max-w-2xl font-medium leading-relaxed">
+          コミュニティの活気を感じる魅力的なイベントに参加しましょう。
+          <br class="hidden sm:block">
+          興味のあるものをまとめてチェックして、一括で申し込むことも可能です。
+        </p>
+      </div>
+      
+      <%# ステータス情報（右側） %>
+      <div class="hidden lg:flex items-center space-x-4 bg-white/50 backdrop-blur-md p-4 rounded-3xl border border-white/20 shadow-xl shadow-indigo-500/5 ring-1 ring-black/5">
+        <div class="flex -space-x-2 overflow-hidden">
+          <%= image_tag current_user.image || "https://ui-avatars.com/api/?name=#{current_user.name}&background=random", class: "inline-block h-10 w-10 rounded-full ring-2 ring-white shadow-sm", alt: current_user.name %>
         </div>
-        <div class="flex items-center space-x-3">
-          <div class="flex -space-x-2 overflow-hidden">
-             <%= image_tag current_user.image || "https://ui-avatars.com/api/?name=#{current_user.name}&background=random", class: "inline-block h-10 w-10 rounded-full ring-2 ring-white", alt: current_user.name %>
-          </div>
-          <div class="text-sm font-medium text-gray-700">
-            <%= current_user.name %> さん
-          </div>
+        <div class="pr-2">
+          <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">Welcome back</p>
+          <p class="text-sm font-black text-gray-900 leading-none"><%= current_user.name %> <span class="text-xs text-gray-400 font-bold ml-1">さん</span></p>
         </div>
       </div>
     </div>
   </div>
 
   <%= form_with url: bulk_create_event_bookings_path(event_id: @events.first&.id || 0), method: :post, local: true do |f| %>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+    <div>
       <% if @events.any? %>
-        <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+        <div class="grid grid-cols-1 gap-y-12 gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
           <% @events.each do |event| %>
             <%= render "event_card", event: event %>
           <% end %>
         </div>
       <% else %>
-        <div class="text-center bg-white rounded-2xl shadow-sm border border-gray-100 py-20">
-          <div class="flex justify-center mb-4 text-gray-300">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
+        <div class="text-center bg-white rounded-[3rem] shadow-sm ring-1 ring-gray-900/5 py-24">
+          <div class="flex justify-center mb-6">
+            <div class="bg-gray-50 p-6 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-300" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
           </div>
-          <h3 class="text-lg font-medium text-gray-900">募集中のイベントはありません</h3>
-          <p class="mt-1 text-sm text-gray-500">新しいイベントが追加されるのをお待ちください。</p>
+          <h3 class="text-xl font-black text-gray-900">現在は募集中のイベントがありません</h3>
+          <p class="mt-2 text-sm text-gray-500 font-medium">新しい企画がまもなく登場します。楽しみにお待ちください！</p>
         </div>
       <% end %>
     </div>
 
-    <%# フローティング・アクション・バー %>
+    <%# プレミアム・フローティング・バー %>
     <div data-bulk-booking-target="floatingBar" 
-         class="fixed bottom-8 inset-x-4 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 z-50 transform translate-y-full opacity-0 transition-all duration-300 ease-out">
-      <div class="bg-gray-900 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center space-x-6 border border-gray-700">
-        <div class="flex flex-col">
-          <span class="text-xs text-gray-400 font-bold uppercase tracking-wider">選択中</span>
-          <span class="text-xl font-black">
-            <span data-bulk-booking-target="countLabel">0</span> 件
-          </span>
+         class="fixed bottom-10 inset-x-4 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 z-50 transform translate-y-32 opacity-0 transition-all duration-500 cubic-bezier(0.34, 1.56, 0.64, 1)">
+      <div class="bg-gray-900/90 backdrop-blur-xl text-white px-8 py-5 rounded-[2.5rem] shadow-2xl flex items-center space-x-8 border border-white/10 ring-1 ring-white/20">
+        <div class="flex items-center space-x-4">
+          <div class="bg-indigo-600 h-12 w-12 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-500/40">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest leading-none mb-1">Selection Status</p>
+            <p class="text-lg font-black leading-none">
+              <span data-bulk-booking-target="countLabel">0</span> 件 <span class="text-gray-400 text-sm font-bold ml-1">を選択中</span>
+            </p>
+          </div>
         </div>
-        <div class="h-8 w-px bg-gray-700"></div>
-        <%= f.submit "一括で申し込む", 
-            class: "bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-8 rounded-xl transition-all active:scale-95 cursor-pointer shadow-lg shadow-indigo-500/20",
+        <div class="h-10 w-px bg-white/10"></div>
+        <%= f.submit "一括で参加を申し込む", 
+            class: "bg-white hover:bg-gray-100 text-gray-900 font-black py-3.5 px-8 rounded-2xl transition-all active:scale-95 cursor-pointer shadow-xl",
             data: { confirm: "選択したイベントに一括で申し込みますか？" } %>
       </div>
     </div>
   <% end %>
-
-  <%# 簡易ログアウトボタン（フッター代わり） %>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 pt-8 border-t border-gray-200">
-    <div class="flex justify-between items-center text-sm text-gray-500">
-      <div>&copy; 2026 ハネノバ</div>
-      <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "hover:text-red-500 transition-colors underline decoration-gray-300 underline-offset-4" %>
-    </div>
-  </div>
 </div>

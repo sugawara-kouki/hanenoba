@@ -16,11 +16,11 @@ export default class extends Controller {
     const selectedCount = this.checkboxTargets.filter(checkbox => checkbox.checked).length
     
     if (selectedCount > 0) {
-      this.floatingBarTarget.classList.remove("translate-y-full", "opacity-0")
+      this.floatingBarTarget.classList.remove("translate-y-32", "opacity-0")
       this.floatingBarTarget.classList.add("translate-y-0", "opacity-100")
       this.countLabelTarget.textContent = selectedCount
     } else {
-      this.floatingBarTarget.classList.add("translate-y-full", "opacity-0")
+      this.floatingBarTarget.classList.add("translate-y-32", "opacity-0")
       this.floatingBarTarget.classList.remove("translate-y-0", "opacity-100")
     }
   }
