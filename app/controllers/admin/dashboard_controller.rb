@@ -9,5 +9,6 @@ class Admin::DashboardController < Admin::BaseController
     
     # 今後のイベント3件
     @upcoming_events = Event.where("held_at >= ?", Time.current).order(held_at: :asc).limit(3)
+    @pending_users_count = User.where(approved: false).count
   end
 end

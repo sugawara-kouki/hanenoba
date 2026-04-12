@@ -38,18 +38,25 @@
               イベント管理
             <% end %>
 
-            <%= link_to admin_users_path, class: "group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all #{controller_name == 'users' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}" do %>
-              <svg class="mr-3 h-5 w-5 <%= controller_name == 'users' ? 'text-white' : 'text-gray-500 group-hover:text-gray-300' %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-              ユーザー管理
-            <% end %>
-
             <%= link_to admin_event_types_path, class: "group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all #{controller_name == 'event_types' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}" do %>
               <svg class="mr-3 h-5 w-5 <%= controller_name == 'event_types' ? 'text-white' : 'text-gray-500 group-hover:text-gray-300' %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
               </svg>
               種別設定
+            <% end %>
+
+            <%= link_to admin_users_path, class: "group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all #{controller_name == 'users' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}" do %>
+              <svg class="mr-3 h-5 w-5 <%= controller_name == 'users' ? 'text-white' : 'text-gray-500 group-hover:text-gray-300' %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+              利用者ユーザー管理
+            <% end %>
+
+            <%= link_to "#", class: "group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all text-gray-400 hover:bg-gray-800 hover:text-white" do %>
+              <svg class="mr-3 h-5 w-5 text-gray-500 group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              管理者ユーザー管理
             <% end %>
           </nav>
           <div class="flex-shrink-0 flex bg-gray-800/50 p-4">
@@ -58,8 +65,10 @@
                 <div>
                   <div class="inline-block h-9 w-9 bg-indigo-500 rounded-xl flex items-center justify-center text-white font-black shadow-lg shadow-indigo-500/20">A</div>
                 </div>
-                <div class="ml-3 flex-1 px-1">
-                  <p class="text-xs font-black text-white uppercase tracking-widest opacity-80 mb-0.5">Administrator</p>
+                <div class="ml-3 flex-1 px-1 min-w-0">
+                  <p class="text-[10px] font-black text-white uppercase tracking-widest opacity-80 mb-0.5 truncate" title="<%= current_admin.email %>">
+                    <%= current_admin.email %>
+                  </p>
                   <%= button_to "ログアウト", destroy_admin_session_path, method: :delete, class: "text-xs font-bold text-gray-400 hover:text-red-400 transition-colors" %>
                 </div>
               </div>
