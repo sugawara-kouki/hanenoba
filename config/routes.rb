@@ -11,11 +11,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    root to: "dashboard#show"
     resources :events
     resources :event_types
     resources :users, only: [ :index, :update, :destroy ]
     resources :bookings, only: [ :destroy ]
-    root to: "events#index"
   end
 
   # 管理者ログイン用
