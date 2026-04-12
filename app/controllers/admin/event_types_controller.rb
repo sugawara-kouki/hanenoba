@@ -1,14 +1,11 @@
 class Admin::EventTypesController < Admin::BaseController
-  before_action :set_event_type, only: %i[ show edit update destroy ]
+  before_action :set_event_type, only: %i[ edit update destroy ]
 
   # GET /event_types or /event_types.json
   def index
     @event_types = EventType.all
   end
 
-  # GET /event_types/1 or /event_types/1.json
-  def show
-  end
 
   # GET /event_types/new
   def new
@@ -23,27 +20,19 @@ class Admin::EventTypesController < Admin::BaseController
   def create
     @event_type = EventType.new(event_type_params)
 
-    respond_to do |format|
-      if @event_type.save
-        format.html { redirect_to [:admin, @event_type], notice: "Event type was successfully created." }
-        format.json { render :show, status: :created, location: [:admin, @event_type] }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @event_type.errors, status: :unprocessable_entity }
-      end
+    if @event_type.save
+      redirect_to admin_event_types_path, notice: "種別を正常に作成しました。"
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /event_types/1 or /event_types/1.json
   def update
-    respond_to do |format|
-      if @event_type.update(event_type_params)
-        format.html { redirect_to [:admin, @event_type], notice: "Event type was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: [:admin, @event_type] }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @event_type.errors, status: :unprocessable_entity }
-      end
+    if @event_type.update(event_type_params)
+      redirect_to admin_event_types_path, notice: "種別を正常に更新しました。", status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

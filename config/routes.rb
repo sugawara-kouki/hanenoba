@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "dashboard#show"
     resources :events
-    resources :event_types
+    resources :event_types, except: [ :show ]
     resources :users, only: [ :index, :update, :destroy ]
     resources :bookings, only: [ :destroy ]
   end
