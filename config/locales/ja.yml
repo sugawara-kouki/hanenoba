@@ -56,6 +56,21 @@ ja:
       send_instructions: "パスワードのリセット方法を数分以内にメールで送信します。"
       updated: "パスワードを更新しました。ログイン済みです。"
       updated_not_active: "パスワードを更新しました。"
+    omniauth_callbacks:
+      success: "%{kind}アカウントでの認証に成功しました。"
+      user:
+        success: "%{kind}アカウントでの認証に成功しました。"
+      failure: "%{kind}アカウントでの認証に失敗しました。理由は「%{reason}」です。"
+    registrations:
+      signed_up: "アカウント登録が完了しました。"
+      updated: "アカウント情報を更新しました。"
+      destroyed: "アカウントを削除しました。またのご利用をお待ちしております。"
+    confirmations:
+      send_instructions: "アカウントの確認方法をメールで送信しました。"
+      confirmed: "アカウントの確認が完了しました。ログイン済みです。"
+    unlocks:
+      send_instructions: "アカウントの凍結解除方法をメールで送信しました。"
+      unlocked: "アカウントの凍結を解除しました。ログイン済みです。"
   date:
     abbr_day_names: ["日", "月", "火", "水", "木", "金", "土"]
     day_names: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
