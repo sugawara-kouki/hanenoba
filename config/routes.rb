@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
+  get "mypage/calendar", to: "mypages#calendar", as: :mypage_calendar
+
   resources :events, only: [ :index, :show ] do
     resources :bookings, only: [ :create ] do
       post :bulk_create, on: :collection

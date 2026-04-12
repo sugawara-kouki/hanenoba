@@ -29,6 +29,17 @@
             </div>
             <span class="text-2xl font-black text-gray-900 tracking-tight">ハネノバ</span>
           <% end %>
+
+          <% if user_signed_in? %>
+            <div class="ml-10 hidden md:flex items-center space-x-8">
+              <%= link_to events_path, class: "text-sm font-black transition-all uppercase tracking-widest #{controller_name == 'events' ? 'text-indigo-600' : 'text-gray-400 hover:text-gray-900'}" do %>
+                Discover
+              <% end %>
+              <%= link_to mypage_calendar_path, class: "text-sm font-black transition-all uppercase tracking-widest #{controller_name == 'mypages' ? 'text-indigo-600' : 'text-gray-400 hover:text-gray-900'}" do %>
+                My Schedule
+              <% end %>
+            </div>
+          <% end %>
         </div>
 
         <div class="flex items-center space-x-6">
@@ -56,8 +67,8 @@
       </nav>
     </header>
 
-    <main class="flex-grow">
-      <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    <main class="flex-grow pb-24 md:pb-8">
+      <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <% if notice.present? %>
           <div class="mb-8 bg-indigo-50 border border-indigo-100 text-indigo-700 px-6 py-4 rounded-2xl flex items-center shadow-sm">
             <svg class="h-5 w-5 mr-3 text-indigo-500" fill="currentColor" viewBox="0 0 20 20">
@@ -80,7 +91,32 @@
       </div>
     </main>
 
-    <footer class="bg-white border-t border-gray-100 py-12 mt-auto">
+    <%# モバイル・ボトムナビゲーション %>
+    <% if user_signed_in? %>
+      <div class="md:hidden fixed bottom-6 inset-x-4 z-50">
+        <nav class="bg-gray-900/90 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-2xl px-6 py-3 flex items-center justify-around ring-1 ring-white/20">
+          <%= link_to events_path, class: "flex flex-col items-center space-y-1 group transition-all #{controller_name == 'events' ? 'text-white' : 'text-gray-500'}" do %>
+            <div class="<%= controller_name == 'events' ? 'bg-indigo-600 shadow-lg shadow-indigo-500/40 p-2 rounded-xl text-white' : 'p-2' %> transition-all scale-100 group-active:scale-90">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-widest <%= controller_name == 'events' ? 'opacity-100' : 'opacity-40' %>">Discover</span>
+          <% end %>
+
+          <%= link_to mypage_calendar_path, class: "flex flex-col items-center space-y-1 group transition-all #{controller_name == 'mypages' ? 'text-white' : 'text-gray-500'}" do %>
+            <div class="<%= controller_name == 'mypages' ? 'bg-indigo-600 shadow-lg shadow-indigo-500/40 p-2 rounded-xl text-white' : 'p-2' %> transition-all scale-100 group-active:scale-90">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-widest <%= controller_name == 'mypages' ? 'opacity-100' : 'opacity-40' %>">Schedule</span>
+          <% end %>
+        </nav>
+      </div>
+    <% end %>
+
+    <footer class="bg-white border-t border-gray-100 py-12 pb-32 md:pb-12 mt-auto">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-gray-400">
         <div class="flex items-center space-x-2 mb-4 md:mb-0">
           <span class="font-black text-gray-900 tracking-tight">ハネノバ</span>

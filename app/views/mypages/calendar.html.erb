@@ -1,0 +1,148 @@
+<% content_for :title, "My Schedule | Hanenoba" %>
+
+<div class="space-y-10">
+  <%# 月の切り替えコントローラー %>
+  <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+    <div class="text-center md:text-left">
+      <h1 class="text-4xl font-black text-gray-900 tracking-tight sm:text-5xl">
+        My <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Schedule</span>
+      </h1>
+      <p class="mt-4 text-sm sm:text-lg text-gray-500 font-medium">参加予定のイベントをチェックしましょう。</p>
+    </div>
+
+    <div class="flex items-center justify-center bg-white rounded-2xl shadow-sm ring-1 ring-gray-900/5 p-1 self-center md:self-end">
+      <%= link_to mypage_calendar_path(date: @base_date.prev_month), class: "p-2 hover:bg-gray-50 rounded-xl transition-colors text-gray-400 hover:text-indigo-600" do %>
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      <% end %>
+      <div class="px-6 py-2 text-lg font-black text-gray-900 tracking-tighter">
+        <%= @base_date.strftime("%Y年 %m月") %>
+      </div>
+      <%= link_to mypage_calendar_path(date: @base_date.next_month), class: "p-2 hover:bg-gray-50 rounded-xl transition-colors text-gray-400 hover:text-indigo-600" do %>
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      <% end %>
+    </div>
+  </div>
+
+  <%# カレンダーグリッド %>
+  <div class="bg-white rounded-[2.5rem] sm:rounded-[3rem] shadow-xl shadow-indigo-500/5 ring-1 ring-gray-900/5 overflow-hidden">
+    <div class="grid grid-cols-7 bg-gray-50 border-b border-gray-100">
+      <% %w(日 月 火 水 木 金 土).each_with_index do |day, index| %>
+        <div class="py-3 sm:py-4 text-center text-[10px] sm:text-xs font-black uppercase tracking-widest <%= 'text-pink-400' if index == 0 %> <%= 'text-indigo-400' if index == 6 %> <%= 'text-gray-400' if (1..5).include?(index) %>">
+          <%= day %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="grid grid-cols-7 auto-rows-[64px] sm:auto-rows-[160px] divide-x divide-y divide-gray-50">
+      <% (@start_date..@end_date).each do |date| %>
+        <% 
+          is_today = date == Date.today 
+          is_current_month = date.month == @base_date.month
+          events = @events_by_date[date] || []
+          
+          date_color_class = if is_today
+            'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
+          elsif date.sunday?
+            is_current_month ? 'text-pink-500' : 'text-pink-200'
+          elsif date.saturday?
+            is_current_month ? 'text-indigo-500' : 'text-indigo-200'
+          else
+            is_current_month ? 'text-gray-900' : 'text-gray-300'
+          end
+        %>
+        <div class="relative p-1 sm:p-4 group transition-all duration-300 <%= is_current_month ? (events.any? ? 'bg-indigo-50/40 ring-1 ring-inset ring-indigo-500/10 hover:bg-indigo-100/60 hover:shadow-lg hover:shadow-indigo-500/5 cursor-pointer' : 'bg-white') : 'bg-gray-50/20' %>">
+          <% if events.any? %>
+            <%= link_to event_path(events.first), class: "absolute inset-0 z-20", title: events.first.title do %><% end %>
+          <% end %>
+          <div class="flex flex-col items-center h-full relative z-10">
+            <span class="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 text-xs sm:text-sm font-black rounded-lg transition-all <%= date_color_class %>">
+              <%= date.day %>
+            </span>
+
+            <% if events.any? %>
+              <%# モバイル用：ドット表示 %>
+              <div class="mt-1 flex justify-center space-x-1 sm:hidden">
+                <div class="w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-sm animate-pulse"></div>
+              </div>
+
+              <%# デスクトップ用：詳細表示 %>
+              <div class="hidden sm:block mt-2 space-y-1 w-full overflow-y-auto max-h-[100px] custom-scrollbar">
+                <% events.each do |event| %>
+                  <%= link_to event_path(event), class: "block px-2 py-1 rounded-lg text-[10px] font-bold leading-tight transition-all truncate bg-indigo-50 text-indigo-700 ring-1 ring-indigo-600/10 hover:bg-indigo-600 hover:text-white hover:ring-indigo-600" do %>
+                    <span class="opacity-70 mr-0.5"><%= event.held_at.strftime("%H:%M") %></span>
+                    <%= event.title %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%# モバイル専用：イベントリスト一覧 %>
+  <div class="md:hidden space-y-6">
+    <div class="flex items-center space-x-2 px-2">
+      <div class="h-1 w-1 rounded-full bg-indigo-600"></div>
+      <h2 class="text-xs font-black text-gray-400 uppercase tracking-widest">Upcoming in <%= @base_date.strftime("%B") %></h2>
+    </div>
+    
+    <% month_events = @booked_events.filter { |e| e.held_at.month == @base_date.month }.sort_by(&:held_at) %>
+    <% if month_events.any? %>
+      <div class="space-y-4">
+        <% month_events.each do |event| %>
+          <%= link_to event_path(event), class: "flex items-center bg-white p-5 rounded-3xl shadow-sm ring-1 ring-gray-900/5 hover:ring-indigo-600/20 active:scale-[0.98] transition-all group" do %>
+            <div class="flex-shrink-0 text-center pr-5 border-r border-gray-100">
+              <p class="text-[10px] font-black text-gray-400 uppercase leading-none mb-1"><%= event.held_at.strftime("%a") %></p>
+              <p class="text-xl font-black text-gray-900 leading-none"><%= event.held_at.day %></p>
+            </div>
+            <div class="pl-5 flex-1 min-w-0">
+              <div class="flex items-center space-x-2 mb-1">
+                <span class="text-[10px] font-black text-indigo-600 uppercase tracking-widest"><%= event.held_at.strftime("%H:%M") %></span>
+                <span class="h-1 w-1 rounded-full bg-gray-200"></span>
+                <span class="text-[10px] font-black text-gray-400 uppercase truncate"><%= event.location %></span>
+              </div>
+              <h3 class="text-base font-bold text-gray-900 truncate group-hover:text-indigo-600 transition-colors"><%= event.title %></h3>
+            </div>
+            <div class="text-gray-300">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center py-10 bg-white rounded-3xl ring-1 ring-gray-900/5">
+        <p class="text-xs text-gray-400 font-bold italic">この月の予定はありません</p>
+      </div>
+    <% end %>
+  </div>
+
+  <%# 凡例/補足 %>
+  <div class="flex items-center justify-center space-x-8 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
+    <div class="flex items-center">
+      <span class="w-3 h-3 rounded-md bg-indigo-600 shadow-sm mr-2"></span>
+      Today
+    </div>
+    <div class="flex items-center">
+      <span class="w-3 h-3 rounded-md bg-indigo-50 ring-1 ring-indigo-600/10 mr-2"></span>
+      Applied Event
+    </div>
+  </div>
+</div>
+
+<style>
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 2px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(99, 102, 241, 0.1);
+    border-radius: 20px;
+  }
+</style>
