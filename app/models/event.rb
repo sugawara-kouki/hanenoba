@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :event_type
+  has_many :bookings, dependent: :destroy
+  has_many :users, through: :bookings
 
   enum :status, { draft: 0, published: 1, hidden: 2 }, default: :draft
 

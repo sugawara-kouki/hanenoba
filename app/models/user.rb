@@ -3,6 +3,9 @@ class User < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :omniauthable, omniauth_providers: [ :line ]
 
+  has_many :bookings, dependent: :destroy
+  has_many :events, through: :bookings
+
   # 承認済みチェック（既存）
   def active_for_authentication?
     super && approved?
