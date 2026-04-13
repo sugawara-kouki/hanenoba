@@ -56,6 +56,6 @@ class Admin::EventTypesController < Admin::BaseController
 
     # Only allow a list of trusted parameters through.
     def event_type_params
-      params.expect(event_type: [ :name, :color ])
+      params.expect(event_type: [ :name ])
     end
 end
