@@ -8,16 +8,16 @@ class Admin::UsersController < Admin::BaseController
   def update
     @user = User.find(params[:id])
     if @user.update(approved: !@user.approved)
-      redirect_to admin_users_path, notice: t('admin.notices.status_updated', name: @user.name || @user.email)
+      redirect_to admin_users_path, notice: t("admin.notices.status_updated", name: @user.name || @user.email)
     else
-      redirect_to admin_users_path, alert: t('admin.notices.update_failed')
+      redirect_to admin_users_path, alert: t("admin.notices.update_failed")
     end
   end
 
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to admin_users_path, notice: t('admin.notices.destroyed', model: User.model_name.human)
+    redirect_to admin_users_path, notice: t("admin.notices.destroyed", model: User.model_name.human)
   end
 
   def impersonate
@@ -25,6 +25,6 @@ class Admin::UsersController < Admin::BaseController
 
     @user = User.find(params[:id])
     sign_in(:user, @user)
-    redirect_to root_path, notice: t('admin.notices.impersonated', name: @user.name || @user.email)
+    redirect_to root_path, notice: t("admin.notices.impersonated", name: @user.name || @user.email)
   end
 end

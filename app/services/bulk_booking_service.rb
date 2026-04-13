@@ -9,7 +9,7 @@ class BulkBookingService
   # @return [Hash] 成功件数、成功タイトル、失敗メッセージを含むハッシュ
   def execute
     # イベントが選択されていない場合のガード
-    return { success: false, message: I18n.t('bookings.bulk_create.no_events', default: "イベントが選択されていません。") } if @event_ids.empty?
+    return { success: false, message: I18n.t("bookings.bulk_create.no_events", default: "イベントが選択されていません。") } if @event_ids.empty?
 
     success_titles = []
     failure_messages = []
@@ -19,7 +19,7 @@ class BulkBookingService
     events.each do |event|
       # 各イベントの申し込みは BookingService に委譲
       result = BookingService.new(event, @user).execute
-      
+
       # XSS対策のため、イベント名はエスケープして保持する
       safe_title = ERB::Util.html_escape(event.title)
       if result[:success]

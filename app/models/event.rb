@@ -31,7 +31,7 @@ class Event < ApplicationRecord
 
   # 残りの予約可能枠数を取得
   def remaining_capacity
-    [capacity - bookings.count, 0].max
+    [ capacity - bookings.count, 0 ].max
   end
 
   # 特定のユーザーが既にこのイベントに申し込んでいるかチェック

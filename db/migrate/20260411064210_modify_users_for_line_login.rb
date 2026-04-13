@@ -7,7 +7,7 @@ class ModifyUsersForLineLogin < ActiveRecord::Migration[8.1]
     add_column :users, :image, :string
 
     # LINEのID（uid）にインデックスを貼る（高速化と重複防止）
-    add_index :users, [:provider, :uid], unique: true
+    add_index :users, [ :provider, :uid ], unique: true
 
     # メールアドレスの「必須（NOT NULL）」と「ユニーク制約」を外す
     # MySQLの場合は null: true に変更

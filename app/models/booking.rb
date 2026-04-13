@@ -4,7 +4,7 @@ class Booking < ApplicationRecord
 
   # 同一ユーザーが同じイベントに複数回申し込むのを防ぐ
   validates :user_id, uniqueness: { scope: :event_id, message: "は既にこのイベントに申し込んでいます" }
-  
+
   # 保存前に定員チェックを実行
   validate :event_at_capacity, on: :create
 

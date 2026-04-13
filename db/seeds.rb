@@ -52,4 +52,3 @@ events_data.each do |data|
   end
 end
 puts "5 events created with varied capacities"
-

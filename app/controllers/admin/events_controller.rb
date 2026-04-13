@@ -27,7 +27,7 @@ class Admin::EventsController < Admin::BaseController
     @event = Event.new(event_params)
 
     if @event.save
-      redirect_to [ :admin, @event ], notice: t('admin.notices.created', model: Event.model_name.human)
+      redirect_to [ :admin, @event ], notice: t("admin.notices.created", model: Event.model_name.human)
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class Admin::EventsController < Admin::BaseController
   # PATCH/PUT /events/1 or /events/1.json
   def update
     if @event.update(event_params)
-      redirect_to [ :admin, @event ], notice: t('admin.notices.updated', model: Event.model_name.human), status: :see_other
+      redirect_to [ :admin, @event ], notice: t("admin.notices.updated", model: Event.model_name.human), status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -45,7 +45,7 @@ class Admin::EventsController < Admin::BaseController
   # DELETE /events/1 or /events/1.json
   def destroy
     @event.destroy!
-    redirect_to admin_events_path, notice: t('admin.notices.destroyed', model: Event.model_name.human), status: :see_other
+    redirect_to admin_events_path, notice: t("admin.notices.destroyed", model: Event.model_name.human), status: :see_other
   end
 
   private

@@ -7,7 +7,7 @@ class BookingsController < ApplicationController
   # 1件の申し込みを作成
   def create
     @event = Event.published.find(params[:event_id])
-    
+
     # 申し込みロジックの実行をサービスに委譲
     result = BookingService.new(@event, current_user).execute
 
@@ -17,7 +17,7 @@ class BookingsController < ApplicationController
       redirect_to event_path(@event), alert: result[:message]
     end
   rescue ActiveRecord::RecordNotFound
-    redirect_to events_path, alert: I18n.t('errors.messages.event_not_found', default: "指定されたイベントは見つかりませんでした。")
+    redirect_to events_path, alert: I18n.t("errors.messages.event_not_found", default: "指定されたイベントは見つかりませんでした。")
   end
 
   # 複数のイベントに対して一括で申し込む

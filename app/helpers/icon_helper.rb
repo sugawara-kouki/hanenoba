@@ -2,7 +2,7 @@ module IconHelper
   # Lucide-like SVG icons
   def icon(name, options = {})
     classes = options[:class] || "h-5 w-5"
-    
+
     case name.to_sym
     when :chevron_up
       content_tag(:svg, xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", stroke_width: "2", stroke_linecap: "round", stroke_linejoin: "round", class: classes) do
