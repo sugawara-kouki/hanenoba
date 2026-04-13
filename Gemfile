@@ -72,3 +72,5 @@ gem "devise", "~> 5.0"
 gem "omniauth-oauth2", "~> 1.9"
 
 gem "omniauth-rails_csrf_protection", "~> 2.0"
+
+gem "pagy", "~> 43.5"

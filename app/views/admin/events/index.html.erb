@@ -105,5 +105,11 @@
         </tbody>
       </table>
     </div>
+
+    <% if @pagy.pages > 1 %>
+      <div class="mt-8 flex justify-center">
+        <%== @pagy.series_nav %>
+      </div>
+    <% end %>
   </div>
 </div>
