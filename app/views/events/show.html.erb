@@ -74,7 +74,7 @@
 
             <%# イベント説明（もしあれば） %>
             <section class="prose prose-indigo max-w-none prose-sm font-medium text-gray-600 leading-relaxed">
-              <p>このイベントに参加して、新しいつながりを作りましょう。ハネノバ共有スペースにて皆様をお待ちしております。参加申し込みは下のボタンから簡単に行えます。</p>
+              <p><%= t('events.show.intro') %></p>
             </section>
           </div>
 
@@ -92,7 +92,7 @@
                      style="width: <%= [@event.bookings.count.to_f / @event.capacity * 100, 100].min %>%"></div>
               </div>
               <p class="mt-6 text-[10px] text-gray-400 font-bold leading-relaxed">
-                ※定員の <%= @event.capacity %>名に達し次第、締め切ります。お早めにお申し込みください。
+                <%= t('events.show.capacity_hint', capacity: @event.capacity) %>
               </p>
             </div>
 
@@ -106,7 +106,7 @@
                     </svg>
                   </div>
                   <h3 class="text-xl font-black text-indigo-900"><%= t('events.show.applied') %></h3>
-                  <p class="text-indigo-400 text-xs font-bold mt-2 uppercase tracking-widest">Enjoy the event!</p>
+                  <p class="text-indigo-400 text-xs font-bold mt-2 uppercase tracking-widest"><%= t('events.show.enjoy') %></p>
                 </div>
               <% elsif @event.bookings.count >= @event.capacity %>
                 <div class="bg-gray-50 border border-gray-100 rounded-[2rem] p-8 text-center grayscale opacity-70">

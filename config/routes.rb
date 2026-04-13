@@ -16,7 +16,9 @@ Rails.application.routes.draw do
     root to: "dashboard#show"
     resources :events
     resources :event_types, except: [ :show ]
-    resources :users, only: [ :index, :update, :destroy ]
+    resources :users, only: [ :index, :update, :destroy ] do
+      post :impersonate, on: :member if Rails.env.development?
+    end
     resources :bookings, only: [ :destroy ]
     resources :admins, except: [ :show ]
   end

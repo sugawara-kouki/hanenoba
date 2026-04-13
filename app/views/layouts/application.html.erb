@@ -27,7 +27,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
               </svg>
             </div>
-            <span class="text-2xl font-black text-gray-900 tracking-tight">ハネノバ</span>
+            <span class="text-2xl font-black text-gray-900 tracking-tight"><%= t('views.layout.brand') %></span>
           <% end %>
 
           <% if user_signed_in? %>
@@ -119,11 +119,11 @@
     <footer class="bg-white border-t border-gray-100 py-12 pb-32 md:pb-12 mt-auto">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-gray-400">
         <div class="flex items-center space-x-2 mb-4 md:mb-0">
-          <span class="font-black text-gray-900 tracking-tight">ハネノバ</span>
-          <span class="text-sm">&copy; 2026 Community Portal</span>
+          <span class="font-black text-gray-900 tracking-tight"><%= t('views.layout.brand') %></span>
+          <span class="text-sm"><%= t('views.layout.footer_copy').html_safe %></span>
         </div>
         <div class="text-xs">
-          Built with precision and style.
+          <%= t('views.layout.footer_built') %>
         </div>
       </div>
     </footer>

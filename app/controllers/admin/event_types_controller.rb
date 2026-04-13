@@ -23,7 +23,7 @@ class Admin::EventTypesController < Admin::BaseController
     @event_type = EventType.new(event_type_params)
 
     if @event_type.save
-      redirect_to admin_event_types_path, notice: "種別を正常に作成しました。"
+      redirect_to admin_event_types_path, notice: t('admin.notices.created', model: EventType.model_name.human)
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +32,7 @@ class Admin::EventTypesController < Admin::BaseController
   # PATCH/PUT /event_types/1 or /event_types/1.json
   def update
     if @event_type.update(event_type_params)
-      redirect_to admin_event_types_path, notice: "種別を正常に更新しました。", status: :see_other
+      redirect_to admin_event_types_path, notice: t('admin.notices.updated', model: EventType.model_name.human), status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -43,7 +43,7 @@ class Admin::EventTypesController < Admin::BaseController
     @event_type.destroy!
 
     respond_to do |format|
-      format.html { redirect_to admin_event_types_path, notice: "Event type was successfully destroyed.", status: :see_other }
+      format.html { redirect_to admin_event_types_path, notice: t('admin.notices.destroyed', model: EventType.model_name.human), status: :see_other }
       format.json { head :no_content }
     end
   end

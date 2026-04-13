@@ -8,15 +8,23 @@ class Admin::UsersController < Admin::BaseController
   def update
     @user = User.find(params[:id])
     if @user.update(approved: !@user.approved)
-      redirect_to admin_users_path, notice: "ユーザー「#{@user.name || @user.email}」の状態を更新しました。"
+      redirect_to admin_users_path, notice: t('admin.notices.status_updated', name: @user.name || @user.email)
     else
-      redirect_to admin_users_path, alert: "更新に失敗しました。"
+      redirect_to admin_users_path, alert: t('admin.notices.update_failed')
     end
   end
 
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to admin_users_path, notice: "ユーザー「#{@user.name || @user.email}」を削除しました。"
+    redirect_to admin_users_path, notice: t('admin.notices.destroyed', model: User.model_name.human)
+  end
+
+  def impersonate
+    return unless Rails.env.development?
+
+    @user = User.find(params[:id])
+    sign_in(:user, @user)
+    redirect_to root_path, notice: t('admin.notices.impersonated', name: @user.name || @user.email)
   end
 end

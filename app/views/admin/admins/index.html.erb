@@ -3,15 +3,15 @@
 
   <div class="mb-10 sm:flex sm:items-center sm:justify-between">
     <div class="sm:flex-auto">
-      <h1 class="text-3xl font-black text-gray-900 leading-tight">管理者ユーザー管理</h1>
-      <p class="mt-2 text-sm text-gray-500 font-medium tracking-tight">システムの管理権限を持つユーザーの一覧と管理を行います。</p>
+      <h1 class="text-3xl font-black text-gray-900 leading-tight"><%= t('admin.views.admins.index.title') %></h1>
+      <p class="mt-2 text-sm text-gray-500 font-medium tracking-tight"><%= t('admin.views.admins.index.subtitle') %></p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
       <%= link_to new_admin_admin_path, class: "inline-flex items-center rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-bold text-white shadow-xl shadow-indigo-100 hover:bg-indigo-500 transition-all active:scale-95" do %>
         <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
-        新規管理者を作成
+        <%= t('admin.views.admins.index.new') %>
       <% end %>
     </div>
   </div>
@@ -54,7 +54,7 @@
               <td class="relative whitespace-nowrap py-6 pl-3 pr-8 text-right font-medium">
                 <div class="flex justify-end space-x-2 items-center">
                   <%= link_to edit_admin_admin_path(admin_user), class: "inline-flex items-center px-4 py-2.5 rounded-xl bg-white border border-gray-200 text-gray-700 text-xs font-bold shadow-sm hover:bg-gray-50 transition-all" do %>
-                    編集
+                    <%= t('common.actions.edit') %>
                   <% end %>
                   
                   <% unless admin_user == current_admin %>

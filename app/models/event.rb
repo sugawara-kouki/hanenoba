@@ -12,13 +12,6 @@ class Event < ApplicationRecord
   validates :event_type_id, presence: true
 
   def status_ja
-    case status
-    when "draft"
-      "下書き"
-    when "published"
-      "公開"
-    when "hidden"
-      "非公開"
-    end
+    I18n.t("activerecord.attributes.event.status/#{status}", default: status)
   end
 end

@@ -5,6 +5,6 @@ class Admin::BookingsController < Admin::BaseController
     @user = @booking.user
     
     @booking.destroy
-    redirect_to admin_event_path(@event), notice: "ユーザー「#{@user.name || @user.email}」の申し込みを取り消しました。"
+    redirect_to admin_event_path(@event), notice: t('admin.notices.booking_cancelled', name: @user.name || @user.email)
   end
 end

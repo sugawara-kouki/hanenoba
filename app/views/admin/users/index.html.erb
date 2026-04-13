@@ -3,8 +3,8 @@
 
   <div class="mb-10 sm:flex sm:items-center sm:justify-between">
     <div class="sm:flex-auto">
-      <h1 class="text-3xl font-black text-gray-900 leading-tight">ユーザー管理</h1>
-      <p class="mt-2 text-sm text-gray-500 font-medium tracking-tight">登録されているユーザーの承認状態と利用権限を管理します。</p>
+      <h1 class="text-3xl font-black text-gray-900 leading-tight"><%= t('admin.views.users.index.title') %></h1>
+      <p class="mt-2 text-sm text-gray-500 font-medium tracking-tight"><%= t('admin.views.users.index.subtitle') %></p>
     </div>
   </div>
 
@@ -57,7 +57,16 @@
               </td>
               <td class="relative whitespace-nowrap py-6 pl-3 pr-8 text-right font-medium">
                 <div class="flex justify-end space-x-2 items-center">
-                  <%= button_to user.approved? ? "利用停止" : "利用承認", admin_user_path(user), 
+                  <% if Rails.env.development? %>
+                    <%= button_to impersonate_admin_user_path(user), 
+                        method: :post, 
+                        class: "inline-flex items-center rounded-xl bg-amber-500 px-4 py-2.5 text-xs font-bold text-white shadow-xl shadow-amber-100 hover:bg-amber-400 transition-all",
+                        data: { turbo_confirm: "#{user.name || user.email} #{t('admin.views.users.index.impersonate_confirm')}" } do %>
+                      <%= t('admin.views.users.index.impersonate') %>
+                    <% end %>
+                  <% end %>
+
+                  <%= button_to user.approved? ? t('admin.views.users.index.suspend') : t('admin.views.users.index.approve'), admin_user_path(user), 
                       method: :patch, 
                       class: user.approved? ? 
                         "inline-flex items-center rounded-xl bg-white border border-gray-200 text-red-500 px-4 py-2.5 text-xs font-bold shadow-sm hover:bg-red-50 hover:border-red-100 transition-all" : 

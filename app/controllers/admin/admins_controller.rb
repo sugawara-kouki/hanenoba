@@ -18,7 +18,7 @@ class Admin::AdminsController < Admin::BaseController
     @admin = Admin.new(admin_params)
 
     if @admin.save
-      redirect_to admin_admins_path, notice: "管理者を正常に作成しました。"
+      redirect_to admin_admins_path, notice: t('admin.notices.created', model: Admin.model_name.human)
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +32,7 @@ class Admin::AdminsController < Admin::BaseController
     end
 
     if @admin.update(admin_params)
-      redirect_to admin_admins_path, notice: "管理者を正常に更新しました。"
+      redirect_to admin_admins_path, notice: t('admin.notices.updated', model: Admin.model_name.human)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,12 +40,12 @@ class Admin::AdminsController < Admin::BaseController
 
   def destroy
     if @admin == current_admin
-      redirect_to admin_admins_path, alert: "自分自身を削除することはできません。"
+      redirect_to admin_admins_path, alert: t('admin.notices.cannot_delete_self')
       return
     end
 
     @admin.destroy
-    redirect_to admin_admins_path, notice: "管理者を削除しました。"
+    redirect_to admin_admins_path, notice: t('admin.notices.destroyed', model: Admin.model_name.human)
   end
 
   private

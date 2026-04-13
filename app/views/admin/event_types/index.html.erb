@@ -1,17 +1,17 @@
 <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-  <%= render "admin/shared/breadcrumbs", breadcrumbs: [{ name: "種別設定" }] %>
+  <%= render "admin/shared/breadcrumbs", breadcrumbs: [{ name: t('admin.views.event_types.index.breadcrumb') }] %>
 
   <div class="mb-10 sm:flex sm:items-center sm:justify-between">
     <div class="sm:flex-auto">
-      <h1 class="text-3xl font-black text-gray-900 leading-tight">イベント種別設定</h1>
-      <p class="mt-2 text-sm text-gray-500 font-medium tracking-tight">イベントを分類するためのカテゴリーを設定します。</p>
+      <h1 class="text-3xl font-black text-gray-900 leading-tight"><%= t('admin.views.event_types.index.title') %></h1>
+      <p class="mt-2 text-sm text-gray-500 font-medium tracking-tight"><%= t('admin.views.event_types.index.subtitle') %></p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
       <%= link_to new_admin_event_type_path, class: "inline-flex items-center rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-bold text-white shadow-xl shadow-indigo-100 hover:bg-indigo-500 transition-all active:scale-95" do %>
         <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
-        新規種別を作成
+        <%= t('admin.views.event_types.index.new') %>
       <% end %>
     </div>
   </div>

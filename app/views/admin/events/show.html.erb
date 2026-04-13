@@ -1,6 +1,6 @@
 <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
   <%= render "admin/shared/breadcrumbs", breadcrumbs: [
-    { name: "イベント一覧", link: admin_events_path },
+    { name: t('admin.views.events.index.breadcrumb'), link: admin_events_path },
     { name: @event.title }
   ] %>
 
@@ -24,7 +24,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
         </svg>
-        イベントを編集
+        <%= t('admin.views.events.show.edit_event') %>
       <% end %>
     </div>
   </div>
@@ -38,7 +38,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <h3 class="text-base font-bold leading-7 text-gray-900">基本情報</h3>
+            <h3 class="text-base font-bold leading-7 text-gray-900"><%= t('admin.views.events.show.basic_info') %></h3>
           </div>
           <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold ring-1 ring-inset <%= @event.published? ? 'bg-green-50 text-green-700 ring-green-600/20' : 'bg-yellow-50 text-yellow-700 ring-yellow-600/20' %>">
             <%= @event.status_ja %>
@@ -46,7 +46,7 @@
         </div>
         <div class="px-8 py-10 grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8">
           <div class="group">
-            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-mono">開催日時 / HELD AT</label>
+            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-mono"><%= t('admin.views.events.show.held_at') %></label>
             <div class="flex items-center space-x-3">
               <div class="bg-indigo-50 p-2 rounded-lg text-indigo-600">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,7 +57,7 @@
             </div>
           </div>
           <div class="group">
-            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-mono">開催予定場所 / LOCATION</label>
+            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-mono"><%= t('admin.views.events.show.location') %></label>
             <div class="flex items-center space-x-3">
               <div class="bg-emerald-50 p-2 rounded-lg text-emerald-600">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -69,7 +69,7 @@
             </div>
           </div>
           <div class="group sm:col-span-2">
-            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-mono">募集定員</label>
+            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-mono"><%= t('admin.views.events.show.capacity') %></label>
             <div class="flex items-center space-x-3">
               <div class="bg-amber-50 p-2 rounded-lg text-amber-600">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -91,13 +91,13 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
-            <h3 class="text-[10px] font-black uppercase tracking-[0.2em]">申込状況概要</h3>
+            <h3 class="text-[10px] font-black uppercase tracking-[0.2em]"><%= t('admin.views.events.show.booking_summary') %></h3>
           </div>
           <div class="flex items-baseline space-x-2 mb-4">
             <span class="text-7xl font-black tracking-tighter"><%= @event.bookings.count %></span>
             <span class="text-gray-500 font-bold text-2xl tracking-tight">/ <%= @event.capacity %></span>
           </div>
-          <p class="text-gray-400 text-sm font-medium leading-relaxed">現時点で定員の <span class="text-white font-bold"><%= (@event.bookings.count.to_f / @event.capacity * 100).round %>%</span> が埋まっています。</p>
+          <p class="text-gray-400 text-sm font-medium leading-relaxed"><%= t('admin.views.events.show.booking_full_percent', percent: (@event.bookings.count.to_f / @event.capacity * 100).round) %></p>
         </div>
         
         <div class="mt-8">
@@ -119,8 +119,8 @@
           </svg>
           <span class="text-[10px] font-black uppercase tracking-[0.2em]">Participants List</span>
         </div>
-        <h2 class="text-2xl font-black text-gray-900 tracking-tight">参加申込者一覧</h2>
-        <p class="mt-1 text-sm text-gray-500 font-medium">現在、このイベントに申し込んでいる全てのユーザーです。</p>
+        <h2 class="text-2xl font-black text-gray-900 tracking-tight"><%= t('admin.views.events.show.participants_list') %></h2>
+        <p class="mt-1 text-sm text-gray-500 font-medium"><%= t('admin.views.events.show.participants_subtitle') %></p>
       </div>
     </div>
     
@@ -128,8 +128,8 @@
       <table class="min-w-full divide-y divide-gray-100">
         <thead class="bg-gray-50/50">
           <tr>
-            <th scope="col" class="py-4 pl-8 pr-3 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">参加ユーザー</th>
-            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">申込日時</th>
+            <th scope="col" class="py-4 pl-8 pr-3 text-left text-xs font-bold text-gray-400 uppercase tracking-widest"><%= t('admin.views.events.show.table.user') %></th>
+            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest"><%= t('admin.views.events.show.table.applied_at') %></th>
             <th scope="col" class="relative py-4 pl-3 pr-8 text-right">
               <span class="sr-only">操作</span>
             </th>
@@ -159,8 +159,8 @@
                   <%= button_to admin_booking_path(booking), 
                       method: :delete, 
                       class: "inline-flex items-center rounded-xl bg-white px-4 py-2 text-xs font-bold text-red-500 shadow-sm ring-1 ring-inset ring-red-100 hover:bg-red-50 transition-all",
-                      data: { turbo_confirm: "「#{booking.user.name}」の申し込みを取り消しますか？\nこの操作は元に戻せません。" } do %>
-                    申込を取り消す
+                      data: { turbo_confirm: t('admin.views.events.show.confirm_cancel_booking', name: booking.user.name) } do %>
+                    <%= t('admin.views.events.show.cancel_booking') %>
                   <% end %>
                 </td>
               </tr>
@@ -172,8 +172,8 @@
                   <svg class="h-12 w-12 text-gray-200 mb-4" fill="none" viewbox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
-                  <p class="font-bold">申込者はまだいません。</p>
-                  <p class="text-xs mt-1">公開して参加者を募りましょう。</p>
+                  <p class="font-bold"><%= t('admin.views.events.show.no_participants') %></p>
+                  <p class="text-xs mt-1"><%= t('admin.views.events.show.recruit_participants') %></p>
                 </div>
               </td>
             </tr>

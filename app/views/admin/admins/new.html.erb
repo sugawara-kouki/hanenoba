@@ -1,12 +1,12 @@
 <div class="px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
   <%= render "admin/shared/breadcrumbs", breadcrumbs: [
-    { name: "管理者ユーザー管理", link: admin_admins_path },
-    { name: "新規作成" }
+    { name: t('admin.views.admins.index.breadcrumb'), link: admin_admins_path },
+    { name: t('admin.views.admins.new.breadcrumb') }
   ] %>
 
   <div class="mb-10">
-    <h1 class="text-3xl font-black text-gray-900 leading-tight">新規管理者作成</h1>
-    <p class="mt-2 text-sm text-gray-500 font-medium tracking-tight">新しい管理ユーザーをシステムに追加します。</p>
+    <h1 class="text-3xl font-black text-gray-900 leading-tight"><%= t('admin.views.admins.new.title') %></h1>
+    <p class="mt-2 text-sm text-gray-500 font-medium tracking-tight"><%= t('admin.views.admins.new.subtitle') %></p>
   </div>
 
   <%= render "form", admin: @admin %>
