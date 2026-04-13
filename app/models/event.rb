@@ -14,4 +14,22 @@ class Event < ApplicationRecord
   def status_ja
     I18n.t("activerecord.attributes.event.status/#{status}", default: status)
   end
+
+  def full?
+    bookings.count >= capacity
+  end
+
+  def occupancy_rate
+    return 0 if capacity.zero?
+    (bookings.count.to_f / capacity * 100).round
+  end
+
+  def remaining_capacity
+    [capacity - bookings.count, 0].max
+  end
+
+  def booked_by?(user)
+    return false unless user
+    bookings.exists?(user: user)
+  end
 end

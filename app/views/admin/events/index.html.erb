@@ -54,10 +54,11 @@
                     <div class="flex flex-col flex-1 min-w-[120px]">
                       <div class="flex justify-between text-[10px] font-bold text-gray-400 mb-1.5 uppercase tracking-tighter">
                         <span><%= event.bookings.count %> / <%= event.capacity %> 名</span>
-                        <span><%= (event.bookings.count.to_f / event.capacity * 100).round %>%</span>
+                        <div class="h-1 w-1 rounded-full bg-gray-300"></div>
+                        <span><%= event.occupancy_rate %>%</span>
                       </div>
-                      <div class="w-full bg-gray-100 rounded-full h-1.5">
-                        <div class="bg-indigo-600 h-1.5 rounded-full" style="width: <%= [event.bookings.count.to_f / event.capacity * 100, 100].min %>%"></div>
+                      <div class="mt-2 w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                        <div class="bg-indigo-600 h-1.5 rounded-full" style="width: <%= [event.occupancy_rate, 100].min %>%"></div>
                       </div>
                     </div>
                   </div>

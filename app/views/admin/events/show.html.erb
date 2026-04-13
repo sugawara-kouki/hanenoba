@@ -97,12 +97,12 @@
             <span class="text-7xl font-black tracking-tighter"><%= @event.bookings.count %></span>
             <span class="text-gray-500 font-bold text-2xl tracking-tight">/ <%= @event.capacity %></span>
           </div>
-          <p class="text-gray-400 text-sm font-medium leading-relaxed"><%= t('admin.views.events.show.booking_full_percent', percent: (@event.bookings.count.to_f / @event.capacity * 100).round) %></p>
+          <p class="text-gray-400 text-sm font-medium leading-relaxed"><%= t('admin.views.events.show.booking_full_percent', percent: @event.occupancy_rate) %></p>
         </div>
         
         <div class="mt-8">
           <div class="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
-            <div class="bg-indigo-500 h-full rounded-full shadow-[0_0_20px_rgba(99,102,241,0.5)] transition-all duration-1000" style="width: <%= [@event.bookings.count.to_f / @event.capacity * 100, 100].min %>%"></div>
+            <div class="bg-indigo-500 h-full rounded-full shadow-[0_0_20px_rgba(99,102,241,0.5)] transition-all duration-1000" style="width: <%= [@event.occupancy_rate, 100].min %>%"></div>
           </div>
         </div>
       </div>

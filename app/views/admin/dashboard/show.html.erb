@@ -149,12 +149,12 @@
               </div>
               <%# 申込状況ミニバー %>
               <div class="mt-4">
-                <div class="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1.5">
-                  <span>定員</span>
-                  <span><%= event.bookings.count %> / <%= event.capacity %></span>
+                <div class="flex items-center justify-between text-xs font-bold mb-2">
+                  <span class="text-gray-900 group-hover:text-indigo-600 transition-colors truncate pr-4"><%= event.title %></span>
+                  <span class="text-gray-400 whitespace-nowrap"><%= event.bookings.count %> / <%= event.capacity %></span>
                 </div>
-                <div class="w-full bg-gray-50 rounded-full h-1.5 overflow-hidden">
-                  <div class="bg-indigo-600 h-full rounded-full transition-all duration-1000" style="width: <%= [event.bookings.count.to_f / event.capacity * 100, 100].min %>%"></div>
+                <div class="w-full bg-gray-100/50 rounded-full h-1.5 overflow-hidden ring-1 ring-gray-900/5">
+                  <div class="bg-indigo-600 h-full rounded-full transition-all duration-1000" style="width: <%= [event.occupancy_rate, 100].min %>%"></div>
                 </div>
               </div>
             <% end %>

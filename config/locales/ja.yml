@@ -20,8 +20,15 @@ ja:
       items_selected: "件選択中"
       bulk_apply: "まとめて申し込む"
       confirm_bulk_apply: "選択したイベントにまとめて申し込みますか？"
+  bookings:
+    create:
+      success: "申し込みが完了しました！"
+      failure: "申し込みに失敗しました。"
+    bulk_create:
+      no_events: "イベントが選択されていません。"
     show:
       back_to_discover: "DISCOVER"
+
       event_details: "EVENT DETAILS"
       date_time: "DATE & TIME"
       location: "LOCATION"
@@ -153,7 +160,15 @@ ja:
       event_type:
         name: "種別名"
     errors:
+      models:
+        booking:
+          attributes:
+            user_id:
+              taken: "は既にこのイベントに申し込んでいます。"
+          base:
+            event_at_capacity: "定員に達しているため申し込みできません。"
       messages:
+
         blank: "を入力してください"
         invalid: "は不正な値です"
         taken: "はすでに存在します"
@@ -214,6 +229,8 @@ ja:
       confirm: "確定"
     errors:
       check_input: "入力内容を確認してください"
+      unexpected: "エラーが発生しました: %{error}"
+
     forms:
       placeholders:
         email: "admin@example.com"

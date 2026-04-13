@@ -89,7 +89,7 @@
               <%# プレミアム・進捗バー %>
               <div class="w-full bg-gray-200/50 rounded-full h-3 overflow-hidden">
                 <div class="bg-gradient-to-r from-indigo-500 to-purple-600 h-full rounded-full shadow-lg shadow-indigo-500/20 transition-all duration-1000" 
-                     style="width: <%= [@event.bookings.count.to_f / @event.capacity * 100, 100].min %>%"></div>
+                     style="width: <%= [@event.occupancy_rate, 100].min %>%"></div>
               </div>
               <p class="mt-6 text-[10px] text-gray-400 font-bold leading-relaxed">
                 <%= t('events.show.capacity_hint', capacity: @event.capacity) %>
@@ -108,7 +108,7 @@
                   <h3 class="text-xl font-black text-indigo-900"><%= t('events.show.applied') %></h3>
                   <p class="text-indigo-400 text-xs font-bold mt-2 uppercase tracking-widest"><%= t('events.show.enjoy') %></p>
                 </div>
-              <% elsif @event.bookings.count >= @event.capacity %>
+              <% elsif @event.full? %>
                 <div class="bg-gray-50 border border-gray-100 rounded-[2rem] p-8 text-center grayscale opacity-70">
                   <h3 class="text-xl font-black text-gray-400 uppercase tracking-widest"><%= t('events.show.fully_booked') %></h3>
                 </div>

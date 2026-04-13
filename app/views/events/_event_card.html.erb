@@ -1,7 +1,7 @@
 <div class="group relative bg-white rounded-[2.5rem] shadow-sm ring-1 ring-gray-900/5 overflow-hidden hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 flex flex-col h-full">
   <% 
-    is_booked = event.bookings.exists?(user: current_user)
-    is_full = event.bookings.count >= event.capacity
+    is_booked = event.booked_by?(current_user)
+    is_full = event.full?
     is_disabled = is_booked || is_full
   %>
 
