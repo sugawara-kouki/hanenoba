@@ -3,7 +3,7 @@
 
   <div class="mb-10 sm:flex sm:items-center sm:justify-between">
     <div class="sm:flex-auto">
-      <h1 class="text-3xl font-black text-gray-900 leading-tight"><%= t('admin.views.users.index.title') %></h1>
+      <h1 class="text-3xl font-bold text-gray-900 leading-tight"><%= t('admin.views.users.index.title') %></h1>
       <p class="mt-2 text-sm text-gray-500 font-medium tracking-tight"><%= t('admin.views.users.index.subtitle') %></p>
     </div>
   </div>
@@ -13,11 +13,19 @@
       <table class="min-w-full divide-y divide-gray-100">
         <thead class="bg-gray-50/50">
           <tr>
-            <th scope="col" class="py-4 pl-8 pr-3 text-left text-xs font-bold text-gray-400 uppercase tracking-widest"><%= sort_link "name", "ユーザープロフィール" %></th>
-            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest"><%= sort_link "email", "メールアドレス" %></th>
-            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest font-mono"><%= sort_link "created_at", "登録日" %></th>
-            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest"><%= sort_link "approved", "状態" %></th>
-            <th scope="col" class="relative py-4 pl-3 pr-8 text-right">
+            <th scope="col" class="py-4 pl-8 pr-3 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">
+              <%= sort_link "name", "ユーザー情報" %>
+            </th>
+            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest w-56">
+              <%= sort_link "email", "メールアドレス" %>
+            </th>
+            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest w-40">
+              <%= sort_link "created_at", "登録日" %>
+            </th>
+            <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest w-28">
+              <%= sort_link "approved", "状態" %>
+            </th>
+            <th scope="col" class="relative py-4 pl-3 pr-8 text-right w-44">
               <span class="sr-only">操作</span>
             </th>
           </tr>
@@ -25,64 +33,75 @@
         <tbody class="divide-y divide-gray-50">
           <% @users.each do |user| %>
             <tr class="hover:bg-gray-50/30 transition-colors">
-              <td class="whitespace-nowrap py-6 pl-8 pr-3 text-sm">
-                <div class="flex items-center">
-                  <div class="h-11 w-11 flex-shrink-0">
-                    <%= image_tag user.image || "https://ui-avatars.com/api/?name=#{user.name}&background=random", 
-                        class: "h-11 w-11 rounded-full object-cover ring-2 ring-gray-100 shadow-sm", 
-                        alt: user.name %>
+                <td class="py-5 pl-8 pr-3 text-sm">
+                  <div class="flex items-center text-sm">
+                    <div class="h-11 w-11 flex-shrink-0">
+                      <%= image_tag user.image || "https://ui-avatars.com/api/?name=#{user.name}&background=random", 
+                          class: "h-11 w-11 rounded-full object-cover ring-2 ring-white shadow-sm", 
+                          alt: user.name %>
+                    </div>
+                    <div class="ml-4 flex flex-col">
+                      <div class="font-bold text-gray-900 text-base leading-snug"><%= user.name || "名称未設定" %></div>
+                      <div class="mt-1 text-gray-400 text-[10px] font-bold uppercase tracking-widest tabular-nums">UID: <%= user.uid %></div>
+                    </div>
                   </div>
-                  <div class="ml-4">
-                    <div class="font-bold text-gray-900 text-base"><%= user.name || "名称未設定" %></div>
-                    <div class="mt-0.5 text-gray-400 text-[10px] font-bold uppercase tracking-wider font-mono">UID: <%= user.uid %></div>
+                </td>
+                <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 font-medium tabular-nums">
+                  <%= user.email.presence || "---" %>
+                </td>
+                <td class="whitespace-nowrap px-3 py-5">
+                  <div class="tabular-nums text-sm font-semibold text-gray-900">
+                    <%= user.created_at.strftime("%Y/%m/%d") %>
                   </div>
-                </div>
-              </td>
-              <td class="whitespace-nowrap px-3 py-6 text-sm text-gray-500 font-medium">
-                <%= user.email.presence || "---" %>
-              </td>
-              <td class="whitespace-nowrap px-3 py-6 text-sm text-gray-900 font-bold font-mono">
-                <%= user.created_at.strftime("%Y/%m/%d") %>
-              </td>
-              <td class="whitespace-nowrap px-3 py-6 text-sm">
-                <% if user.approved? %>
-                  <span class="inline-flex items-center rounded-md bg-indigo-50 px-2.5 py-1 text-[10px] font-black text-indigo-700 ring-1 ring-inset ring-indigo-600/20 uppercase tracking-wider">
-                    承認済
-                  </span>
-                <% else %>
-                  <span class="inline-flex items-center rounded-md bg-yellow-50 px-2.5 py-1 text-[10px] font-black text-yellow-800 ring-1 ring-inset ring-yellow-600/20 uppercase tracking-wider">
-                    承認待
-                  </span>
-                <% end %>
-              </td>
-              <td class="relative whitespace-nowrap py-6 pl-3 pr-8 text-right font-medium">
-                <div class="flex justify-end space-x-2 items-center">
-                  <% if Rails.env.development? %>
-                    <%= button_to impersonate_admin_user_path(user), 
-                        method: :post, 
-                        class: "inline-flex items-center rounded-xl bg-amber-500 px-4 py-2.5 text-xs font-bold text-white shadow-xl shadow-amber-100 hover:bg-amber-400 transition-all",
-                        data: { turbo_confirm: "#{user.name || user.email} #{t('admin.views.users.index.impersonate_confirm')}" } do %>
-                      <%= t('admin.views.users.index.impersonate') %>
+                </td>
+                <td class="whitespace-nowrap px-3 py-5">
+                  <div class="flex items-center space-x-1.5">
+                    <div class="h-1.5 w-1.5 rounded-full <%= user.approved? ? 'bg-indigo-500 shadow-[0_0_8px_rgba(79,70,229,0.4)]' : 'bg-yellow-400' %>"></div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider <%= user.approved? ? 'text-indigo-700' : 'text-yellow-800' %>">
+                      <%= user.approved? ? '承認済' : '承認待' %>
+                    </span>
+                  </div>
+                </td>
+                <td class="whitespace-nowrap py-5 pl-3 pr-8 text-right font-medium text-xs">
+                  <div class="flex justify-end -space-x-px">
+                    <% if Rails.env.development? %>
+                      <%= button_to impersonate_admin_user_path(user), 
+                          method: :post, 
+                          class: "p-2 rounded-l-xl border border-gray-200 bg-white text-gray-400 hover:text-amber-600 hover:bg-amber-50 transition-all shadow-sm",
+                          title: t('admin.views.users.index.impersonate'),
+                          data: { turbo_confirm: "#{user.name || user.email} #{t('admin.views.users.index.impersonate_confirm')}" } do %>
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
+                        </svg>
+                      <% end %>
                     <% end %>
-                  <% end %>
 
-                  <%= button_to user.approved? ? t('admin.views.users.index.suspend') : t('admin.views.users.index.approve'), admin_user_path(user), 
-                      method: :patch, 
-                      class: user.approved? ? 
-                        "inline-flex items-center rounded-xl bg-white border border-gray-200 text-red-500 px-4 py-2.5 text-xs font-bold shadow-sm hover:bg-red-50 hover:border-red-100 transition-all" : 
-                        "inline-flex items-center rounded-xl bg-indigo-600 px-4 py-2.5 text-xs font-bold text-white shadow-xl shadow-indigo-100 hover:bg-indigo-500 transition-all",
-                      data: { turbo_confirm: "#{user.name} を#{user.approved? ? '停止' : '承認'}しますか？" } %>
-                  
-                  <%= button_to admin_user_path(user), 
-                      method: :delete, 
-                      class: "p-2.5 text-gray-300 hover:text-red-600 transition-colors",
-                      data: { turbo_confirm: "ユーザー「#{user.name}」を完全に削除しますか？\nこの操作は取り消せません。" }, title: "完全削除" do %>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>
-                  <% end %>
-                </div>
-              </td>
+                    <%= button_to admin_user_path(user), 
+                        method: :patch, 
+                        class: "p-2 #{Rails.env.development? ? 'border-y border-x-0' : 'rounded-l-xl border'} border-gray-200 bg-white #{user.approved? ? 'text-gray-400 hover:text-red-600 hover:bg-red-50' : 'text-indigo-400 hover:text-indigo-600 hover:bg-indigo-50'} transition-all shadow-sm",
+                        title: user.approved? ? t('admin.views.users.index.suspend') : t('admin.views.users.index.approve'),
+                        data: { turbo_confirm: "#{user.name} を#{user.approved? ? '停止' : '承認'}しますか？" } do %>
+                        <% if user.approved? %>
+                          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                          </svg>
+                        <% else %>
+                          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        <% end %>
+                    <% end %>
+                    
+                    <%= button_to admin_user_path(user), 
+                        method: :delete, 
+                        class: "p-2 rounded-r-xl border border-gray-200 bg-white text-gray-400 hover:text-red-600 hover:bg-red-50 transition-all shadow-sm",
+                        data: { turbo_confirm: "ユーザー「#{user.name}」を完全に削除しますか？\nこの操作は取り消せません。" }, title: "完全削除" do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                    <% end %>
+                  </div>
+                </td>
             </tr>
           <% end %>
         </tbody>
