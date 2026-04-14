@@ -39,48 +39,11 @@
 
     <div class="grid grid-cols-7 auto-rows-[64px] sm:auto-rows-[160px] divide-x divide-y divide-gray-50">
       <% (@start_date..@end_date).each do |date| %>
-        <% 
-          is_today = date == Date.today 
-          is_current_month = date.month == @base_date.month
-          events = @events_by_date[date] || []
-          
-          date_color_class = if is_today
-            'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
-          elsif date.sunday?
-            is_current_month ? 'text-pink-500' : 'text-pink-200'
-          elsif date.saturday?
-            is_current_month ? 'text-indigo-500' : 'text-indigo-200'
-          else
-            is_current_month ? 'text-gray-900' : 'text-gray-300'
-          end
-        %>
-        <div class="relative p-1 sm:p-4 group transition-all duration-300 <%= is_current_month ? (events.any? ? 'bg-indigo-50/40 ring-1 ring-inset ring-indigo-500/10 hover:bg-indigo-100/60 hover:shadow-lg hover:shadow-indigo-500/5 cursor-pointer' : 'bg-white') : 'bg-gray-50/20' %>">
-          <% if events.any? %>
-            <%= link_to event_path(events.first), class: "absolute inset-0 z-20", title: events.first.title do %><% end %>
-          <% end %>
-          <div class="flex flex-col items-center h-full relative z-10">
-            <span class="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 text-xs sm:text-sm font-black rounded-lg transition-all <%= date_color_class %>">
-              <%= date.day %>
-            </span>
-
-            <% if events.any? %>
-              <%# モバイル用：ドット表示 %>
-              <div class="mt-1 flex justify-center space-x-1 sm:hidden">
-                <div class="w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-sm animate-pulse"></div>
-              </div>
-
-              <%# デスクトップ用：詳細表示 %>
-              <div class="hidden sm:block mt-2 space-y-1 w-full overflow-y-auto max-h-[100px] custom-scrollbar">
-                <% events.each do |event| %>
-                  <%= link_to event_path(event), class: "block px-2 py-1 rounded-lg text-[10px] font-bold leading-tight transition-all truncate bg-indigo-50 text-indigo-700 ring-1 ring-indigo-600/10 hover:bg-indigo-600 hover:text-white hover:ring-indigo-600" do %>
-                    <span class="opacity-70 mr-0.5"><%= event.held_at.strftime("%H:%M") %></span>
-                    <%= event.title %>
-                  <% end %>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-        </div>
+        <%= render Calendar::DayCellComponent.new(
+              date: date, 
+              base_date: @base_date, 
+              events: @events_by_date[date] || []
+            ) %>
       <% end %>
     </div>
   </div>

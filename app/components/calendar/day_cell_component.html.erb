@@ -1,0 +1,28 @@
+<div class="<%= container_classes %>">
+  <% if has_events? %>
+    <%= link_to event_path(events.first), class: "absolute inset-0 z-20", title: events.first.title do %><% end %>
+  <% end %>
+  
+  <div class="flex flex-col items-center h-full relative z-10 font-sans">
+    <span class="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 text-xs sm:text-sm font-black rounded-lg transition-all <%= date_color_classes %>">
+      <%= date.day %>
+    </span>
+
+    <% if has_events? %>
+      <%# モバイル用：ドット表示 %>
+      <div class="mt-1 flex justify-center space-x-1 sm:hidden">
+        <div class="w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-sm animate-pulse"></div>
+      </div>
+
+      <%# デスクトップ用：詳細表示 %>
+      <div class="hidden sm:block mt-2 space-y-1 w-full overflow-y-auto max-h-[100px] custom-scrollbar">
+        <% events.each do |event| %>
+          <%= link_to event_path(event), class: "block px-2 py-1 rounded-lg text-[10px] font-bold leading-tight transition-all truncate bg-indigo-50 text-indigo-700 ring-1 ring-indigo-600/10 hover:bg-indigo-600 hover:text-white hover:ring-indigo-600" do %>
+            <span class="opacity-70 mr-0.5"><%= l(event.held_at, format: :hm) %></span>
+            <%= event.title %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
