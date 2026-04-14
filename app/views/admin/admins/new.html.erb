@@ -1,8 +1,8 @@
 <div class="px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-  <%= render "admin/shared/breadcrumbs", breadcrumbs: [
+  <%= render Layout::Admin::BreadcrumbsComponent.new(breadcrumbs: [
     { name: t('admin.views.admins.index.breadcrumb'), link: admin_admins_path },
     { name: t('admin.views.admins.new.breadcrumb') }
-  ] %>
+  ]) %>
 
   <div class="mb-10">
     <h1 class="text-3xl font-black text-gray-900 leading-tight"><%= t('admin.views.admins.new.title') %></h1>

@@ -1,10 +1,10 @@
 <% content_for :title, "New Event Type | Hanenoba Admin" %>
 
 <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-  <%= render "admin/shared/breadcrumbs", breadcrumbs: [
+  <%= render Layout::Admin::BreadcrumbsComponent.new(breadcrumbs: [
     { name: "種別設定", link: admin_event_types_path },
     { name: "新規種別" }
-  ] %>
+  ]) %>
 
   <div class="mb-10 sm:flex sm:items-center sm:justify-between">
     <div class="sm:flex-auto">
