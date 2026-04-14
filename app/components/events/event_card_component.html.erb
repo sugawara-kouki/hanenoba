@@ -1,10 +1,4 @@
-<div class="group relative bg-white rounded-[2.5rem] shadow-sm ring-1 ring-gray-900/5 overflow-hidden hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 flex flex-col h-full">
-  <% 
-    is_booked = event.booked_by?(current_user)
-    is_full = event.full?
-    is_disabled = is_booked || is_full
-  %>
-
+<div class="<%= card_classes %>">
   <%# 選択用レイヤー (Absolute) %>
   <div class="absolute top-6 left-6 z-20">
     <label class="relative block h-8 w-8 cursor-pointer group/cb">
@@ -12,20 +6,21 @@
              class="peer absolute inset-0 opacity-0 z-10 cursor-pointer disabled:cursor-not-allowed"
              data-bulk-booking-target="checkbox"
              data-action="change->bulk-booking#toggle"
-             <%= "disabled" if is_disabled %>>
+             aria-label="<%= event.title %>"
+             <%= "disabled" if disabled? %>>
       <div class="absolute inset-0 bg-white/90 backdrop-blur-sm rounded-xl peer-checked:bg-indigo-600 ring-2 ring-indigo-600/20 peer-checked:ring-indigo-600 transition-all duration-300 peer-disabled:opacity-20 peer-disabled:grayscale flex items-center justify-center shadow-lg peer-checked:shadow-indigo-500/50">
-        <svg class="h-4 w-4 text-white scale-50 opacity-0 peer-checked:scale-100 peer-checked:opacity-100 transition-all duration-300 cubic-bezier(0.34, 1.56, 0.64, 1)" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7" />
-        </svg>
       </div>
+      <svg class="absolute inset-0 m-auto h-4 w-4 text-white scale-50 opacity-0 peer-checked:scale-100 peer-checked:opacity-100 transition-all duration-300 [transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)] pointer-events-none z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7" />
+      </svg>
     </label>
   </div>
 
   <%# ステータスバッジ (Absolute) %>
   <div class="absolute top-6 right-6 z-20">
-    <% if is_booked %>
+    <% if booked? %>
       <span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-green-500 text-white shadow-lg shadow-green-500/20"><%= t('events.card.applied') %></span>
-    <% elsif is_full %>
+    <% elsif full? %>
       <span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-gray-500 text-white"><%= t('events.card.full') %></span>
     <% end %>
   </div>
@@ -33,12 +28,12 @@
   <%# ビジュアルエリア %>
   <div class="relative h-48 overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/80 to-purple-700/80 mix-blend-multiply z-10 transition-all duration-500 group-hover:scale-110"></div>
-    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80&v=<%= event.id %>" 
          class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110" 
          alt="<%= event.title %>">
     
     <div class="absolute inset-0 z-10 flex items-center justify-center">
-       <span class="text-white text-3xl font-black opacity-40 uppercase tracking-[0.2em] transform -rotate-1 group-hover:rotate-0 transition-transform duration-500">
+       <span class="text-white text-3xl font-black opacity-40 uppercase tracking-[0.2em] transform -rotate-1 group-hover:rotate-0 transition-transform duration-500 text-center px-4">
          <%= event.event_type.name %>
        </span>
     </div>
@@ -67,9 +62,9 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
         </div>
-        <%= event.held_at.strftime("%Y.%m.%d") %> 
+        <%= l(event.held_at, format: :dot_date) %> 
         <span class="mx-2 text-gray-200">/</span>
-        <%= event.held_at.strftime("%H:%M") %>〜
+        <%= t('events.card.time_range', start_time: l(event.held_at, format: :hm)) %>
       </div>
       
       <div class="flex items-center text-sm font-bold text-gray-500">
@@ -78,7 +73,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
           </svg>
         </div>
-        <%= event.location %>
+        <%= event.location.presence || t('events.card.tbd') %>
       </div>
     </div>
 

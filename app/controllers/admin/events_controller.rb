@@ -5,7 +5,7 @@ class Admin::EventsController < Admin::BaseController
   # GET /events or /events.json
   def index
     s = sort_params("held_at", "desc", %w[title held_at created_at capacity status])
-    @pagy, @events = pagy(:offset, Event.includes(:event_type).order("#{s[:column]} #{s[:direction]}"), limit: 1)
+    @pagy, @events = pagy(:offset, Event.includes(:event_type).order("#{s[:column]} #{s[:direction]}"), limit: 5)
   end
 
   # GET /events/1 or /events/1.json

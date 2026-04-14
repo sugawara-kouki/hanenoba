@@ -11,12 +11,12 @@ ja:
       footer_built: "Built with precision and style."
   events:
     index:
-      title: "Discover Events"
+      title: "イベントを探す"
       subtitle: "コミュニティの新しい活動を見つけよう。ハネノバはあなたの居場所を広げます。"
-      welcome_back: "Welcome back,"
+      welcome_back: "おかえりなさい、"
       no_events: "イベントがありません"
       no_events_subtitle: "現在公開されているイベントはありません。また後でチェックしてみてください。"
-      selection_status: "Selection Status"
+      selection_status: "選択状況"
       items_selected: "件選択中"
       bulk_apply: "まとめて申し込む"
       confirm_bulk_apply: "選択したイベントにまとめて申し込みますか？"
@@ -40,15 +40,13 @@ ja:
       intro: "このイベントに参加して、新しいつながりを作りましょう。ハネノバ共有スペースにて皆様をお待ちしております。参加申し込みは下のボタンから簡単に行えます。"
       capacity_hint: "※定員の %{capacity}名に達し次第、締め切ります。お早めにお申し込みください。"
       enjoy: "Enjoy the event!"
-    event_card:
-      capacity: "名"
-      view_details: "View Details"
-      booked: "申込済"
     card:
       applied: "申込済"
       full: "満員"
       details: "詳細を見る"
       capacity_text: "定員 %{count}名"
+      time_range: "%{start_time}〜"
+      tbd: "未定"
   mypage:
     title: "マイカレンダー"
     subtitle: "参加予定のイベントをチェックしましょう。"
@@ -129,6 +127,10 @@ ja:
   date:
     abbr_day_names: ["日", "月", "火", "水", "木", "金", "土"]
     day_names: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
+  time:
+    formats:
+      dot_date: "%Y.%m.%d"
+      hm: "%H:%M"
   activerecord:
     models:
       admin: "管理者"
