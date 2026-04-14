@@ -31,22 +31,13 @@
 
     <main class="flex-grow pb-24 md:pb-8">
       <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <%# Flash メッセージ %>
         <% if notice.present? %>
-          <div class="mb-8 bg-indigo-50 border border-indigo-100 text-indigo-700 px-6 py-4 rounded-2xl flex items-center shadow-sm">
-            <svg class="h-5 w-5 mr-3 text-indigo-500" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zm-1 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-            </svg>
-            <span class="font-semibold"><%= notice %></span>
-          </div>
+          <%= render Layout::FlashComponent.new(type: :notice, message: notice) %>
         <% end %>
 
         <% if alert.present? %>
-          <div class="mb-8 bg-red-50 border border-red-100 text-red-700 px-6 py-4 rounded-2xl flex items-center shadow-sm">
-            <svg class="h-5 w-5 mr-3 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-            </svg>
-            <span class="font-semibold uppercase tracking-tight"><%= alert %></span>
-          </div>
+          <%= render Layout::FlashComponent.new(type: :alert, message: alert) %>
         <% end %>
 
         <%= yield %>

@@ -1,0 +1,8 @@
+<div class="<%= container_classes %>">
+  <svg class="h-8 w-8 mr-4 <%= icon_color_class %>" fill="currentColor" viewBox="0 0 20 20">
+    <path fill-rule="evenodd" d="<%= icon_path %>" clip-rule="evenodd" />
+  </svg>
+  <span class="font-semibold <%= 'uppercase tracking-tight' if type == :alert %>">
+    <%= message %>
+  </span>
+</div>
