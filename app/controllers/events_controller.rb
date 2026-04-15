@@ -4,10 +4,13 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.published.includes(:event_type)
+                   .select("events.*, (SELECT COUNT(*) FROM bookings WHERE bookings.event_id = events.id) AS bookings_count_virtual")
                    .title_like(params[:q])
                    .held_on(params[:date])
                    .with_remaining_capacity(params[:capacity])
                    .order(held_at: :asc)
+
+    @pagy, @events = pagy(@events, limit: 12)
   end
 
   def show

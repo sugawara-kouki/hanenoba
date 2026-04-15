@@ -76,6 +76,12 @@
             <%= render Events::EventCardComponent.new(event: event, current_user: current_user) %>
           <% end %>
         </div>
+
+        <% if @pagy.pages > 1 %>
+          <div class="mt-8 flex justify-center">
+            <%== @pagy.series_nav %>
+          </div>
+        <% end %>
       <% else %>
         <div class="text-center py-24">
           <div class="flex justify-center mb-6">

@@ -39,18 +39,18 @@ class Event < ApplicationRecord
 
   # 定員に達しているかどうかを判定
   def full?
-    bookings.count >= capacity
+    current_bookings_count >= capacity
   end
 
   # 現在の予約充足率（パーセント）を計算
   def occupancy_rate
     return 0 if capacity.zero?
-    (bookings.count.to_f / capacity * 100).round
+    (current_bookings_count.to_f / capacity * 100).round
   end
 
   # 残りの予約可能枠数を取得
   def remaining_capacity
-    [ capacity - bookings.count, 0 ].max
+    [ capacity - current_bookings_count, 0 ].max
   end
 
   # 特定のユーザーが既にこのイベントに申し込んでいるかチェック
@@ -58,4 +58,12 @@ class Event < ApplicationRecord
     return false unless user
     bookings.exists?(user: user)
   end
+
+  def current_bookings_count
+    # SQLのSELECT句で追加した仮想的な属性があればそれを使用し、
+    # なければ各個別にカウントクエリを発行する
+    attributes["bookings_count_virtual"]&.to_i || bookings.count
+  end
+
+  private
 end
