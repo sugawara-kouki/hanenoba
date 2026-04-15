@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_13_045328) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_15_043141) do
   create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
@@ -49,6 +49,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_13_045328) do
     t.string "title"
     t.datetime "updated_at", null: false
     t.index ["event_type_id"], name: "index_events_on_event_type_id"
+    t.index ["held_at"], name: "index_events_on_held_at"
+    t.index ["status"], name: "index_events_on_status"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

@@ -3,7 +3,11 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @events = Event.published.includes(:event_type).order(held_at: :asc)
+    @events = Event.published.includes(:event_type)
+                   .title_like(params[:q])
+                   .held_on(params[:date])
+                   .with_remaining_capacity(params[:capacity])
+                   .order(held_at: :asc)
   end
 
   def show

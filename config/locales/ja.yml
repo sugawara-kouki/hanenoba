@@ -20,6 +20,15 @@ ja:
       items_selected: "件選択中"
       bulk_apply: "まとめて申し込む"
       confirm_bulk_apply: "選択したイベントにまとめて申し込みますか？"
+      search:
+        title: "条件から探す"
+        keyword: "キーワード"
+        date: "開催日"
+        capacity: "残在庫数"
+        capacity_suffix: "名以上"
+        status: "ステータス"
+        submit: "検索"
+        clear: "リセット"
   bookings:
     create:
       success: "申し込みが完了しました！"
@@ -239,6 +248,11 @@ ja:
         password: "6文字以上"
       hints:
         password_change: "※変更しない場合は空欄のままにしてください"
+    search:
+      submit: "検索"
+      clear: "リセット"
+      placeholders:
+        keyword: "キーワードを入力..."
 
   admin:
     shared:

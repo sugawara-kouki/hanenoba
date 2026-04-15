@@ -18,6 +18,25 @@ class Event < ApplicationRecord
     I18n.t("activerecord.attributes.event.status/#{status}", default: status)
   end
 
+  # 検索用スコープ
+  scope :title_like, ->(q) { where("title LIKE ?", "%#{q}%") if q.present? }
+  scope :held_on, ->(date) {
+    if date.present?
+      begin
+        d = Time.zone.parse(date)
+        where(held_at: d.all_day)
+      rescue ArgumentError
+        none
+      end
+    end
+  }
+  scope :with_status, ->(status) { where(status: status) if status.present? }
+  scope :with_remaining_capacity, ->(n) {
+    if n.present?
+      where("events.capacity - (SELECT COUNT(*) FROM bookings WHERE bookings.event_id = events.id) >= ?", n.to_i)
+    end
+  }
+
   # 定員に達しているかどうかを判定
   def full?
     bookings.count >= capacity

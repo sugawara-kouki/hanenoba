@@ -4,8 +4,14 @@ class Admin::EventsController < Admin::BaseController
 
   # GET /events or /events.json
   def index
+    @events = Event.includes(:event_type)
+                   .title_like(params[:q])
+                   .held_on(params[:date])
+                   .with_status(params[:status])
+                   .with_remaining_capacity(params[:capacity])
+
     s = sort_params("held_at", "desc", %w[title held_at created_at capacity status])
-    @pagy, @events = pagy(:offset, Event.includes(:event_type).order("#{s[:column]} #{s[:direction]}"), limit: 5)
+    @pagy, @events = pagy(:offset, @events.order("#{s[:column]} #{s[:direction]}"), limit: 5)
   end
 
   # GET /events/1 or /events/1.json
