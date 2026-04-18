@@ -75,4 +75,4 @@ gem "omniauth-rails_csrf_protection", "~> 2.0"
 
 gem "pagy", "~> 43.5"
 
-gem "view_component", "~> 4.6"
+gem "view_component", "~> 4.7"
