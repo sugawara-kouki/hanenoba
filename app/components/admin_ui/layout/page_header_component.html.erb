@@ -1,0 +1,24 @@
+<div class="mb-10 sm:flex sm:items-center sm:justify-between">
+  <div class="sm:flex-auto">
+    <%# タイトルの上のコンテンツ %>
+    <% if prepend? %>
+      <div class="mb-2">
+        <%= prepend %>
+      </div>
+    <% end %>
+
+    <%# タイトル %>
+    <h1 class="text-3xl font-bold text-gray-900 leading-tight"><%= title %></h1>
+    <%# サブタイトル %>
+    <% if subtitle %>
+      <p class="mt-2 text-sm text-gray-500 font-medium tracking-tight"><%= subtitle %></p>
+    <% end %>
+  </div>
+
+  <%# 右側のボタン等を入れるためのスロット %>
+  <% if action? %>
+    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+      <%= action %>
+    </div>
+  <% end %>
+</div>

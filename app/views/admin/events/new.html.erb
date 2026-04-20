@@ -6,23 +6,24 @@
     { name: t('admin.views.events.new.breadcrumb') }
   ]) %>
 
-  <div class="mb-10 sm:flex sm:items-center sm:justify-between">
-    <div class="sm:flex-auto">
-      <div class="flex items-center space-x-2 text-indigo-600 mb-2">
+  <%= render AdminUi::Layout::PageHeaderComponent.new(
+        title: t('admin.views.events.new.title'),
+        subtitle: t('admin.views.events.new.subtitle')
+      ) do |c| %>
+    <% c.with_prepend do %>
+      <div class="flex items-center space-x-2 text-indigo-600">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
         <span class="text-xs font-bold uppercase tracking-widest"><%= t('admin.views.events.form.creator') %></span>
       </div>
-      <h1 class="text-3xl font-black text-gray-900 leading-tight"><%= t('admin.views.events.new.title') %></h1>
-      <p class="mt-2 text-sm text-gray-500"><%= t('admin.views.events.new.subtitle') %></p>
-    </div>
-    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none space-x-3">
+    <% end %>
+    <% c.with_action do %>
       <%= link_to admin_events_path, class: "inline-flex items-center rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition-all" do %>
         <%= t('common.actions.cancel') %>
       <% end %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 
   <%= render "form", event: @event %>
 </div>

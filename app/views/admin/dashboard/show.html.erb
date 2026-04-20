@@ -22,20 +22,19 @@
     </div>
   <% end %>
 
-  <div class="mb-10 sm:flex sm:items-center sm:justify-between">
-    <div class="sm:flex-auto">
-      <h1 class="text-3xl font-black text-gray-900 leading-tight">ダッシュボード</h1>
-      <p class="mt-2 text-sm text-gray-500">運営状況のサマリーと最近のアクティビティを確認できます。</p>
-    </div>
-    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+  <%= render AdminUi::Layout::PageHeaderComponent.new(
+        title: t('admin.views.dashboard.show.title'),
+        subtitle: t('admin.views.dashboard.show.subtitle')
+      ) do |c| %>
+    <% c.with_action do %>
       <%= link_to new_admin_event_path, class: "inline-flex items-center rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-bold text-white shadow-xl shadow-indigo-100 hover:bg-indigo-500 transition-all active:scale-95" do %>
         <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
         新規イベント作成
       <% end %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 
   <%# 統計カードセクション %>
   <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-12">

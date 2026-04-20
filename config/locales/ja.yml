@@ -273,6 +273,10 @@ ja:
       cannot_delete_self: "自分自身を削除することはできません。"
       update_failed: "更新に失敗しました。"
     views:
+      dashboard:
+        show:
+          title: "ダッシュボード"
+          subtitle: "運営状況のサマリーと最近のアクティビティを確認できます。"
       events:
         index:
           title: "イベント一覧"
@@ -356,6 +360,12 @@ ja:
           breadcrumb: "種別設定"
           subtitle: "「バドミントン」「飲み会」など、イベントのカテゴリーを管理します。"
           new: "新規種別作成"
+        new:
+          title: "新規イベント種別"
+          subtitle: "新しいイベントカテゴリーを定義し、コミュニティの幅を広げましょう。"
+        edit:
+          title: "イベント種別を編集"
+          subtitle: "カテゴリーの名前やテーマカラーを調整します。"
         form:
           title: "種別の基本設定"
           subtitle: "カテゴリー名を設定します。"

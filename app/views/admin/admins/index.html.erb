@@ -1,20 +1,19 @@
 <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
   <%= render AdminUi::Layout::BreadcrumbsComponent.new(breadcrumbs: [{ name: "管理者ユーザー管理" }]) %>
 
-  <div class="mb-10 sm:flex sm:items-center sm:justify-between">
-    <div class="sm:flex-auto">
-      <h1 class="text-3xl font-bold text-gray-900 leading-tight"><%= t('admin.views.admins.index.title') %></h1>
-      <p class="mt-2 text-sm text-gray-500 font-medium tracking-tight"><%= t('admin.views.admins.index.subtitle') %></p>
-    </div>
-    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+  <%= render AdminUi::Layout::PageHeaderComponent.new(
+        title: t('admin.views.admins.index.title'),
+        subtitle: t('admin.views.admins.index.subtitle')
+      ) do |c| %>
+    <% c.with_action do %>
       <%= link_to new_admin_admin_path, class: "inline-flex items-center rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-bold text-white shadow-xl shadow-indigo-100 hover:bg-indigo-500 transition-all active:scale-95" do %>
         <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
         <%= t('admin.views.admins.index.new') %>
       <% end %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 
   <div class="mt-8 flow-root">
     <div class="overflow-x-auto shadow-sm ring-1 ring-gray-900/5 rounded-3xl border border-gray-100 bg-white">
