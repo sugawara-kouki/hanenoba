@@ -1,6 +1,6 @@
 <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
   <%# パンくずリスト %>
-  <%= render Layout::Admin::BreadcrumbsComponent.new(breadcrumbs: [{ name: "イベント一覧" }]) %>
+  <%= render AdminUI::Layout::BreadcrumbsComponent.new(breadcrumbs: [{ name: "イベント一覧" }]) %>
 
   <%# タイトルセクション %>
   <div class="mb-10 sm:flex sm:items-center sm:justify-between">
@@ -19,8 +19,8 @@
   </div>
   
   <%# 検索フォーム %>
-  <%= render AdminSection::Events::SearchFormComponent.new(params: params) %>
+  <%= render AdminUI::Events::SearchFormComponent.new(params: params) %>
 
   <%# イベント一覧テーブル %>
-  <%= render AdminSection::Events::TableComponent.new(events: @events, pagy: @pagy) %>
+  <%= render AdminUI::Events::TableComponent.new(events: @events, pagy: @pagy) %>
 </div>

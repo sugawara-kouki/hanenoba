@@ -28,7 +28,7 @@
         <% if events.any? %>
           <%# イベントが存在する場合 %>
           <% events.each do |event| %>
-            <%= render AdminSection::Events::TableRowComponent.new(event: event)%>
+            <%= render AdminUI::Events::TableRowComponent.new(event: event)%>
           <% end %>
         <% else %>
           <%# イベントが存在しない場合 %>

@@ -1,4 +1,4 @@
-module AdminSection
+module AdminUI
   module Events
     class SearchFormComponent < ViewComponent::Base
       def initialize(params:)

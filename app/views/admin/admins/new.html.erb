@@ -1,5 +1,5 @@
 <div class="px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-  <%= render Layout::Admin::BreadcrumbsComponent.new(breadcrumbs: [
+  <%= render AdminUI::Layout::BreadcrumbsComponent.new(breadcrumbs: [
     { name: t('admin.views.admins.index.breadcrumb'), link: admin_admins_path },
     { name: t('admin.views.admins.new.breadcrumb') }
   ]) %>

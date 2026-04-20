@@ -1,7 +1,7 @@
 <% content_for :title, "New Event | Hanenoba Admin" %>
 
 <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-  <%= render Layout::Admin::BreadcrumbsComponent.new(breadcrumbs: [
+  <%= render AdminUI::Layout::BreadcrumbsComponent.new(breadcrumbs: [
     { name: t('admin.views.events.index.breadcrumb'), link: admin_events_path },
     { name: t('admin.views.events.new.breadcrumb') }
   ]) %>

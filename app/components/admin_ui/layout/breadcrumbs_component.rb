@@ -1,5 +1,5 @@
-module Layout
-  module Admin
+module AdminUI
+  module Layout
     class BreadcrumbsComponent < ViewComponent::Base
       def initialize(breadcrumbs:)
         @breadcrumbs = breadcrumbs
