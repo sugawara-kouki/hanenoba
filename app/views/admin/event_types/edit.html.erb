@@ -1,7 +1,7 @@
 <% content_for :title, "Edit Event Type | Hanenoba Admin" %>
 
 <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-  <%= render AdminUI::Layout::BreadcrumbsComponent.new(breadcrumbs: [
+  <%= render AdminUi::Layout::BreadcrumbsComponent.new(breadcrumbs: [
     { name: "種別設定", link: admin_event_types_path },
     { name: "種別編集 (#{@event_type.name})" }
   ]) %>

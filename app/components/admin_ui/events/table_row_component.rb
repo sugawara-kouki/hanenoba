@@ -1,4 +1,4 @@
-module AdminUI
+module AdminUi
   module Events
     class TableRowComponent < ViewComponent::Base
       def initialize(event:)
