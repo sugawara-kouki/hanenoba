@@ -1,0 +1,59 @@
+<div class="mt-8 flow-root">
+  <div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200">
+
+      <%# ヘッダー列描画 %>
+      <thead class="bg-transparent">
+        <tr>
+          <th scope="col" class="py-4 pl-8 pr-3 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">
+            <%= helpers.sort_link "title", t('admin.views.events.index.table.title') %>
+          </th>
+          <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest w-40">
+            <%= helpers.sort_link "held_at", t('admin.views.events.index.table.held_at') %>
+          </th>
+          <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest w-52">
+            <%= helpers.sort_link "capacity", t('admin.views.events.index.table.capacity') %>
+          </th>
+          <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest w-28">
+            <%= helpers.sort_link "status", t('admin.views.events.index.table.status') %>
+          </th>
+          <th scope="col" class="relative py-4 pl-3 pr-8 text-right w-44">
+            <span class="sr-only">操作</span>
+          </th>
+        </tr>
+      </thead>
+
+      <%# データ行の描画 %>
+      <tbody class="divide-y divide-gray-50">
+        <% if events.any? %>
+          <%# イベントが存在する場合 %>
+          <% events.each do |event| %>
+            <%= render AdminSection::Events::TableRowComponent.new(event: event)%>
+          <% end %>
+        <% else %>
+          <%# イベントが存在しない場合 %>
+          <tr>
+            <td colspan="5" class="py-24 text-center">
+              <div class="flex justify-center mb-6">
+                <div class="bg-gray-100 p-6 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-300" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="text-xl font-black text-gray-900"><%= t('events.index.no_events') %></h3>
+              <p class="mt-2 text-sm text-gray-500 font-medium"><%= t('events.index.no_events_subtitle') %></p>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%# ページネーション %>
+  <% if pagy.pages > 1 %>
+    <div class="mt-8 flex justify-center">
+      <%== pagy.series_nav %>
+    </div>
+  <% end %>
+</div>
