@@ -13,7 +13,7 @@ module AdminUi
 
     (field_helpers - %i[label check_box radio_button fields_for fields hidden_field]).each do |method|
       define_method(method) do |name, options = {}|
-        options[:class] = template.sanitize_to_id("#{COMMON_CLASSES} #{options[:class]}")
+        options[:class] = "#{COMMON_CLASSES} #{options[:class]}"
         super(name, options)
       end
     end
