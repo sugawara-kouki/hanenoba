@@ -91,28 +91,8 @@
             </div>
 
             <%# アクション %>
-            <div>
-              <% if @is_booked %>
-                <div class="bg-indigo-50/50 border border-indigo-100 rounded-[2rem] p-8 text-center">
-                  <div class="inline-flex items-center justify-center p-4 bg-white rounded-2xl shadow-sm text-indigo-600 mb-6">
-                    <%= icon(:check, class: "h-8 w-8 text-indigo-500") %>
-                  </div>
-                  <h3 class="text-xl font-black text-indigo-900"><%= t('events.show.applied') %></h3>
-                  <p class="text-indigo-400 text-xs font-bold mt-2 uppercase tracking-widest"><%= t('events.show.enjoy') %></p>
-                </div>
-              <% elsif @event.full? %>
-                <div class="bg-gray-50 border border-gray-100 rounded-[2rem] p-8 text-center grayscale opacity-70">
-                  <h3 class="text-xl font-black text-gray-400 uppercase tracking-widest"><%= t('events.show.fully_booked') %></h3>
-                </div>
-              <% else %>
-                <%= button_to event_bookings_path(@event), 
-                    method: :post, 
-                    class: "w-full bg-indigo-600 hover:bg-indigo-700 text-white font-black py-6 px-8 rounded-[2rem] shadow-2xl shadow-indigo-500/30 transform hover:-translate-y-1 transition-all text-lg flex items-center justify-center group active:scale-95",
-                    data: { turbo_confirm: t('events.show.confirm_apply') } do %>
-                  <%= t('events.show.apply') %>
-                  <%= icon(:arrow_right, class: "h-6 w-6 ml-3 transform group-hover:translate-x-1 transition-transform") %>
-                <% end %>
-              <% end %>
+            <div id="booking_section">
+              <%= render 'bookings/booking_section', event: @event, is_booked: @is_booked %>
             </div>
           </div>
         </div>

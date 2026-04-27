@@ -1,0 +1,13 @@
+<%# 予約完了後の Turbo Stream レスポンス %>
+<%# 1. 予約セクションを更新 %>
+<%= turbo_stream.replace "booking_section" do %>
+  <div id="booking_section">
+    <%= render 'bookings/booking_section', event: @event, is_booked: true %>
+  </div>
+<% end %>
+
+<%# 2. Flashメッセージを表示（Layout::FlashComponent があると仮定、または既存の仕組みに合わせる） %>
+<%= turbo_stream.prepend "flash" do %>
+  <%= render Layout::FlashComponent.new(type: :notice, message: flash[:notice]) if flash[:notice] %>
+  <%= render Layout::FlashComponent.new(type: :alert, message: flash[:alert]) if flash[:alert] %>
+<% end %>

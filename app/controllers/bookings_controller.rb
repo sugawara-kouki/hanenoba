@@ -12,9 +12,15 @@ class BookingsController < ApplicationController
     result = BookingService.new(@event, current_user).execute
 
     if result[:success]
-      redirect_to event_path(@event), notice: result[:message]
+      respond_to do |format|
+        format.html { redirect_to event_path(@event), notice: result[:message] }
+        format.turbo_stream { flash.now[:notice] = result[:message] }
+      end
     else
-      redirect_to event_path(@event), alert: result[:message]
+      respond_to do |format|
+        format.html { redirect_to event_path(@event), alert: result[:message] }
+        format.turbo_stream { flash.now[:alert] = result[:message] }
+      end
     end
   rescue ActiveRecord::RecordNotFound
     redirect_to events_path, alert: I18n.t("errors.messages.event_not_found", default: "指定されたイベントは見つかりませんでした。")
