@@ -59,9 +59,7 @@
           <%= f.submit t('events.index.search.submit'), 
               class: "flex-1 bg-gray-900 hover:bg-gray-800 text-white font-black py-4 px-10 rounded-3xl transition-all active:scale-95 cursor-pointer shadow-xl shadow-gray-900/10 text-sm h-full" %>
           <%= link_to events_path, class: "bg-white hover:bg-gray-50 text-gray-500 font-black py-4 px-5 rounded-3xl transition-all active:scale-95 border border-gray-200 shadow-sm h-full flex items-center justify-center" do %>
-            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
+            <%= icon(:refresh, class: "w-6 h-6") %>
           <% end %>
         </div>
       </div>
@@ -86,9 +84,7 @@
         <div class="text-center py-24">
           <div class="flex justify-center mb-6">
             <div class="bg-gray-100 p-6 rounded-full">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-300" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
+              <%= icon(:calendar, class: "h-12 w-12 text-gray-300") %>
             </div>
           </div>
           <h3 class="text-xl font-black text-gray-900"><%= t('events.index.no_events') %></h3>
@@ -103,9 +99,7 @@
       <div class="bg-gray-900/90 backdrop-blur-xl text-white px-8 py-5 rounded-[2.5rem] shadow-2xl flex items-center space-x-8 border border-white/10 ring-1 ring-white/20">
         <div class="flex items-center space-x-4">
           <div class="bg-indigo-600 h-12 w-12 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-500/40">
-            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-            </svg>
+            <%= icon(:plus, class: "h-6 w-6 text-white") %>
           </div>
           <div class="hidden sm:block">
             <p class="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] mb-1"><%= t('events.index.selection_status') %></p>
