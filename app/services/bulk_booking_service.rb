@@ -9,7 +9,7 @@ class BulkBookingService
   # @return [Hash] 成功件数、成功タイトル、失敗メッセージを含むハッシュ
   def execute
     # イベントが選択されていない場合のガード
-    return { success: false, message: I18n.t("bookings.bulk_create.no_events", default: "イベントが選択されていません。") } if @event_ids.empty?
+    return { success: false, message: I18n.t("views.bookings.bulk_create.no_events") } if @event_ids.empty?
 
     success_titles = []
     failure_messages = []
