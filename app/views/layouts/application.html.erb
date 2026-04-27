@@ -22,12 +22,20 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-gray-50 flex flex-col min-h-screen">
-    <%= render Layout::NavbarComponent.new(
-          user: current_user, 
-          admin_signed_in: admin_signed_in?, 
-          active_controller: controller_name
-        ) %>
+  <body class="bg-gray-50 flex flex-col min-h-screen <%= 'is-preview' if params[:preview] %>">
+    <% if params[:preview] %>
+      <style>
+        .is-preview a { pointer-events: none !important; cursor: default !important; }
+      </style>
+    <% end %>
+
+    <% unless params[:preview] %>
+      <%= render Layout::NavbarComponent.new(
+            user: current_user, 
+            admin_signed_in: admin_signed_in?, 
+            active_controller: controller_name
+          ) %>
+    <% end %>
 
     <main class="flex-grow pb-24 md:pb-8">
       <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -47,7 +55,7 @@
     </main>
 
     <%# モバイル・ボトムナビゲーション %>
-    <% if user_signed_in? %>
+    <% if user_signed_in? && !params[:preview] %>
       <div class="md:hidden fixed bottom-6 inset-x-4 z-50">
         <nav class="bg-gray-900/90 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-2xl px-6 py-3 flex items-center justify-around ring-1 ring-white/20">
           <%= link_to events_path, class: "flex flex-col items-center space-y-1 group transition-all #{controller_name == 'events' ? 'text-white' : 'text-gray-500'}" do %>
@@ -67,16 +75,18 @@
       </div>
     <% end %>
 
-    <footer class="bg-white border-t border-gray-100 py-12 pb-32 md:pb-12 mt-auto">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-gray-400">
-        <div class="flex items-center space-x-2 mb-4 md:mb-0">
-          <span class="font-bold text-gray-900 tracking-tight"><%= t('views.layout.brand') %></span>
-          <span class="text-base"><%= t('views.layout.footer_copy').html_safe %></span>
+    <% unless params[:preview] %>
+      <footer class="bg-white border-t border-gray-100 py-12 pb-32 md:pb-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-gray-400">
+          <div class="flex items-center space-x-2 mb-4 md:mb-0">
+            <span class="font-bold text-gray-900 tracking-tight"><%= t('views.layout.brand') %></span>
+            <span class="text-base"><%= t('views.layout.footer_copy').html_safe %></span>
+          </div>
+          <div class="text-sm">
+            <%= t('views.layout.footer_built') %>
+          </div>
         </div>
-        <div class="text-sm">
-          <%= t('views.layout.footer_built') %>
-        </div>
-      </div>
-    </footer>
+      </footer>
+    <% end %>
   </body>
 </html>

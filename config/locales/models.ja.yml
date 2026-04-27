@@ -22,6 +22,7 @@ ja:
         status/hidden: "非公開"
         event_type: "種別"
         event_type_id: "種別"
+        image: "イベント画像"
       user:
         name: "名前"
         email: "メールアドレス"

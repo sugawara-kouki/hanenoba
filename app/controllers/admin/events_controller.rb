@@ -63,6 +63,6 @@ class Admin::EventsController < Admin::BaseController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.expect(event: [ :title, :event_type_id, :capacity, :held_at, :location, :status ])
+      params.expect(event: [ :title, :event_type_id, :capacity, :held_at, :location, :status, :image ])
     end
 end

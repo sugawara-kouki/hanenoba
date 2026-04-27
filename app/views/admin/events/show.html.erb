@@ -1,4 +1,4 @@
-<div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+<div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto" data-controller="modal" data-action="keydown@window->modal#closeWithEsc">
   <%= render AdminUi::Layout::BreadcrumbsComponent.new(breadcrumbs: [
     { name: t('admin.views.events.index.breadcrumb'), link: admin_events_path },
     { name: @event.title }
@@ -19,12 +19,68 @@
       </div>
     <% end %>
     <% c.with_action do %>
-      <%= link_to edit_admin_event_path(@event), class: "inline-flex items-center rounded-xl bg-white px-5 py-3 text-sm font-bold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition-all" do %>
-        <%= icon(:edit, class: "h-4 w-4 mr-2") %>
-        <%= t('admin.views.events.show.edit_event') %>
-      <% end %>
+      <div class="flex items-center space-x-3">
+        <button type="button" 
+                data-action="click->modal#open"
+                class="inline-flex items-center rounded-xl bg-indigo-50 px-5 py-3 text-sm font-bold text-indigo-700 shadow-sm ring-1 ring-inset ring-indigo-100 hover:bg-indigo-100 transition-all group cursor-pointer">
+          <%= icon(:eye, class: "h-4 w-4 mr-2 group-hover:scale-110 transition-transform") %>
+          <%= t('admin.views.events.show.view_public_page') %>
+          <%= icon(:sparkles, class: "h-3 w-3 ml-2 opacity-50") %>
+        </button>
+
+        <%= link_to edit_admin_event_path(@event), class: "inline-flex items-center rounded-xl bg-white px-5 py-3 text-sm font-bold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition-all" do %>
+          <%= icon(:edit, class: "h-4 w-4 mr-2") %>
+          <%= t('admin.views.events.show.edit_event') %>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
+
+  <%# ... (existing content continues) ... %>
+
+  <%# プレビューモーダル本体 %>
+  <div data-modal-target="container" 
+       data-action="click->modal#closeBackground"
+       class="hidden fixed inset-0 z-[100] items-center justify-center p-4 sm:p-10 bg-gray-900/90 backdrop-blur-sm animate-in fade-in duration-300">
+    <div class="relative w-full h-full max-w-6xl bg-white rounded-[2.5rem] shadow-2xl flex flex-col overflow-hidden ring-1 ring-white/20 animate-in zoom-in-95 duration-300">
+      <%# モーダルヘッダー %>
+      <div class="px-8 py-5 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+        <div class="flex items-center space-x-4">
+          <div class="bg-indigo-600 p-2 rounded-xl">
+            <%= icon(:eye, class: "h-5 w-5 text-white") %>
+          </div>
+          <div>
+            <h3 class="text-lg font-black text-gray-900 leading-none"><%= t('admin.views.events.show.preview_mode') %></h3>
+            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1.5">Live Public View</p>
+          </div>
+        </div>
+        <button type="button" 
+                data-action="click->modal#close"
+                class="p-2 rounded-xl hover:bg-gray-200 text-gray-400 hover:text-gray-900 transition-all cursor-pointer">
+          <%= icon(:x_mark, class: "h-6 w-6") %>
+        </button>
+      </div>
+      
+      <%# プレビュー本体 (Iframe) %>
+      <div class="flex-grow bg-gray-100 relative">
+        <div class="absolute inset-0 flex items-center justify-center -z-10">
+          <div class="animate-pulse flex flex-col items-center">
+            <%= icon(:cog, class: "h-12 w-12 text-gray-200 animate-spin-slow mb-4") %>
+            <p class="text-gray-400 font-bold text-sm">Loading Preview...</p>
+          </div>
+        </div>
+        <iframe src="<%= event_path(@event, preview: true) %>" class="w-full h-full border-none shadow-inner"></iframe>
+      </div>
+
+      <%# モーダルフッター %>
+      <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-center">
+        <p class="text-[10px] text-gray-400 font-black uppercase tracking-[0.3em]">
+          <%= t('admin.views.events.show.preview_description') %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 
   <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 mb-16">
     <%# 基本情報カード %>
@@ -35,6 +91,11 @@
         <% end %>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8">
+          <% if @event.image.attached? %>
+            <div class="sm:col-span-2 overflow-hidden rounded-2xl ring-1 ring-gray-900/10 shadow-sm bg-gray-50 aspect-[3/1]">
+              <%= image_tag @event.image.variant(resize_to_limit: [1200, 400]), class: "w-full h-full object-cover" %>
+            </div>
+          <% end %>
           <div class="group">
             <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-mono"><%= t('admin.views.events.show.held_at') %></label>
             <div class="flex items-center space-x-3">

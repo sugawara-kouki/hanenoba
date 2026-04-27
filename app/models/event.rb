@@ -2,6 +2,7 @@ class Event < ApplicationRecord
   belongs_to :event_type
   has_many :bookings, dependent: :destroy
   has_many :users, through: :bookings
+  has_one_attached :image
 
   # イベントの公開状態を管理
   # draft: 下書き (管理者のみ), published: 公開 (一般ユーザー閲覧可), hidden: 非公開 (管理用)

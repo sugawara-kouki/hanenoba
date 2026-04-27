@@ -12,6 +12,23 @@
       </div>
 
       <div>
+        <%= form.label :image %>
+        <div class="mt-2 flex items-center gap-x-3">
+          <% if event.image.attached? %>
+            <%= image_tag event.image.variant(resize_to_limit: [200, 200]), class: "h-16 w-24 rounded-xl object-cover ring-1 ring-gray-900/10 shadow-sm" %>
+          <% else %>
+            <div class="h-16 w-24 rounded-xl bg-gray-50 flex items-center justify-center ring-1 ring-gray-900/10 border-2 border-dashed border-gray-200">
+              <%= icon(:image, class: "h-6 w-6 text-gray-300") %>
+            </div>
+          <% end %>
+          <div class="flex-grow">
+            <%= form.file_field :image, class: "block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition-all cursor-pointer" %>
+            <p class="mt-1 text-[10px] text-gray-400"><%= t('admin.views.events.form.image_hint') %></p>
+          </div>
+        </div>
+      </div>
+
+      <div>
         <%= form.label :event_type_id %>
         <%= form.collection_select :event_type_id, EventType.all, :id, :name, { prompt: t('admin.views.events.form.type_prompt') } %>
       </div>

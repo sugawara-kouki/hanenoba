@@ -1,5 +1,22 @@
 <%# 予約セクション：詳細画面の右側（または下部）に表示される予約状態とボタン %>
-<% if is_booked %>
+<% if params[:preview] == "true" %>
+  <div class="bg-amber-50 border-2 border-dashed border-amber-200 rounded-[2rem] p-8 text-center ring-4 ring-white shadow-lg">
+    <div class="inline-flex items-center justify-center p-3 bg-amber-100 rounded-xl text-amber-600 mb-4">
+      <%= icon(:cog, class: "h-6 w-6 animate-spin-slow") %>
+    </div>
+    <h3 class="text-sm font-black text-amber-900 uppercase tracking-widest"><%= t('admin.views.events.show.preview_mode') %></h3>
+    <p class="text-amber-700 text-[10px] font-bold mt-2 leading-relaxed">
+      <%= t('admin.views.events.show.preview_description') %>
+    </p>
+    
+    <div class="mt-6 opacity-30 grayscale pointer-events-none">
+      <div class="w-full bg-gray-400 text-white font-black py-4 px-6 rounded-2xl flex items-center justify-center text-sm">
+        <%= t('events.show.apply') %>
+        <%= icon(:arrow_right, class: "h-4 w-4 ml-2") %>
+      </div>
+    </div>
+  </div>
+<% elsif is_booked %>
   <div class="bg-indigo-50/50 border border-indigo-100 rounded-[2rem] p-8 text-center animate-in fade-in zoom-in duration-500">
     <div class="inline-flex items-center justify-center p-4 bg-white rounded-2xl shadow-sm text-indigo-600 mb-6">
       <%= icon(:check, class: "h-8 w-8 text-indigo-500") %>

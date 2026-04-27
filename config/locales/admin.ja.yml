@@ -53,6 +53,9 @@ ja:
           subtitle: "内容を調整して、よりわかりやすいイベントにしましょう。"
         show:
           edit_event: "イベントを編集"
+          view_public_page: "公開ページを確認"
+          preview_mode: "プレビューモード"
+          preview_description: "管理権限でプレビュー中です。実際の予約は行えません。"
           basic_info: "基本情報"
           held_at: "開催日時 / HELD AT"
           location: "開催場所 / LOCATION"
@@ -78,6 +81,7 @@ ja:
           section3_title: "3. 公開設定"
           section3_subtitle: "イベントの公開状態を選択します。"
           title_placeholder: "例：春の交流BBQパーティ"
+          image_hint: "推奨サイズ: 1200x800px (3:2)"
           type_prompt: "種別を選択してください"
           location_placeholder: "例：ハネノバ共有スペース"
           status_options:

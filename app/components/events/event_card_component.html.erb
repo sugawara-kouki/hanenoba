@@ -26,9 +26,15 @@
   <%# ビジュアルエリア %>
   <div class="relative h-48 overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/80 to-purple-700/80 mix-blend-multiply z-10 transition-all duration-500 group-hover:scale-110"></div>
-    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80&v=<%= event.id %>" 
-         class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110" 
-         alt="<%= event.title %>">
+    <% if event.image.attached? %>
+      <%= image_tag event.image.variant(resize_to_limit: [800, 480]), 
+                   class: "absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110", 
+                   alt: event.title %>
+    <% else %>
+      <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80&v=<%= event.id %>" 
+           class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110" 
+           alt="<%= event.title %>">
+    <% end %>
     
     <div class="absolute inset-0 z-10 flex items-center justify-center">
        <span class="text-white text-3xl font-black opacity-40 uppercase tracking-[0.2em] transform -rotate-1 group-hover:rotate-0 transition-transform duration-500 text-center px-4">
