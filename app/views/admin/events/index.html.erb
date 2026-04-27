@@ -1,6 +1,6 @@
 <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
   <%# パンくずリスト %>
-  <%= render AdminUi::Layout::BreadcrumbsComponent.new(breadcrumbs: [{ name: "イベント一覧" }]) %>
+  <%= render AdminUi::Layout::BreadcrumbsComponent.new(breadcrumbs: [{ name: t('admin.views.events.index.breadcrumb') }]) %>
 
   <%# タイトルセクション %>
   <%= render AdminUi::Layout::PageHeaderComponent.new(
@@ -9,9 +9,7 @@
   ) do |c| %>
     <% c.with_action do %>
       <%= link_to new_admin_event_path, class: "inline-flex items-center rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-bold text-white shadow-xl shadow-indigo-100 hover:bg-indigo-500 transition-all active:scale-95" do %>
-        <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-        </svg>
+        <%= icon(:plus, class: "h-5 w-5 mr-2") %>
         <%= t('admin.views.events.index.new') %>
       <% end %>
     <% end %>

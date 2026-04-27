@@ -165,6 +165,9 @@ ja:
       user:
         name: "名前"
         email: "メールアドレス"
+        status:
+          approved: "承認済"
+          pending: "承認待"
       admin:
         email: "メールアドレス"
         password: "パスワード"

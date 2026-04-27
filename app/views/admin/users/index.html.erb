@@ -1,5 +1,5 @@
 <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-  <%= render AdminUi::Layout::BreadcrumbsComponent.new(breadcrumbs: [{ name: "ユーザー管理" }]) %>
+  <%= render AdminUi::Layout::BreadcrumbsComponent.new(breadcrumbs: [{ name: t('admin.views.users.index.title') }]) %>
 
   <%= render AdminUi::Layout::PageHeaderComponent.new(
         title: t('admin.views.users.index.title'),
@@ -49,16 +49,11 @@
                 </td>
                 <td class="whitespace-nowrap px-3 py-5">
                   <div class="tabular-nums text-sm font-semibold text-gray-900">
-                    <%= user.created_at.strftime("%Y/%m/%d") %>
+                    <%= l(user.created_at, format: :dot_date) %>
                   </div>
                 </td>
                 <td class="whitespace-nowrap px-3 py-5">
-                  <div class="flex items-center space-x-1.5">
-                    <div class="h-1.5 w-1.5 rounded-full <%= user.approved? ? 'bg-indigo-500 shadow-[0_0_8px_rgba(79,70,229,0.4)]' : 'bg-yellow-400' %>"></div>
-                    <span class="text-[10px] font-bold uppercase tracking-wider <%= user.approved? ? 'text-indigo-700' : 'text-yellow-800' %>">
-                      <%= user.approved? ? '承認済' : '承認待' %>
-                    </span>
-                  </div>
+                  <%= render AdminUi::BadgeComponent.new(status: user.approved? ? :approved : :pending) %>
                 </td>
                 <td class="whitespace-nowrap py-5 pl-3 pr-8 text-right font-medium text-xs">
                   <div class="flex justify-end -space-x-px">
@@ -68,9 +63,7 @@
                           class: "p-2 rounded-l-xl border border-gray-200 bg-white text-gray-400 hover:text-amber-600 hover:bg-amber-50 transition-all shadow-sm",
                           title: t('admin.views.users.index.impersonate'),
                           data: { turbo_confirm: "#{user.name || user.email} #{t('admin.views.users.index.impersonate_confirm')}" } do %>
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
-                        </svg>
+                        <%= icon(:user_circle, class: "w-4 h-4") %>
                       <% end %>
                     <% end %>
 
@@ -80,13 +73,9 @@
                         title: user.approved? ? t('admin.views.users.index.suspend') : t('admin.views.users.index.approve'),
                         data: { turbo_confirm: "#{user.name} を#{user.approved? ? '停止' : '承認'}しますか？" } do %>
                         <% if user.approved? %>
-                          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
-                          </svg>
+                          <%= icon(:ban, class: "w-4 h-4") %>
                         <% else %>
-                          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
+                          <%= icon(:check_circle, class: "w-4 h-4") %>
                         <% end %>
                     <% end %>
                     
@@ -94,9 +83,7 @@
                         method: :delete, 
                         class: "p-2 rounded-r-xl border border-gray-200 bg-white text-gray-400 hover:text-red-600 hover:bg-red-50 transition-all shadow-sm",
                         data: { turbo_confirm: "ユーザー「#{user.name}」を完全に削除しますか？\nこの操作は取り消せません。" }, title: "完全削除" do %>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                      </svg>
+                      <%= icon(:trash, class: "h-4 w-4") %>
                     <% end %>
                   </div>
                 </td>

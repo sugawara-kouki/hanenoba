@@ -5,14 +5,16 @@ module AdminUi
     end
 
     def label
-      I18n.t("activerecord.attributes.event.status/#{@status}", default: @status.to_s)
+      I18n.t("activerecord.attributes.user.status.#{@status}", default:
+        I18n.t("activerecord.attributes.event.status/#{@status}", default: @status.to_s)
+      )
     end
 
     def color_classes
       case @status
-      when :published
+      when :published, :approved
         "bg-green-50 text-green-700 ring-green-600/20"
-      when :draft
+      when :draft, :pending
         "bg-yellow-50 text-yellow-700 ring-yellow-600/20"
       when :hidden
         "bg-gray-50 text-gray-700 ring-gray-600/20"

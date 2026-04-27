@@ -7,9 +7,7 @@
     <div class="mb-8 bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-center justify-between shadow-sm animate-pulse">
       <div class="flex items-center">
         <div class="bg-amber-100 p-2 rounded-lg text-amber-600 mr-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
+          <%= icon(:exclamation_triangle, class: "h-5 w-5") %>
         </div>
         <div>
           <p class="text-sm font-bold text-amber-900">承認待ちのユーザーが <span class="text-lg font-black"><%= @pending_users_count %></span> 名います。</p>
@@ -28,9 +26,7 @@
       ) do |c| %>
     <% c.with_action do %>
       <%= link_to new_admin_event_path, class: "inline-flex items-center rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-bold text-white shadow-xl shadow-indigo-100 hover:bg-indigo-500 transition-all active:scale-95" do %>
-        <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-        </svg>
+        <%= icon(:plus, class: "h-5 w-5 mr-2") %>
         新規イベント作成
       <% end %>
     <% end %>
@@ -41,9 +37,7 @@
     <%# ユーザー数 %>
     <div class="bg-white p-8 rounded-[2rem] shadow-sm ring-1 ring-gray-900/5 relative overflow-hidden group">
       <div class="absolute -right-4 -top-4 text-indigo-50/50 transform rotate-12 group-hover:scale-110 transition-transform duration-500">
-        <svg class="h-32 w-32" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
+        <%= icon(:users, class: "h-32 w-32") %>
       </div>
       <div class="relative z-10">
         <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">ユーザー総数</p>
@@ -55,9 +49,7 @@
     <%# イベント数 %>
     <div class="bg-white p-8 rounded-[2rem] shadow-sm ring-1 ring-gray-900/5 relative overflow-hidden group">
       <div class="absolute -right-4 -bottom-4 text-purple-50/50 transform -rotate-12 group-hover:scale-110 transition-transform duration-500">
-        <svg class="h-32 w-32" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
+        <%= icon(:calendar, class: "h-32 w-32") %>
       </div>
       <div class="relative z-10">
         <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">イベント総数</p>
@@ -69,9 +61,7 @@
     <%# 申込数 %>
     <div class="bg-white p-8 rounded-[2rem] shadow-sm ring-1 ring-gray-900/5 relative overflow-hidden group sm:col-span-2 lg:col-span-1">
       <div class="absolute -right-4 -top-8 text-pink-50/50 transform group-hover:scale-110 transition-transform duration-500">
-        <svg class="h-32 w-32" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
+        <%= icon(:check_circle, class: "h-32 w-32") %>
       </div>
       <div class="relative z-10">
         <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">累計申込数</p>
@@ -135,15 +125,13 @@
                   </span>
                   <h3 class="text-base font-bold text-gray-900 group-hover:text-indigo-600 transition-colors"><%= event.title %></h3>
                   <div class="mt-2 flex items-center text-xs text-gray-400 font-bold">
-                    <svg class="h-3 w-3 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    </svg>
+                    <%= icon(:location, class: "h-3 w-3 mr-1.5") %>
                     <%= event.location %>
                   </div>
                 </div>
                 <div class="text-right">
-                  <p class="text-xl font-black text-gray-900 leading-none mb-1"><%= event.held_at.strftime("%m.%d") %></p>
-                  <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest"><%= event.held_at.strftime("%H:%M") %></p>
+                  <p class="text-xl font-black text-gray-900 leading-none mb-1"><%= l(event.held_at, format: :dot_date) %></p>
+                  <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest"><%= l(event.held_at, format: :hm) %></p>
                 </div>
               </div>
               <%# 申込状況ミニバー %>
