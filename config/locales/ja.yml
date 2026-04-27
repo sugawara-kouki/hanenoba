@@ -61,6 +61,9 @@ ja:
     subtitle: "参加予定のイベントをチェックしましょう。"
     upcoming: "%{month}月の予定"
     no_events: "この月の予定はありません"
+    legend:
+      today: "今日"
+      applied: "申込済イベント"
   devise:
     failure:
       unauthenticated: "ログインまたは登録が必要です。"
@@ -140,6 +143,7 @@ ja:
     formats:
       dot_date: "%Y.%m.%d"
       hm: "%H:%M"
+      year_month: "%Y年 %m月"
       long: "%Y年 %m月 %d日 %H:%M"
   activerecord:
     models:
@@ -338,7 +342,15 @@ ja:
           impersonate: "代理ログイン"
           impersonate_confirm: "として代理ログインしますか？"
           approve: "利用承認"
+          approve_confirm: "を承認しますか？"
           suspend: "利用停止"
+          suspend_confirm: "を停止しますか？"
+          destroy_confirm: "ユーザー「%{name}」を完全に削除しますか？\nこの操作は取り消せません。"
+          user_info: "ユーザー情報"
+          email: "メールアドレス"
+          created_at: "登録日"
+          status_label: "状態"
+          unnamed: "名称未設定"
           status:
             approved: "承認済"
             pending: "承認待"
@@ -349,6 +361,9 @@ ja:
           breadcrumb: "管理者ユーザー管理"
           subtitle: "システムの管理権限を持つユーザーの一覧と管理を行います。"
           new: "新規管理者を作成"
+          admin_info: "管理者情報"
+          created_at: "登録日"
+          destroy_confirm: "管理者「%{email}」を削除しますか？"
         new:
           title: "新規管理者作成"
           breadcrumb: "新規作成"
@@ -364,6 +379,11 @@ ja:
           breadcrumb: "種別設定"
           subtitle: "「バドミントン」「飲み会」など、イベントのカテゴリーを管理します。"
           new: "新規種別作成"
+          type_info: "種別情報"
+          created_at: "登録日"
+          destroy_confirm: "種別「%{name}」を削除してもよろしいですか？\nこの種別を設定しているイベントがある場合は削除できません。"
+          empty: "種別が登録されていません。"
+          empty_hint: "新規作成ボタンから追加してください。"
         new:
           title: "新規イベント種別"
           subtitle: "新しいイベントカテゴリーを定義し、コミュニティの幅を広げましょう。"
