@@ -335,6 +335,26 @@ ja:
             hidden: "🔒 非公開（管理用）"
 
 
+      dashboard:
+        show:
+          title: "ダッシュボード"
+          subtitle: "コミュニティの活動状況を一目で把握できます。"
+          pending_users: "承認待ちのユーザーが %{count} 名います。"
+          pending_users_hint: "コミュニティへの参加を許可するには承認作業が必要です。"
+          go_to_users: "ユーザー管理へ"
+          create_event: "新規イベント作成"
+          total_users: "ユーザー総数"
+          registered_members: "登録済みメンバー"
+          total_events: "イベント総数"
+          all_events: "全イベント数"
+          total_bookings: "累計申込数"
+          recent_bookings: "直近の申し込み"
+          view_all: "全て見る"
+          booking_completed: "申込完了"
+          no_recent_bookings: "まだ申し込みはありません"
+          upcoming_events: "今後のイベント予定"
+          no_upcoming_events: "今後の予定はありません"
+
       users:
         index:
           title: "ユーザー管理"
@@ -389,7 +409,7 @@ ja:
           subtitle: "新しいイベントカテゴリーを定義し、コミュニティの幅を広げましょう。"
         edit:
           title: "イベント種別を編集"
-          subtitle: "カテゴリーの名前やテーマカラーを調整します。"
+          subtitle: "カテゴリーの名前を調整します。"
         form:
           title: "種別の基本設定"
           subtitle: "カテゴリー名を設定します。"

@@ -34,11 +34,13 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, allow_blank: true, format: { with: Devise.email_regexp }, if: :email_changed?
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.name = auth.info.name
-      user.image = auth.info.image
-      # メールアドレスは空で保存 ( 後のバリデーションで弾かれないように )
-      user.approved = false
+    user = where(provider: auth.provider, uid: auth.uid).first_or_initialize do |u|
+      u.approved = false # 新規ユーザーのみ未承認で初期化
     end
+
+    user.name = auth.info.name
+    user.image = auth.info.image
+    user.save if user.changed?
+    user
   end
 end
