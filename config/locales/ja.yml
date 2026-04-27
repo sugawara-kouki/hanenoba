@@ -140,6 +140,7 @@ ja:
     formats:
       dot_date: "%Y.%m.%d"
       hm: "%H:%M"
+      long: "%Y年 %m月 %d日 %H:%M"
   activerecord:
     models:
       admin: "管理者"

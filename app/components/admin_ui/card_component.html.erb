@@ -1,0 +1,16 @@
+<div class="bg-white rounded-3xl shadow-sm ring-1 ring-gray-900/5 overflow-hidden">
+  <div class="px-8 py-6 border-b border-gray-50 bg-gray-50/50 flex items-center justify-between">
+    <div class="flex items-center space-x-2">
+      <% if @icon %>
+        <%= icon(@icon, class: "h-5 w-5 text-gray-400") %>
+      <% end %>
+      <h3 class="text-base font-bold leading-7 text-gray-900"><%= @title %></h3>
+    </div>
+    <% if header_action %>
+      <%= header_action %>
+    <% end %>
+  </div>
+  <div class="px-8 py-10">
+    <%= content %>
+  </div>
+</div>
