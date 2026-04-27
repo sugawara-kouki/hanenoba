@@ -1,0 +1,47 @@
+ja:
+  activerecord:
+    models:
+      admin: "管理者"
+      user: "利用者"
+      event: "イベント"
+      event_type: "種別"
+      booking: "予約"
+    attributes:
+      admin:
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認）"
+      event:
+        title: "イベント名"
+        location: "開催場所"
+        held_at: "開催日時"
+        capacity: "定員"
+        status: "ステータス"
+        status/draft: "下書き"
+        status/published: "公開"
+        status/hidden: "非公開"
+        event_type: "種別"
+        event_type_id: "種別"
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        status:
+          approved: "承認済"
+          pending: "承認待"
+      event_type:
+        name: "種別名"
+    errors:
+      models:
+        booking:
+          attributes:
+            user_id:
+              taken: "は既にこのイベントに申し込んでいます。"
+          base:
+            event_at_capacity: "定員に達しているため申し込みできません。"
+      messages:
+        blank: "を入力してください"
+        invalid: "は不正な値です"
+        taken: "はすでに存在します"
+        confirmation: "と%{attribute}が一致しません"
+        too_short: "は%{count}文字以上で入力してください"
+        not_saved: "%{count}件のエラーにより、%{resource} を保存できませんでした。"

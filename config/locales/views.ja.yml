@@ -1,0 +1,65 @@
+ja:
+  views:
+    layout:
+      discover: "イベントを探す"
+      my_schedule: "マイスケジュール"
+      logout: "ログアウト"
+      login: "ログイン"
+      admin_panel: "管理者パネル"
+      brand: "ハネノバ"
+      footer_copy: "&copy; 2026 Community Portal"
+      footer_built: "Built with precision and style."
+  events:
+    index:
+      title: "イベントを探す"
+      subtitle: "コミュニティの新しい活動を見つけよう。ハネノバはあなたの居場所を広げます。"
+      welcome_back: "おかえりなさい、"
+      no_events: "イベントがありません"
+      no_events_subtitle: "現在公開されているイベントはありません。また後でチェックしてみてください。"
+      selection_status: "選択状況"
+      items_selected: "件選択中"
+      bulk_apply: "まとめて申し込む"
+      confirm_bulk_apply: "選択したイベントにまとめて申し込みますか？"
+      search:
+        title: "条件から探す"
+        keyword: "キーワード"
+        date: "開催日"
+        capacity: "残在庫数"
+        capacity_suffix: "名以上"
+        status: "ステータス"
+        submit: "検索"
+        clear: "リセット"
+  bookings:
+    create:
+      success: "申し込みが完了しました！"
+      failure: "申し込みに失敗しました。"
+    bulk_create:
+      no_events: "イベントが選択されていません。"
+    show:
+      back_to_discover: "DISCOVER"
+      event_details: "EVENT DETAILS"
+      date_time: "DATE & TIME"
+      location: "LOCATION"
+      status: "STATUS"
+      fully_booked: "FULLY BOOKED"
+      apply: "申し込む"
+      applied: "申し込み済み"
+      confirm_apply: "このイベントに申し込みますか？"
+      intro: "このイベントに参加して、新しいつながりを作りましょう。ハネノバ共有スペースにて皆様をお待ちしております。参加申し込みは下のボタンから簡単に行えます。"
+      capacity_hint: "※定員の %{capacity}名に達し次第、締め切ります。お早めにお申し込みください。"
+      enjoy: "Enjoy the event!"
+    card:
+      applied: "申込済"
+      full: "満員"
+      details: "詳細を見る"
+      capacity_text: "定員 %{count}名"
+      time_range: "%{start_time}〜"
+      tbd: "未定"
+  mypage:
+    title: "マイカレンダー"
+    subtitle: "参加予定のイベントをチェックしましょう。"
+    upcoming: "%{month}月の予定"
+    no_events: "この月の予定はありません"
+    legend:
+      today: "今日"
+      applied: "申込済イベント"

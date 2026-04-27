@@ -1,0 +1,78 @@
+ja:
+  date:
+    abbr_day_names: ["日", "月", "火", "水", "木", "金", "土"]
+    day_names: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
+  time:
+    formats:
+      dot_date: "%Y.%m.%d"
+      hm: "%H:%M"
+      year_month: "%Y年 %m月"
+      long: "%Y年 %m月 %d日 %H:%M"
+  datetime:
+    distance_in_words:
+      half_a_minute: "30秒前後"
+      less_than_x_seconds:
+        one:   "1秒以内"
+        other: "%{count}秒以内"
+      x_seconds:
+        one:   "1秒"
+        other: "%{count}秒"
+      less_than_x_minutes:
+        one:   "1分以内"
+        other: "%{count}分以内"
+      x_minutes:
+        one:   "1分"
+        other: "%{count}分"
+      about_x_hours:
+        one:   "約1時間"
+        other: "約%{count}時間"
+      x_days:
+        one:   "1日"
+        other: "%{count}日"
+      about_x_months:
+        one:   "約1ヶ月"
+        other: "約%{count}ヶ月"
+      x_months:
+        one:   "1ヶ月"
+        other: "%{count}ヶ月"
+      about_x_years:
+        one:   "約1年"
+        other: "約%{count}年"
+      over_x_years:
+        one:   "1年以上"
+        other: "%{count}年以上"
+      almost_x_years:
+        one:   "1年弱"
+        other: "%{count}年弱"
+  helpers:
+    submit:
+      create: "作成"
+      update: "更新"
+  common:
+    datetime:
+      ago: "前"
+    actions:
+      cancel: "キャンセル"
+      save: "保存"
+      edit: "編集"
+      delete: "削除"
+      back: "戻る"
+      show: "詳細"
+      update: "更新する"
+      create: "作成する"
+      submit: "送信"
+      confirm: "確定"
+    errors:
+      check_input: "入力内容を確認してください"
+      unexpected: "エラーが発生しました: %{error}"
+    forms:
+      placeholders:
+        email: "admin@example.com"
+        password: "6文字以上"
+      hints:
+        password_change: "※変更しない場合は空欄のままにしてください"
+    search:
+      submit: "検索"
+      clear: "リセット"
+      placeholders:
+        keyword: "キーワードを入力..."

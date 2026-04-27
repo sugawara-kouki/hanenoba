@@ -1,0 +1,144 @@
+ja:
+  admin:
+    shared:
+      sidebar:
+        dashboard: "ダッシュボード"
+        events: "イベント管理"
+        users: "利用者ユーザー管理"
+        admins: "管理者ユーザー管理"
+        settings: "システム設定"
+        event_types: "種別設定"
+    notices:
+      created: "%{model}を正常に作成しました。"
+      updated: "%{model}を正常に更新しました。"
+      destroyed: "%{model}を削除しました。"
+      status_updated: "ユーザー「%{name}」の状態を更新しました。"
+      booking_cancelled: "ユーザー「%{name}」の申し込みを取り消しました。"
+      impersonated: "ユーザー「%{name}」として代理ログインしました（開発用）"
+      cannot_delete_self: "自分自身を削除することはできません。"
+      update_failed: "更新に失敗しました。"
+    views:
+      dashboard:
+        show:
+          title: "ダッシュボード"
+          subtitle: "コミュニティの活動状況を一目で把握できます。"
+          pending_users: "承認待ちのユーザーが %{count} 名います。"
+          pending_users_hint: "コミュニティへの参加を許可するには承認作業が必要です。"
+          go_to_users: "ユーザー管理へ"
+          create_event: "新規イベント作成"
+          total_users: "ユーザー総数"
+          registered_members: "登録済みメンバー"
+          total_events: "イベント総数"
+          all_events: "全イベント数"
+          total_bookings: "累計申込数"
+          recent_bookings: "直近の申し込み"
+          view_all: "全て見る"
+          booking_completed: "申込完了"
+          no_recent_bookings: "まだ申し込みはありません"
+          upcoming_events: "今後のイベント予定"
+          no_upcoming_events: "今後の予定はありません"
+      events:
+        index:
+          title: "イベント一覧"
+          breadcrumb: "イベント一覧"
+          subtitle: "開催予定のイベント管理と、申込状況の確認ができます。"
+          new: "新規イベント作成"
+        new:
+          title: "新しいイベントを作成"
+          breadcrumb: "新規作成"
+          subtitle: "コミュニティを盛り上げる魅力的なイベントを企画しましょう。"
+        edit:
+          title: "イベントを編集"
+          breadcrumb: "編集"
+          subtitle: "内容を調整して、よりわかりやすいイベントにしましょう。"
+        show:
+          edit_event: "イベントを編集"
+          basic_info: "基本情報"
+          held_at: "開催日時 / HELD AT"
+          location: "開催場所 / LOCATION"
+          capacity: "募集定員"
+          booking_summary: "申込状況概要"
+          booking_full_percent: "現時点で定員の %{percent}% が埋まっています。"
+          participants_list: "参加申込者一覧"
+          participants_subtitle: "現在、このイベントに申し込んでいる全てのユーザーです。"
+          table:
+            user: "参加ユーザー"
+            applied_at: "申込日時"
+          confirm_cancel_booking: "「%{name}」の申し込みを取り消しますか？\nこの操作は元に戻せません。"
+          cancel_booking: "申込を取り消す"
+          no_participants: "申込者はまだいません。"
+          recruit_participants: "公開して参加者を募りましょう。"
+        form:
+          creator: "Creator"
+          editor: "Editor"
+          section1_title: "1. 基本情報"
+          section1_subtitle: "イベントのタイトルと種別を設定します。"
+          section2_title: "2. 開催日時・場所"
+          section2_subtitle: "どこで、いつ開催するか、何人まで参加できるかを設定します。"
+          section3_title: "3. 公開設定"
+          section3_subtitle: "イベントの公開状態を選択します。"
+          title_placeholder: "例：春の交流BBQパーティ"
+          type_prompt: "種別を選択してください"
+          location_placeholder: "例：ハネノバ共有スペース"
+          status_options:
+            draft: "🏠 下書き（公開されません）"
+            published: "🚀 公開する"
+            hidden: "🔒 非公開（管理用）"
+      users:
+        index:
+          title: "ユーザー管理"
+          subtitle: "登録されているユーザーの承認状態と利用権限を管理します。"
+          impersonate: "代理ログイン"
+          impersonate_confirm: "として代理ログインしますか？"
+          approve: "利用承認"
+          approve_confirm: "を承認しますか？"
+          suspend: "利用停止"
+          suspend_confirm: "を停止しますか？"
+          destroy_confirm: "ユーザー「%{name}」を完全に削除しますか？\nこの操作は取り消せません。"
+          user_info: "ユーザー情報"
+          email: "メールアドレス"
+          created_at: "登録日"
+          status_label: "状態"
+          unnamed: "名称未設定"
+          status:
+            approved: "承認済"
+            pending: "承認待"
+      admins:
+        index:
+          title: "管理者ユーザー管理"
+          breadcrumb: "管理者ユーザー管理"
+          subtitle: "システムの管理権限を持つユーザーの一覧と管理を行います。"
+          new: "新規管理者を作成"
+          admin_info: "管理者情報"
+          created_at: "登録日"
+          destroy_confirm: "管理者「%{email}」を削除しますか？"
+        new:
+          title: "新規管理者作成"
+          breadcrumb: "新規作成"
+          subtitle: "新しい管理ユーザーをシステムに追加します。"
+        edit:
+          title: "管理者情報の編集"
+          breadcrumb: "編集"
+          subtitle: "メールアドレスやパスワードの変更を行います。"
+      event_types:
+        index:
+          title: "種別設定"
+          breadcrumb: "種別設定"
+          subtitle: "「バドミントン」「飲み会」など、イベントのカテゴリーを管理します。"
+          new: "新規種別作成"
+          type_info: "種別情報"
+          created_at: "登録日"
+          destroy_confirm: "種別「%{name}」を削除してもよろしいですか？\nこの種別を設定しているイベントがある場合は削除できません。"
+          empty: "種別が登録されていません。"
+          empty_hint: "新規作成ボタンから追加してください。"
+        new:
+          title: "新規イベント種別"
+          subtitle: "新しいイベントカテゴリーを定義し、コミュニティの幅を広げましょう。"
+        edit:
+          title: "イベント種別を編集"
+          subtitle: "カテゴリーの名前を調整します。"
+        form:
+          title: "種別の基本設定"
+          subtitle: "カテゴリー名を設定します。"
+          placeholder: "例：交流会、勉強会、BBQ"
+          save: "設定を保存する"
