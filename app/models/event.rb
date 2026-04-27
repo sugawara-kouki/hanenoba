@@ -19,6 +19,9 @@ class Event < ApplicationRecord
   end
 
   # 検索用スコープ
+  scope :with_bookings_count, -> {
+    select("events.*, (SELECT COUNT(*) FROM bookings WHERE bookings.event_id = events.id) AS bookings_count_virtual")
+  }
   scope :title_like, ->(q) { where("title LIKE ?", "%#{q}%") if q.present? }
   scope :held_on, ->(date) {
     if date.present?

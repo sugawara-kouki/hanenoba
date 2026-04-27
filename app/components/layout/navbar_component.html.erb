@@ -3,9 +3,7 @@
     <div class="flex items-center">
       <%= link_to root_path, class: "group flex items-center space-x-2" do %>
         <div class="bg-indigo-600 p-2 rounded-xl shadow-lg shadow-indigo-100 group-hover:bg-indigo-700 transition-colors">
-          <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-          </svg>
+          <%= icon(:home, class: "h-6 w-6 text-white") %>
         </div>
         <span class="text-2xl font-bold text-gray-900 tracking-tight"><%= t('views.layout.brand') %></span>
       <% end %>
@@ -38,9 +36,7 @@
       <% if admin_signed_in %>
         <%= link_to admin_root_path, class: "hidden sm:inline-flex items-center px-4 py-2 rounded-xl bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-all" do %>
           <%= t('views.layout.admin_panel') %>
-          <svg class="ml-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
+          <%= icon(:arrow_right, class: "ml-1 h-3 w-3") %>
         <% end %>
       <% end %>
     </div>

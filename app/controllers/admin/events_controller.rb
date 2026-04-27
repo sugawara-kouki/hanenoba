@@ -5,7 +5,7 @@ class Admin::EventsController < Admin::BaseController
   # GET /events or /events.json
   def index
     @events = Event.includes(:event_type)
-                   .select("events.*, (SELECT COUNT(*) FROM bookings WHERE bookings.event_id = events.id) AS bookings_count_virtual")
+                   .with_bookings_count
                    .title_like(params[:q])
                    .held_on(params[:date])
                    .with_status(params[:status])
