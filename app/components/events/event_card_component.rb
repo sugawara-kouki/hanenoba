@@ -1,5 +1,5 @@
 module Events
-  class EventCardComponent < ViewComponent::Base
+  class EventCardComponent < ApplicationComponent
     def initialize(event:, current_user:)
       @event = event
       @current_user = current_user

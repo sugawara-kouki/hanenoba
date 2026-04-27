@@ -1,5 +1,5 @@
 module AdminUi
-  class FormErrorsComponent < ViewComponent::Base
+  class FormErrorsComponent < ApplicationComponent
     def initialize(model:)
       @model = model
     end

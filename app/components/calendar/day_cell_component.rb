@@ -1,5 +1,5 @@
 module Calendar
-  class DayCellComponent < ViewComponent::Base
+  class DayCellComponent < ApplicationComponent
     def initialize(date:, base_date:, events: [])
       @date = date
       @base_date = base_date

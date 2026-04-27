@@ -1,6 +1,6 @@
 module AdminUi
   module Events
-    class TableRowComponent < ViewComponent::Base
+    class TableRowComponent < ApplicationComponent
       def initialize(event:)
         @event = event
       end

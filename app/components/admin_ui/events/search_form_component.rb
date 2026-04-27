@@ -1,6 +1,6 @@
 module AdminUi
   module Events
-    class SearchFormComponent < ViewComponent::Base
+    class SearchFormComponent < ApplicationComponent
       def initialize(params:)
         @params = params
       end

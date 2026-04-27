@@ -1,5 +1,5 @@
 module AdminUi
-  class BadgeComponent < ViewComponent::Base
+  class BadgeComponent < ApplicationComponent
     def initialize(status:)
       @status = status.to_sym
     end

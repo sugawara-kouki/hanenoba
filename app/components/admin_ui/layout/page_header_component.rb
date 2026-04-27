@@ -1,6 +1,6 @@
 module AdminUi
   module Layout
-    class PageHeaderComponent < ViewComponent::Base
+    class PageHeaderComponent < ApplicationComponent
       # タイトルの上に表示するコンテンツ（アイコンやバッジなど）のためのスロット
       renders_one :prepend
       # 右側のボタン等を入れるためのスロット

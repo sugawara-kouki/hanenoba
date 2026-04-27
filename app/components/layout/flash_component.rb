@@ -1,5 +1,5 @@
 module Layout
-  class FlashComponent < ViewComponent::Base
+  class FlashComponent < ApplicationComponent
     def initialize(type:, message:)
       @type = type.to_sym
       @message = message

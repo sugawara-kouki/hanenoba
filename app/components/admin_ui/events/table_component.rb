@@ -1,6 +1,6 @@
 module AdminUi
   module Events
-    class TableComponent < ViewComponent::Base
+    class TableComponent < ApplicationComponent
       def initialize(events:, pagy:)
         @events = events
         @pagy = pagy

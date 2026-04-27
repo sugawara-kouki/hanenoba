@@ -1,5 +1,5 @@
 module Layout
-  class NavbarComponent < ViewComponent::Base
+  class NavbarComponent < ApplicationComponent
     def initialize(user:, admin_signed_in:, active_controller:)
       @user = user
       @admin_signed_in = admin_signed_in

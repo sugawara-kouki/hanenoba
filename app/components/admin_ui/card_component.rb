@@ -1,5 +1,5 @@
 module AdminUi
-  class CardComponent < ViewComponent::Base
+  class CardComponent < ApplicationComponent
     renders_one :header_action
 
     def initialize(title:, icon: nil)
