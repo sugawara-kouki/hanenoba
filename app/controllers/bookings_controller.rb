@@ -24,7 +24,7 @@ class BookingsController < ApplicationController
       end
     end
   rescue ActiveRecord::RecordNotFound
-    redirect_to events_path, alert: I18n.t("errors.messages.event_not_found", default: "指定されたイベントは見つかりませんでした。")
+    redirect_to events_path, alert: I18n.t("errors.messages.event_not_found", default: "Event not found")
   end
 
   # 複数のイベントに対して一括で申し込む
@@ -34,7 +34,7 @@ class BookingsController < ApplicationController
 
     # 成功メッセージの設定（複数タイトルの表示に対応）
     if result[:success]
-      flash[:notice] = "#{result[:success_count]} 件の申し込みに成功しました！ (#{result[:success_titles].join('、')})"
+      flash[:notice] = I18n.t("views.bookings.bulk_create.success_with_count", count: result[:success_count], titles: result[:success_titles].join(I18n.t("common.punctuation.comma")))
     end
 
     # 失敗メッセージの設定（改行を含むHTMLとして表示）

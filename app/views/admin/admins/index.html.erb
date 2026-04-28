@@ -25,7 +25,7 @@
               <%= sort_link "created_at", t('admin.views.admins.index.created_at') %>
             </th>
             <th scope="col" class="relative py-4 pl-3 pr-8 text-right w-28">
-              <span class="sr-only">操作</span>
+              <span class="sr-only"><%= t('common.actions.title') %></span>
             </th>
           </tr>
         </thead>
@@ -42,11 +42,11 @@
                         <span class="text-base font-bold text-gray-900 tabular-nums"><%= admin_user.email %></span>
                         <% if admin_user == current_admin %>
                           <span class="inline-flex items-center rounded-md bg-indigo-50 px-1.5 py-0.5 text-[10px] font-bold text-indigo-700 ring-1 ring-inset ring-indigo-600/10 uppercase tracking-tighter">
-                            YOU
+                            <%= t('common.labels.you') %>
                           </span>
                         <% end %>
                       </div>
-                      <div class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-0.5">Administrator</div>
+                      <div class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-0.5"><%= t('common.roles.admin') %></div>
                     </div>
                   </div>
                 </td>

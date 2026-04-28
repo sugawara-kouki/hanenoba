@@ -20,6 +20,6 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <p><%= button_to "#{OmniAuth::Utils.camelize(provider)}でログイン", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "text-blue-600 hover:text-blue-500 text-sm font-medium pointer-cursor" %></p>
+    <p><%= button_to t('devise.views.shared.links.omniauth_login', provider: OmniAuth::Utils.camelize(provider)), omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "text-blue-600 hover:text-blue-500 text-sm font-medium pointer-cursor" %></p>
   <% end %>
 <% end %>

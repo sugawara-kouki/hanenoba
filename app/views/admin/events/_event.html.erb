@@ -8,7 +8,7 @@
     <%= event.event_type&.name %>
   </div>
   <div>
-    <strong class="block font-medium mb-1">定員:</strong>
+    <strong class="block font-medium mb-1"><%= Event.human_attribute_name(:capacity) %>:</strong>
     <%= event.capacity %>
   </div>
   <div>

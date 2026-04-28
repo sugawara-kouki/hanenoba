@@ -39,6 +39,12 @@ ja:
         new:
           title: "パスワードをお忘れですか？"
           submit: "パスワードの再設定方法を送信"
+        edit:
+          title: "新しいパスワードの設定"
+          password_label: "新しいパスワード"
+          password_confirmation_label: "パスワード（確認）"
+          password_hint: "（%{length} 文字以上）"
+          submit: "パスワードを更新する"
       registrations:
         edit:
           admin_title: "管理者プロフィールの編集"
@@ -67,3 +73,4 @@ ja:
           forgot_password: "パスワードを忘れましたか？"
           receive_confirmation: "アカウント確認メールが届きませんか？"
           receive_unlock: "アカウント凍結解除メールが届きませんか？"
+          omniauth_login: "%{provider}でログイン"

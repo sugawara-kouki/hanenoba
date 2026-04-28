@@ -53,12 +53,17 @@ ja:
     datetime:
       ago: "前"
     actions:
+      title: "操作"
       cancel: "キャンセル"
       save: "保存"
       edit: "編集"
       delete: "削除"
       back: "戻る"
       show: "詳細"
+    roles:
+      admin: "Administrator"
+    labels:
+      you: "YOU"
       update: "更新する"
       create: "作成する"
       submit: "送信"
@@ -72,8 +77,13 @@ ja:
         password: "6文字以上"
       hints:
         password_change: "※変更しない場合は空欄のままにしてください"
-    search:
-      submit: "検索"
-      clear: "リセット"
       placeholders:
         keyword: "キーワードを入力..."
+    search:
+      all: "すべて"
+      submit: "検索"
+      clear: "リセット"
+    punctuation:
+      comma: "、"
+    units:
+      people: "名"

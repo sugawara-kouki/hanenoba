@@ -120,7 +120,7 @@
               <div class="bg-amber-50 p-2 rounded-lg text-amber-600">
                 <%= icon(:users) %>
               </div>
-              <p class="text-xl font-extrabold text-gray-900"><%= @event.capacity %><span class="text-sm font-bold text-gray-400 ml-1">名</span></p>
+              <p class="text-xl font-extrabold text-gray-900"><%= @event.capacity %><span class="text-sm font-bold text-gray-400 ml-1"><%= t('common.units.people') %></span></p>
             </div>
           </div>
         </div>
@@ -173,7 +173,7 @@
             <th scope="col" class="py-4 pl-8 pr-3 text-left text-xs font-bold text-gray-400 uppercase tracking-widest"><%= t('admin.views.events.show.table.user') %></th>
             <th scope="col" class="px-3 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest"><%= t('admin.views.events.show.table.applied_at') %></th>
             <th scope="col" class="relative py-4 pl-3 pr-8 text-right">
-              <span class="sr-only">操作</span>
+              <span class="sr-only"><%= t('common.actions.title') %></span>
             </th>
           </tr>
         </thead>
@@ -189,7 +189,7 @@
                           alt: booking.user.name %>
                     </div>
                     <div class="ml-4">
-                      <div class="font-bold text-gray-900 text-base"><%= booking.user.name || "名称未設定" %></div>
+                      <div class="font-bold text-gray-900 text-base"><%= booking.user.name || t('admin.views.users.index.unnamed') %></div>
                       <div class="text-[10px] text-gray-400 font-mono font-bold tracking-tight">UID: <%= booking.user.uid %></div>
                     </div>
                   </div>

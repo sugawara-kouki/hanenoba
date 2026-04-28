@@ -152,6 +152,7 @@ ja:
         edit:
           title: "イベント種別を編集"
           subtitle: "カテゴリーの名前を調整します。"
+          breadcrumb_title: "種別編集 (%{name})"
         form:
           title: "種別の基本設定"
           subtitle: "カテゴリー名を設定します。"

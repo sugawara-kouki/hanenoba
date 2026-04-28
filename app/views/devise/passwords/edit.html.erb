@@ -1,6 +1,6 @@
 <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
-    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 leading-tight">新しいパスワードの設定</h2>
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 leading-tight"><%= t('devise.views.passwords.edit.title') %></h2>
   </div>
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -10,9 +10,9 @@
         <%= f.hidden_field :reset_password_token %>
 
         <div>
-          <%= f.label :password, "新しいパスワード", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.label :password, t('devise.views.passwords.edit.password_label'), class: "block text-sm font-medium text-gray-700" %>
           <% if @minimum_password_length %>
-            <p class="mt-1 text-xs text-gray-400">（<%= @minimum_password_length %> 文字以上）</p>
+            <p class="mt-1 text-xs text-gray-400"><%= t('devise.views.passwords.edit.password_hint', length: @minimum_password_length) %></p>
           <% end %>
           <div class="mt-1">
             <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
@@ -20,14 +20,14 @@
         </div>
 
         <div>
-          <%= f.label :password_confirmation, "パスワード（確認）", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.label :password_confirmation, t('devise.views.passwords.edit.password_confirmation_label'), class: "block text-sm font-medium text-gray-700" %>
           <div class="mt-1">
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
           </div>
         </div>
 
         <div>
-          <%= f.submit "パスワードを更新する", class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors" %>
+          <%= f.submit t('devise.views.passwords.edit.submit'), class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors" %>
         </div>
       <% end %>
 

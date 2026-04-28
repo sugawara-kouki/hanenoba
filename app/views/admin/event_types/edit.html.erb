@@ -2,8 +2,8 @@
 
 <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
   <%= render AdminUi::Layout::BreadcrumbsComponent.new(breadcrumbs: [
-    { name: "種別設定", link: admin_event_types_path },
-    { name: "種別編集 (#{@event_type.name})" }
+    { name: t('admin.views.event_types.index.breadcrumb'), link: admin_event_types_path },
+    { name: t('admin.views.event_types.edit.breadcrumb_title', name: @event_type.name) }
   ]) %>
 
   <%= render AdminUi::Layout::PageHeaderComponent.new(
@@ -20,7 +20,7 @@
     <% end %>
     <% c.with_action do %>
       <%= link_to admin_event_types_path, class: "inline-flex items-center rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition-all" do %>
-        キャンセル
+        <%= t('common.actions.cancel') %>
       <% end %>
     <% end %>
   <% end %>

@@ -40,6 +40,7 @@ ja:
       applied: "申し込み済み"
       confirm_apply: "このイベントに申し込みますか？"
       intro: "このイベントに参加して、新しいつながりを作りましょう。Hanenoba共有スペースにて皆様をお待ちしております。参加申し込みは下のボタンから簡単に行えます。"
+      start_label: "START"
       capacity_hint: "※定員の %{capacity}名に達し次第、締め切ります。お早めにお申し込みください。"
       enjoy: "Enjoy the event!"
   bookings:
@@ -48,6 +49,7 @@ ja:
       failure: "申し込みに失敗しました。"
     bulk_create:
       no_events: "イベントが選択されていません。"
+      success_with_count: "%{count} 件の申し込みに成功しました！ (%{titles})"
     card:
       applied: "申込済"
       full: "満員"
