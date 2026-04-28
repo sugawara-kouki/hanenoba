@@ -29,12 +29,6 @@ ja:
         status: "ステータス"
         submit: "検索"
         clear: "リセット"
-  bookings:
-    create:
-      success: "申し込みが完了しました！"
-      failure: "申し込みに失敗しました。"
-    bulk_create:
-      no_events: "イベントが選択されていません。"
     show:
       back_to_discover: "DISCOVER"
       event_details: "EVENT DETAILS"
@@ -48,6 +42,12 @@ ja:
       intro: "このイベントに参加して、新しいつながりを作りましょう。Hanenoba共有スペースにて皆様をお待ちしております。参加申し込みは下のボタンから簡単に行えます。"
       capacity_hint: "※定員の %{capacity}名に達し次第、締め切ります。お早めにお申し込みください。"
       enjoy: "Enjoy the event!"
+  bookings:
+    create:
+      success: "申し込みが完了しました！"
+      failure: "申し込みに失敗しました。"
+    bulk_create:
+      no_events: "イベントが選択されていません。"
     card:
       applied: "申込済"
       full: "満員"
