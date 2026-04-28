@@ -54,11 +54,11 @@ ja:
       sessions:
         new:
           admin_title: "管理者ログイン"
-          user_title: "ハネノバへようこそ"
-          user_subtitle: "ログインしてイベントをチェックしましょう"
-          line_info: "ハネノバはLINE連携のみでご利用いただけます"
+          user_title: "Hanenoba"
+          user_subtitle: "コミュニティへのログイン"
+          line_info: "ボタンを押すとLINEの認証画面へ移動します"
           line_login: "LINEでログイン"
-          line_footer: "登録にはLINEアカウントが必要です"
+          line_footer: "Built with precision and style."
           admin_submit: "管理者としてログイン"
       shared:
         links:

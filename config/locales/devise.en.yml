@@ -49,6 +49,13 @@ en:
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
       already_signed_out: "Signed out successfully."
+    views:
+      sessions:
+        new:
+          user_title: "Hanenoba"
+          user_subtitle: "Login to Community"
+          line_info: "Click the button to proceed to LINE authentication"
+          line_login: "Login with LINE"
     unlocks:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."

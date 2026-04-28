@@ -1,0 +1,35 @@
+<div class="min-h-[60vh] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <h1 class="text-center text-4xl font-black text-gray-900 tracking-tight leading-tight">
+      <%= t('devise.views.sessions.new.user_title') %>
+    </h1>
+    <p class="mt-4 text-center text-sm text-gray-500 font-medium">
+      <%= t('devise.views.sessions.new.user_subtitle') %>
+    </p>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-12 px-4 shadow-xl shadow-indigo-500/5 border border-gray-100 sm:rounded-[2rem] sm:px-10">
+      <div class="space-y-8">
+        <div class="text-center">
+          <div class="inline-flex items-center justify-center p-4 bg-gray-50 rounded-2xl mb-4">
+            <%= icon(:user_circle, class: "h-8 w-8 text-gray-400") %>
+          </div>
+          <p class="text-sm text-gray-500 font-medium">
+            <%= t('devise.views.sessions.new.line_info') %>
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <%= button_to user_line_omniauth_authorize_path, 
+              method: :post, 
+              data: { turbo: false }, 
+              class: "w-full flex justify-center items-center px-8 py-5 border-2 border-[#06C755] text-lg font-black rounded-2xl text-[#06C755] bg-white hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#06C755] transition-all active:scale-95 shadow-lg shadow-indigo-500/5" do %>
+            <%= image_tag "LINE_Brand_icon.png", class: "h-10 w-10 mr-4" %>
+            <%= t('devise.views.sessions.new.line_login') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
