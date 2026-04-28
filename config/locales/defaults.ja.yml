@@ -77,12 +77,12 @@ ja:
         password: "6文字以上"
       hints:
         password_change: "※変更しない場合は空欄のままにしてください"
-      placeholders:
-        keyword: "キーワードを入力..."
     search:
       all: "すべて"
       submit: "検索"
       clear: "リセット"
+      placeholders:
+        keyword: "キーワードを入力..."
     punctuation:
       comma: "、"
     units:
