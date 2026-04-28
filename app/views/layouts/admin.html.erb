@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Hanenoba Admin" %></title>
+    <title><%= content_for(:title) || "#{t('views.layout.brand')} Admin" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -21,7 +21,7 @@
       <div class="flex flex-col w-64 bg-gray-900">
         <div class="flex flex-col h-0 flex-1">
           <div class="flex items-center h-16 flex-shrink-0 px-6 bg-gray-800">
-            <span class="text-white text-xl font-black tracking-tight">ハネノバ <span class="text-indigo-400">Admin</span></span>
+            <span class="text-white text-xl font-black tracking-tight"><%= t('views.layout.brand') %> <span class="text-indigo-400">Admin</span></span>
           </div>
           <nav class="mt-5 flex-1 px-4 space-y-2 overflow-y-auto">
             <%= link_to admin_root_path, class: "group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all #{controller_name == 'dashboard' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}" do %>

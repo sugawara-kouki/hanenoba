@@ -83,7 +83,7 @@ ja:
           title_placeholder: "例：春の交流BBQパーティ"
           image_hint: "推奨サイズ: 1200x800px (3:2)"
           type_prompt: "種別を選択してください"
-          location_placeholder: "例：ハネノバ共有スペース"
+          location_placeholder: "例：Hanenoba共有スペース"
           status_options:
             draft: "🏠 下書き（公開されません）"
             published: "🚀 公開する"

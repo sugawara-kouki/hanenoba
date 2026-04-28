@@ -6,13 +6,13 @@ ja:
       logout: "ログアウト"
       login: "ログイン"
       admin_panel: "管理者パネル"
-      brand: "ハネノバ"
+      brand: "Hanenoba"
       footer_copy: "&copy; 2026 Community Portal"
       footer_built: "Built with precision and style."
   events:
     index:
       title: "イベントを探す"
-      subtitle: "コミュニティの新しい活動を見つけよう。ハネノバはあなたの居場所を広げます。"
+      subtitle: "コミュニティの新しい活動を見つけよう。Hanenobaはあなたの居場所を広げます。"
       welcome_back: "おかえりなさい、"
       no_events: "イベントがありません"
       no_events_subtitle: "現在公開されているイベントはありません。また後でチェックしてみてください。"
@@ -45,7 +45,7 @@ ja:
       apply: "申し込む"
       applied: "申し込み済み"
       confirm_apply: "このイベントに申し込みますか？"
-      intro: "このイベントに参加して、新しいつながりを作りましょう。ハネノバ共有スペースにて皆様をお待ちしております。参加申し込みは下のボタンから簡単に行えます。"
+      intro: "このイベントに参加して、新しいつながりを作りましょう。Hanenoba共有スペースにて皆様をお待ちしております。参加申し込みは下のボタンから簡単に行えます。"
       capacity_hint: "※定員の %{capacity}名に達し次第、締め切ります。お早めにお申し込みください。"
       enjoy: "Enjoy the event!"
     card:
