@@ -107,6 +107,17 @@ ja:
           status:
             approved: "承認済"
             pending: "承認待"
+        show:
+          title: "ユーザー詳細"
+          breadcrumb: "ユーザー詳細"
+          subtitle: "ユーザーの基本情報と、これまでのイベント予約履歴を確認できます。"
+          basic_info: "基本情報"
+          booking_history: "予約履歴"
+          no_bookings: "予約履歴はありません。"
+          table:
+            event_name: "イベント名"
+            held_at: "開催日時"
+            applied_at: "申し込み日時"
       admins:
         index:
           title: "管理者ユーザー管理"

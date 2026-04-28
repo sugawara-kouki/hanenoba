@@ -5,6 +5,7 @@ ja:
   time:
     formats:
       dot_date: "%Y.%m.%d"
+      dot_datetime: "%Y.%m.%d %H:%M"
       hm: "%H:%M"
       year_month: "%Y年 %m月"
       long: "%Y年 %m月 %d日 %H:%M"

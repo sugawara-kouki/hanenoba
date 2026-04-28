@@ -1,0 +1,113 @@
+<div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+  <%= render AdminUi::Layout::BreadcrumbsComponent.new(breadcrumbs: [
+    { name: t('admin.views.users.index.title'), path: admin_users_path },
+    { name: t('admin.views.users.show.breadcrumb') }
+  ]) %>
+
+  <%= render AdminUi::Layout::PageHeaderComponent.new(
+        title: @user.name || t('admin.views.users.index.unnamed'),
+        subtitle: t('admin.views.users.show.subtitle')
+      ) %>
+
+  <div class="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-3">
+    <%# ユーザー基本情報カード %>
+    <div class="lg:col-span-1">
+      <div class="bg-white shadow-sm ring-1 ring-gray-900/5 rounded-3xl border border-gray-100 overflow-hidden">
+        <div class="px-8 py-10 text-center border-b border-gray-50 bg-gray-50/30">
+          <div class="inline-block relative">
+            <%= image_tag @user.image || "https://ui-avatars.com/api/?name=#{@user.name}&background=random", 
+                class: "h-32 w-32 rounded-full object-cover ring-4 ring-white shadow-md", 
+                alt: @user.name %>
+            <div class="absolute bottom-1 right-1">
+              <%= render AdminUi::BadgeComponent.new(status: @user.approved? ? :approved : :pending) %>
+            </div>
+          </div>
+          <h2 class="mt-6 text-2xl font-black text-gray-900 leading-tight">
+            <%= @user.name || t('admin.views.users.index.unnamed') %>
+          </h2>
+          <p class="mt-1 text-sm font-medium text-gray-400 tabular-nums">UID: <%= @user.uid %></p>
+        </div>
+        
+        <div class="p-8 space-y-6">
+          <div>
+            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1"><%= t('admin.views.users.index.email') %></p>
+            <p class="text-sm font-bold text-gray-900 tabular-nums"><%= @user.email.presence || "---" %></p>
+          </div>
+          <div>
+            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1"><%= t('admin.views.users.index.created_at') %></p>
+            <p class="text-sm font-bold text-gray-900 tabular-nums"><%= l(@user.created_at, format: :dot_date) %></p>
+          </div>
+          
+          <div class="pt-6 border-t border-gray-50 flex justify-center">
+             <%= button_to admin_user_path(@user), 
+                 method: :patch, 
+                 class: "w-full py-4 px-6 rounded-2xl border border-gray-200 bg-white font-black text-sm shadow-sm transition-all #{@user.approved? ? 'text-red-600 hover:bg-red-50' : 'text-indigo-600 hover:bg-indigo-50 active:scale-95'}",
+                 data: { turbo_confirm: "#{@user.name} #{@user.approved? ? t('admin.views.users.index.suspend_confirm') : t('admin.views.users.index.approve_confirm')}" } do %>
+                 <% if @user.approved? %>
+                   <%= t('admin.views.users.index.suspend') %>
+                 <% else %>
+                   <%= t('admin.views.users.index.approve') %>
+                 <% end %>
+             <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%# 予約履歴一覧 %>
+    <div class="lg:col-span-2">
+      <div class="bg-white shadow-sm ring-1 ring-gray-900/5 rounded-3xl border border-gray-100 overflow-hidden">
+        <div class="px-8 py-6 border-b border-gray-50 flex items-center justify-between">
+          <h3 class="text-sm font-black text-gray-400 uppercase tracking-widest">
+            <%= t('admin.views.users.show.booking_history') %>
+            <span class="ml-2 px-2 py-0.5 rounded-md bg-gray-100 text-gray-500 tabular-nums"><%= @bookings.count %></span>
+          </h3>
+        </div>
+        
+        <% if @bookings.any? %>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-100">
+              <thead class="bg-gray-50/30">
+                <tr>
+                  <th scope="col" class="py-4 pl-8 pr-3 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    <%= t('admin.views.users.show.table.event_name') %>
+                  </th>
+                  <th scope="col" class="px-3 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    <%= t('admin.views.users.show.table.held_at') %>
+                  </th>
+                  <th scope="col" class="px-3 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    <%= t('admin.views.users.show.table.applied_at') %>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-50">
+                <% @bookings.each do |booking| %>
+                  <tr class="hover:bg-gray-50/30 transition-colors">
+                    <td class="py-5 pl-8 pr-3">
+                      <%= link_to admin_event_path(booking.event), class: "text-sm font-bold text-gray-900 hover:text-indigo-600 transition-colors" do %>
+                        <%= booking.event.title %>
+                      <% end %>
+                    </td>
+                    <td class="whitespace-nowrap px-3 py-5 text-sm font-semibold text-gray-500 tabular-nums">
+                      <%= l(booking.event.held_at, format: :dot_datetime) %>
+                    </td>
+                    <td class="whitespace-nowrap px-3 py-5 text-sm font-medium text-gray-400 tabular-nums">
+                      <%= l(booking.created_at, format: :dot_datetime) %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <div class="p-20 text-center">
+            <div class="inline-flex items-center justify-center p-6 bg-gray-50 rounded-full text-gray-300 mb-4">
+              <%= icon(:calendar, class: "h-10 w-10") %>
+            </div>
+            <p class="text-gray-400 font-bold text-sm"><%= t('admin.views.users.show.no_bookings') %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

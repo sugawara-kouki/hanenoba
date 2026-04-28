@@ -5,6 +5,11 @@ class Admin::UsersController < Admin::BaseController
     @users = User.all.order("#{s[:column]} #{s[:direction]}")
   end
 
+  def show
+    @user = User.find(params[:id])
+    @bookings = @user.bookings.includes(:event).order(created_at: :desc)
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.update(approved: !@user.approved)
