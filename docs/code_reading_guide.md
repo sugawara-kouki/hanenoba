@@ -55,16 +55,16 @@ Railsのソースを追うときは、常に**「ユーザーがブラウザでU
 2.  **Controller**: `app/controllers/bookings_controller.rb` の `create` を見る。
     *   `BookingService.new(...).call` を呼んでいるのを発見。
 3.  **Service**: `app/services/booking_service.rb` を開く。
-    *   ここで `ActiveRecord::Base.transaction` を使い、定員チェックと保存を「アトミック（不可解）」に行っている「実装の中身」を理解。
+    *   ここで `ActiveRecord::Base.transaction` を使い、定員チェックと保存を「アトミック（原子性）」に行っている「実装の中身」を理解。
 4.  **Model**: `app/models/event.rb` を見る。
     *   `def full?` などの判定ロジックを確認。
-5.  **View**: 処理が終わった後の Flash メッセージがどこで定義されているか、 `config/locales/ja.yml` を確認。
+5.  **View**: 処理が終わった後の Flash メッセージがどこで定義されているか、 `config/locales/` 配下の各ymlファイルを確認。
 
 ---
 
 ## 4. 便利なショートカット
 
-*   **文言から探す**: 画面に見えている日本語（例：「予約を確定する」）をプロジェクト全体で `Ctrl+Shift+F` (Grep) します。多くの場合 `config/locales/ja.yml` にヒットし、そこにあるキー名（例：`events.show.apply`）で検索すると、使われている View が見つかります。
+*   **文言から探す**: 画面に見えている日本語（例：「予約を確定する」）をプロジェクト全体で `Ctrl+Shift+F` (Grep) します。多くの場合 `config/locales/` 配下の各ymlにヒットし、そこにあるキー名（例：`events.show.apply`）で検索すると、使われている View が見つかります。
 *   **エラーを見る**: `bin/dev` で起動しているターミナルのログには、実行されたSQLやレンダリングされたファイルパスがリアルタイムで流れます。これが一番の「生の情報」です。
 
 ---
