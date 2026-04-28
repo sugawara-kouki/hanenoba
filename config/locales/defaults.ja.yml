@@ -52,6 +52,8 @@ ja:
   common:
     datetime:
       ago: "前"
+    confirmations:
+      title: "実行の確認"
     actions:
       title: "操作"
       cancel: "キャンセル"

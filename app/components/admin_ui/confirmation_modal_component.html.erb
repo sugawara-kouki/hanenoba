@@ -1,0 +1,49 @@
+<div id="turbo-confirm-modal" 
+     data-controller="turbo-confirm" 
+     data-turbo-confirm-target="container"
+     class="hidden fixed inset-0 z-[100] items-center justify-center p-4"
+     role="dialog" 
+     aria-modal="true">
+  
+  <%# 背景（ブラー復活） %>
+  <div class="fixed inset-0 bg-gray-900/40 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+
+  <%# モーダル本体 - 幅をコンパクトに固定 %>
+  <div class="relative w-[340px] transform overflow-hidden rounded-2xl bg-white p-6 shadow-xl transition-all duration-300 opacity-0 scale-95 border border-gray-100">
+    
+    <div class="flex items-start space-x-4">
+      <%# アイコンエリア - 控えめなサイズ %>
+      <div class="flex-shrink-0 flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-600">
+        <%= icon(:exclamation_triangle, class: "h-6 w-6", stroke_width: "2") %>
+      </div>
+
+      <%# テキストエリア - 左揃え %>
+      <div class="flex-1 text-left">
+        <h3 class="text-lg font-bold text-gray-900">
+          <%= t('common.confirmations.title') %>
+        </h3>
+        <div class="mt-2">
+          <p class="text-sm text-gray-500 leading-relaxed" data-turbo-confirm-target="message">
+            <%# JSで動的に設定 %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <%# アクションボタン - 右寄せ、スリム %>
+    <div class="mt-8 flex flex-row-reverse space-x-3 space-x-reverse">
+      <button type="button" 
+              data-turbo-confirm-target="confirmButton"
+              data-action="click->turbo-confirm#confirm"
+              class="inline-flex justify-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-bold text-white hover:bg-indigo-700 transition-colors active:scale-95">
+        <%= t('common.actions.confirm') %>
+      </button>
+      <button type="button" 
+              data-turbo-confirm-target="cancelButton"
+              data-action="click->turbo-confirm#cancel"
+              class="inline-flex justify-center rounded-lg bg-white px-4 py-2 text-sm font-bold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition-colors active:scale-95">
+        <%= t('common.actions.cancel') %>
+      </button>
+    </div>
+  </div>
+</div>

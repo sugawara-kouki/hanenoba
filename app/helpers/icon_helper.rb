@@ -2,6 +2,7 @@ module IconHelper
   # Lucide-like SVG icons
   def icon(name, options = {})
     classes = options[:class] || "h-5 w-5"
+    stroke_width = options[:stroke_width] || "2"
 
     case name.to_sym
     when :chevron_up
@@ -66,8 +67,10 @@ module IconHelper
         tag(:path, stroke_linecap: "round", stroke_linejoin: "round", stroke_width: "2", d: "M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z")
       end
     when :exclamation_triangle
-      content_tag(:svg, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", class: classes) do
-        tag(:path, stroke_linecap: "round", stroke_linejoin: "round", stroke_width: "2", d: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z")
+      content_tag(:svg, xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", stroke_width: stroke_width, stroke_linecap: "round", stroke_linejoin: "round", class: classes) do
+        concat tag(:path, d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z")
+        concat tag(:line, x1: "12", y1: "9", x2: "12", y2: "13")
+        concat tag(:line, x1: "12", y1: "17", x2: "12.01", y2: "17")
       end
     when :lock
       content_tag(:svg, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", class: classes) do
