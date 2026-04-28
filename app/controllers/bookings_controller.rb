@@ -6,7 +6,8 @@ class BookingsController < ApplicationController
 
   # 1件の申し込みを作成
   def create
-    @event = Event.published.find(params[:event_id])
+    base_scope = admin_signed_in? ? Event.all : Event.published
+    @event = base_scope.find(params[:event_id])
 
     # 申し込みロジックの実行をサービスに委譲
     result = BookingService.new(@event, current_user).execute
@@ -29,7 +30,7 @@ class BookingsController < ApplicationController
   # 複数のイベントに対して一括で申し込む
   def bulk_create
     # 一括申し込みロジックの実行をサービスに委譲
-    result = BulkBookingService.new(params[:event_ids] || [], current_user).execute
+    result = BulkBookingService.new(params[:event_ids] || [], current_user, admin_mode: admin_signed_in?).execute
 
     # 成功メッセージの設定（複数タイトルの表示に対応）
     if result[:success]

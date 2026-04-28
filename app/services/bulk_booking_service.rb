@@ -1,8 +1,9 @@
 # 複数のイベントに対して一括で申し込みを行うサービス
 class BulkBookingService
-  def initialize(event_ids, user)
+  def initialize(event_ids, user, admin_mode: false)
     @event_ids = event_ids
     @user = user
+    @admin_mode = admin_mode
   end
 
   # 一括申し込み処理を実行する
@@ -14,8 +15,9 @@ class BulkBookingService
     success_titles = []
     failure_messages = []
 
-    # 公開されているイベントの中から対象を絞り込む
-    events = Event.published.where(id: @event_ids)
+    # 管理者モードなら全てのイベントを対象とし、一般ユーザーなら公開済みのみを対象とする
+    base_scope = @admin_mode ? Event.all : Event.published
+    events = base_scope.where(id: @event_ids)
     events.each do |event|
       # 各イベントの申し込みは BookingService に委譲
       result = BookingService.new(event, @user).execute
