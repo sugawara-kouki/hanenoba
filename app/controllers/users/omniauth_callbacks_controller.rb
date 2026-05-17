@@ -19,6 +19,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    redirect_to root_path
+    set_flash_message(:alert, :failure, kind: "LINE", reason: failure_message) if is_navigational_format?
+    redirect_to new_user_session_path
   end
 end
