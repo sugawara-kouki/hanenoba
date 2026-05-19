@@ -15,6 +15,7 @@
     *   [LINE API連携仕様書](basic_designs/line_api_integration.md) （※未作成）
 *   **機能別基本設計 (`docs/basic_designs/features/`)**:
     *   [予約処理 基本設計書](basic_designs/features/booking.md)
+    *   [予約キャンセル処理（管理者） 基本設計書](basic_designs/features/cancellation.md)
 
 ### 3. 詳細設計（内部設計）
 開発者がコードを実装し、テストを記述するための「How（どう実装するか）」の設計です。
@@ -23,6 +24,7 @@
     *   [データベース物理設計書](detailed_designs/db_physical_schema.md) （※未作成）
 *   **機能別詳細設計 (`docs/detailed_designs/features/`)**:
     *   [予約処理 詳細設計書](detailed_designs/features/booking.md)
+    *   [予約キャンセル処理（管理者） 詳細設計書](detailed_designs/features/cancellation.md)
 
 ### 4. テスト仕様書
 品質を保証するために検証すべきテスト観点・シナリオの定義です。
@@ -31,6 +33,7 @@
     *   [テスト記述ガイドライン](test_specs/guideline.md) （※未作成）
 *   **機能別テストシナリオ (`docs/test_specs/scenarios/`)**:
     *   [予約処理 テストシナリオ](test_specs/scenarios/booking.md)
+    *   [予約キャンセル処理（管理者） テストシナリオ](test_specs/scenarios/cancellation.md)
 
 ---
 
