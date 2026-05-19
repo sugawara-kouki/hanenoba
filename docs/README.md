@@ -22,6 +22,11 @@
     *   [イベント詳細表示 基本設計書](basic_designs/features/event_show.md)
     *   [複数イベント一括予約 基本設計書](basic_designs/features/bulk_booking.md)
     *   [予約カレンダーマイページ 基本設計書](basic_designs/features/mypage_calendar.md)
+    *   [管理ダッシュボード 基本設計書](basic_designs/features/admin_dashboard.md)
+    *   [イベント管理 (CRUD) 基本設計書](basic_designs/features/admin_events.md)
+    *   [イベントタイプ管理 (CRUD) 基本設計書](basic_designs/features/admin_event_types.md)
+    *   [会員管理 (CRUD) 基本設計書](basic_designs/features/admin_users.md)
+    *   [管理者アカウント管理 (CRUD) 基本設計書](basic_designs/features/admin_admins.md)
 
 ### 3. 詳細設計（内部設計）
 開発者がコードを実装し、テストを記述するための「How（どう実装するか）」の設計です。
@@ -36,6 +41,11 @@
     *   [イベント詳細表示 詳細設計書](detailed_designs/features/event_show.md)
     *   [複数イベント一括予約 詳細設計書](detailed_designs/features/bulk_booking.md)
     *   [予約カレンダーマイページ 詳細設計書](detailed_designs/features/mypage_calendar.md)
+    *   [管理ダッシュボード 詳細設計書](detailed_designs/features/admin_dashboard.md)
+    *   [イベント管理 (CRUD) 詳細設計書](detailed_designs/features/admin_events.md)
+    *   [イベントタイプ管理 (CRUD) 詳細設計書](detailed_designs/features/admin_event_types.md)
+    *   [会員管理 (CRUD) 詳細設計書](detailed_designs/features/admin_users.md)
+    *   [管理者アカウント管理 (CRUD) 詳細設計書](detailed_designs/features/admin_admins.md)
 
 ### 4. テスト仕様書
 品質を保証するために検証すべきテスト観点・シナリオの定義です。
@@ -50,6 +60,11 @@
     *   [イベント詳細表示 テストシナリオ](test_specs/scenarios/event_show.md)
     *   [複数イベント一括予約 テストシナリオ](test_specs/scenarios/bulk_booking.md)
     *   [予約カレンダーマイページ テストシナリオ](test_specs/scenarios/mypage_calendar.md)
+    *   [管理ダッシュボード テストシナリオ](test_specs/scenarios/admin_dashboard.md)
+    *   [イベント管理 (CRUD) テストシナリオ](test_specs/scenarios/admin_events.md)
+    *   [イベントタイプ管理 (CRUD) テストシナリオ](test_specs/scenarios/admin_event_types.md)
+    *   [会員管理 (CRUD) テストシナリオ](test_specs/scenarios/admin_users.md)
+    *   [管理者アカウント管理 (CRUD) テストシナリオ](test_specs/scenarios/admin_admins.md)
 
 ---
 
