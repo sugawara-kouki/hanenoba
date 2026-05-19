@@ -22,7 +22,7 @@
 *   **全体仕様**:
     *   [データベース物理設計書](detailed_designs/db_physical_schema.md) （※未作成）
 *   **機能別詳細設計 (`docs/detailed_designs/features/`)**:
-    *   [予約処理 詳細設計書](detailed_designs/features/booking.md) （※未作成）
+    *   [予約処理 詳細設計書](detailed_designs/features/booking.md)
 
 ### 4. テスト仕様書
 品質を保証するために検証すべきテスト観点・シナリオの定義です。
