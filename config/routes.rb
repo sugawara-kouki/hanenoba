@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "dashboard#show"
     resources :events
-    resources :event_types, except: [ :show ]
     resources :users, only: [ :index, :show, :update, :destroy ] do
       post :impersonate, on: :member if Rails.env.development?
     end

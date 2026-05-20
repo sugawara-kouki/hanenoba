@@ -24,7 +24,6 @@
     *   [予約カレンダーマイページ 基本設計書](basic_designs/features/mypage_calendar.md)
     *   [管理ダッシュボード 基本設計書](basic_designs/features/admin_dashboard.md)
     *   [イベント管理 (CRUD) 基本設計書](basic_designs/features/admin_events.md)
-    *   [イベントタイプ管理 (CRUD) 基本設計書](basic_designs/features/admin_event_types.md)
     *   [会員管理 (CRUD) 基本設計書](basic_designs/features/admin_users.md)
     *   [管理者アカウント管理 (CRUD) 基本設計書](basic_designs/features/admin_admins.md)
 
@@ -43,7 +42,6 @@
     *   [予約カレンダーマイページ 詳細設計書](detailed_designs/features/mypage_calendar.md)
     *   [管理ダッシュボード 詳細設計書](detailed_designs/features/admin_dashboard.md)
     *   [イベント管理 (CRUD) 詳細設計書](detailed_designs/features/admin_events.md)
-    *   [イベントタイプ管理 (CRUD) 詳細設計書](detailed_designs/features/admin_event_types.md)
     *   [会員管理 (CRUD) 詳細設計書](detailed_designs/features/admin_users.md)
     *   [管理者アカウント管理 (CRUD) 詳細設計書](detailed_designs/features/admin_admins.md)
 
@@ -62,7 +60,6 @@
     *   [予約カレンダーマイページ テストシナリオ](test_specs/scenarios/mypage_calendar.md)
     *   [管理ダッシュボード テストシナリオ](test_specs/scenarios/admin_dashboard.md)
     *   [イベント管理 (CRUD) テストシナリオ](test_specs/scenarios/admin_events.md)
-    *   [イベントタイプ管理 (CRUD) テストシナリオ](test_specs/scenarios/admin_event_types.md)
     *   [会員管理 (CRUD) テストシナリオ](test_specs/scenarios/admin_users.md)
     *   [管理者アカウント管理 (CRUD) テストシナリオ](test_specs/scenarios/admin_admins.md)
 
